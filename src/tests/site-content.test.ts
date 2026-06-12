@@ -5,12 +5,10 @@ import { siteContent } from '../data/site';
 
 describe('siteContent', () => {
   it('contains approved launch navigation only', () => {
-    expect(siteContent.navigation.map((item) => item.label)).toEqual([
-      'Úvod',
-      'Naše služby',
-      'Kontakt'
-    ]);
-    expect(siteContent.navigation.some((item) => item.label === 'Reference')).toBe(false);
+    const navLabels: string[] = siteContent.navigation.map((item) => item.label);
+
+    expect(navLabels).toEqual(['Úvod', 'Naše služby', 'Kontakt']);
+    expect(navLabels.includes('Reference')).toBe(false);
   });
 
   it('contains key contact facts', () => {

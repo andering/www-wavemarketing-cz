@@ -78,7 +78,7 @@ export default defineConfig({
 {
   "extends": "astro/tsconfigs/strict",
   "compilerOptions": {
-    "types": ["vitest/globals"]
+    "types": ["vitest/globals", "node"]
   }
 }
 ```
