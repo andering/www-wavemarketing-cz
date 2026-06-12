@@ -13,7 +13,7 @@ import { siteContent } from '../data/site';
         <a class="button button-secondary" href={siteContent.hero.secondaryCta.href}>{siteContent.hero.secondaryCta.label}</a>
       </div>
     </div>
-    <div class="hero__visual" aria-label="Abstraktní vlna WAVE Marketing">
+    <div class="hero__visual" aria-hidden="true">
       <div class="hero__orb hero__orb--large"></div>
       <div class="hero__orb hero__orb--small"></div>
     </div>
@@ -24,6 +24,7 @@ import { siteContent } from '../data/site';
   .hero {
     overflow: hidden;
     padding-top: var(--ds-space-24);
+    scroll-margin-top: 112px;
   }
 
   .hero__grid {
@@ -68,7 +69,7 @@ import { siteContent } from '../data/site';
   }
 
   .hero__orb {
-    background: rgba(255, 255, 255, 0.24);
+    background: color-mix(in srgb, var(--ds-color-surface-raised) 24%, transparent);
     border-radius: var(--ds-radius-full);
     position: absolute;
   }

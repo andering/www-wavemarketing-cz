@@ -40,6 +40,7 @@ import { siteContent } from '../data/site';
 <style>
   .contact {
     background: radial-gradient(circle at 50% 30%, rgba(116, 89, 60, 0.09), var(--ds-color-background) 62%);
+    scroll-margin-top: 112px;
   }
 
   .contact__wrap {
@@ -69,8 +70,8 @@ import { siteContent } from '../data/site';
   }
 
   .contact-card {
-    background: rgba(255, 255, 255, 0.58);
-    border: var(--ds-border-width) solid rgba(255, 255, 255, 0.72);
+    background: color-mix(in srgb, var(--ds-color-surface-raised) 58%, transparent);
+    border: var(--ds-border-width) solid color-mix(in srgb, var(--ds-color-surface-raised) 72%, transparent);
     border-radius: var(--ds-radius-3xl);
     box-shadow: var(--ds-shadow-md);
     color: var(--ds-color-primary);

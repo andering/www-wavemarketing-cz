@@ -25,6 +25,7 @@ import { siteContent } from '../data/site';
 <style>
   .services {
     background: var(--ds-color-surface-muted);
+    scroll-margin-top: 112px;
   }
 
   .services__header {
@@ -63,7 +64,7 @@ import { siteContent } from '../data/site';
   }
 
   .service-row:hover {
-    background: rgba(255, 255, 255, 0.52);
+    background: color-mix(in srgb, var(--ds-color-surface-raised) 52%, transparent);
   }
 
   .service-row__icon {

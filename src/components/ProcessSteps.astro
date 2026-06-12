@@ -8,15 +8,15 @@ import { siteContent } from '../data/site';
       <h2 id="process-heading">{siteContent.process.heading}</h2>
       <p>{siteContent.process.intro}</p>
     </div>
-    <div class="process__grid">
+    <ol class="process__grid">
       {siteContent.process.steps.map((step, index) => (
-        <article class="process-card">
+        <li class="process-card">
           <span>{String(index + 1).padStart(2, '0')}</span>
           <h3>{step.title}</h3>
           <p>{step.text}</p>
-        </article>
+        </li>
       ))}
-    </div>
+    </ol>
   </div>
 </section>
 
@@ -43,6 +43,9 @@ import { siteContent } from '../data/site';
     display: grid;
     gap: var(--ds-space-6);
     grid-template-columns: repeat(4, minmax(0, 1fr));
+    list-style: none;
+    margin: 0;
+    padding: 0;
   }
 
   .process-card {
