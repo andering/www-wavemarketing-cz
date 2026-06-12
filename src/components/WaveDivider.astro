@@ -1,0 +1,28 @@
+---
+interface Props {
+  tone?: 'teal' | 'sand';
+}
+
+const { tone = 'teal' } = Astro.props;
+const fill = tone === 'teal' ? 'var(--ds-color-primary)' : 'var(--ds-color-surface-muted)';
+---
+
+<div class="wave-divider" aria-hidden="true">
+  <svg viewBox="0 0 1440 100" preserveAspectRatio="none" role="presentation">
+    <path d="M0,50 C240,100 480,0 720,50 C960,100 1200,0 1440,50 L1440,100 L0,100 Z" fill={fill} opacity="0.6"></path>
+    <path d="M0,70 C240,20 480,120 720,70 C960,20 1200,120 1440,70 L1440,100 L0,100 Z" fill={fill} opacity="0.35"></path>
+  </svg>
+</div>
+
+<style>
+  .wave-divider {
+    line-height: 0;
+    overflow: hidden;
+  }
+
+  .wave-divider svg {
+    display: block;
+    height: clamp(48px, 8vw, 96px);
+    width: 100%;
+  }
+</style>

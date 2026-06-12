@@ -1,0 +1,99 @@
+---
+import { siteContent } from '../data/site';
+---
+
+<section class="hero section" id="uvod">
+  <div class="container hero__grid">
+    <div class="hero__copy">
+      <span class="eyebrow">{siteContent.hero.eyebrow}</span>
+      <h1>{siteContent.hero.heading}</h1>
+      <p>{siteContent.hero.lead}</p>
+      <div class="hero__actions">
+        <a class="button button-primary" href={siteContent.hero.primaryCta.href}>{siteContent.hero.primaryCta.label}</a>
+        <a class="button button-secondary" href={siteContent.hero.secondaryCta.href}>{siteContent.hero.secondaryCta.label}</a>
+      </div>
+    </div>
+    <div class="hero__visual" aria-label="Abstraktní vlna WAVE Marketing">
+      <div class="hero__orb hero__orb--large"></div>
+      <div class="hero__orb hero__orb--small"></div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero {
+    overflow: hidden;
+    padding-top: var(--ds-space-24);
+  }
+
+  .hero__grid {
+    align-items: center;
+    display: grid;
+    gap: var(--ds-space-12);
+    grid-template-columns: minmax(0, 1.05fr) minmax(320px, 0.95fr);
+  }
+
+  .hero h1 {
+    color: var(--ds-color-primary);
+    font-family: var(--ds-font-heading);
+    font-size: clamp(var(--ds-text-4xl), 6vw, var(--ds-text-6xl));
+    letter-spacing: var(--ds-tracking-tight);
+    line-height: var(--ds-leading-tight);
+    margin: var(--ds-space-6) 0;
+    max-width: 780px;
+  }
+
+  .hero p {
+    color: var(--ds-color-text-muted);
+    font-size: var(--ds-text-lg);
+    line-height: var(--ds-leading-relaxed);
+    margin: 0 0 var(--ds-space-8);
+    max-width: 720px;
+  }
+
+  .hero__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--ds-space-5);
+  }
+
+  .hero__visual {
+    aspect-ratio: 1;
+    background: radial-gradient(circle at 35% 30%, var(--ds-color-accent), var(--ds-color-primary));
+    border: 8px solid var(--ds-color-surface-raised);
+    border-radius: var(--ds-radius-organic);
+    box-shadow: var(--ds-shadow-warm);
+    min-height: 320px;
+    position: relative;
+  }
+
+  .hero__orb {
+    background: rgba(255, 255, 255, 0.24);
+    border-radius: var(--ds-radius-full);
+    position: absolute;
+  }
+
+  .hero__orb--large {
+    height: 42%;
+    right: 14%;
+    top: 16%;
+    width: 42%;
+  }
+
+  .hero__orb--small {
+    bottom: 18%;
+    height: 22%;
+    left: 18%;
+    width: 22%;
+  }
+
+  @media (max-width: 900px) {
+    .hero__grid {
+      grid-template-columns: 1fr;
+    }
+
+    .hero__visual {
+      min-height: 240px;
+    }
+  }
+</style>

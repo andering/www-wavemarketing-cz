@@ -1,0 +1,155 @@
+---
+import { siteContent } from '../data/site';
+---
+
+<section class="contact section" id="kontakt" aria-labelledby="contact-heading">
+  <div class="container contact__wrap">
+    <div class="contact__header">
+      <h2 id="contact-heading">{siteContent.contact.heading}</h2>
+      <p>{siteContent.contact.intro}</p>
+    </div>
+    <div class="contact__grid">
+      <article class="contact-card contact-card--person">
+        <img src={siteContent.assets.janaPhoto} alt="Jana Skalníková" width="180" height="180" />
+        <div>
+          <h3>{siteContent.contact.person.name}</h3>
+          <p>{siteContent.contact.person.role}</p>
+          <a class="button button-primary" href={siteContent.contact.person.phoneHref}>{siteContent.contact.person.phoneLabel}</a>
+        </div>
+      </article>
+      <a class="contact-card contact-card--action" href={siteContent.contact.email.href}>
+        <span class="material-symbols-outlined" aria-hidden="true">mail</span>
+        <strong>{siteContent.contact.email.label}</strong>
+        <small>{siteContent.contact.email.display}</small>
+      </a>
+      <article class="contact-card contact-card--action">
+        <span class="material-symbols-outlined" aria-hidden="true">groups</span>
+        <strong>Kde se můžeme vidět</strong>
+        <small>{siteContent.contact.meeting}</small>
+      </article>
+      <article class="contact-card contact-card--facts">
+        <h3>Fakturační údaje</h3>
+        <ul>
+          {siteContent.contact.company.map((item) => <li>{item}</li>)}
+        </ul>
+      </article>
+    </div>
+  </div>
+</section>
+
+<style>
+  .contact {
+    background: radial-gradient(circle at 50% 30%, rgba(116, 89, 60, 0.09), var(--ds-color-background) 62%);
+  }
+
+  .contact__wrap {
+    max-width: 1050px;
+  }
+
+  .contact__header {
+    margin-bottom: var(--ds-space-12);
+    text-align: center;
+  }
+
+  .contact h2 {
+    color: var(--ds-color-primary);
+    font-family: var(--ds-font-heading);
+    font-size: clamp(var(--ds-text-3xl), 4vw, var(--ds-text-5xl));
+  }
+
+  .contact__header p {
+    color: var(--ds-color-text-muted);
+    line-height: var(--ds-leading-relaxed);
+  }
+
+  .contact__grid {
+    display: grid;
+    gap: var(--ds-space-5);
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .contact-card {
+    background: rgba(255, 255, 255, 0.58);
+    border: var(--ds-border-width) solid rgba(255, 255, 255, 0.72);
+    border-radius: var(--ds-radius-3xl);
+    box-shadow: var(--ds-shadow-md);
+    color: var(--ds-color-primary);
+    padding: var(--ds-space-6);
+    text-decoration: none;
+  }
+
+  .contact-card--person {
+    align-items: center;
+    display: grid;
+    gap: var(--ds-space-6);
+    grid-column: span 2;
+    grid-row: span 2;
+    grid-template-columns: auto 1fr;
+  }
+
+  .contact-card--person img {
+    border: 4px solid var(--ds-color-surface-raised);
+    border-radius: var(--ds-radius-full);
+    box-shadow: var(--ds-shadow-md);
+    height: 112px;
+    object-fit: cover;
+    width: 112px;
+  }
+
+  .contact-card h3 {
+    font-family: var(--ds-font-heading);
+    font-size: var(--ds-text-2xl);
+    margin: 0 0 var(--ds-space-2);
+  }
+
+  .contact-card p,
+  .contact-card small,
+  .contact-card li {
+    color: var(--ds-color-text-muted);
+  }
+
+  .contact-card--action {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    gap: var(--ds-space-3);
+    justify-content: center;
+    text-align: center;
+  }
+
+  .contact-card--action .material-symbols-outlined {
+    align-items: center;
+    background: var(--ds-color-primary);
+    border-radius: var(--ds-radius-full);
+    color: var(--ds-color-primary-foreground);
+    display: inline-flex;
+    height: 56px;
+    justify-content: center;
+    width: 56px;
+  }
+
+  .contact-card--facts {
+    grid-column: span 4;
+  }
+
+  .contact-card--facts ul {
+    display: grid;
+    gap: var(--ds-space-2);
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  @media (max-width: 900px) {
+    .contact__grid,
+    .contact-card--person {
+      grid-template-columns: 1fr;
+    }
+
+    .contact-card--person,
+    .contact-card--facts,
+    .contact-card--action {
+      grid-column: span 1;
+    }
+  }
+</style>

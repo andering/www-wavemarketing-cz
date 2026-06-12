@@ -1,0 +1,92 @@
+---
+import { siteContent } from '../data/site';
+---
+
+<section class="services section" id="sluzby" aria-labelledby="services-heading">
+  <div class="container">
+    <div class="services__header">
+      <h2 id="services-heading">{siteContent.services.heading}</h2>
+      <p>{siteContent.services.intro}</p>
+    </div>
+    <div class="services__list">
+      {siteContent.services.items.map((service) => (
+        <article class="service-row">
+          <div class="service-row__icon" aria-hidden="true"><span class="material-symbols-outlined">{service.icon}</span></div>
+          <div>
+            <h3>{service.title}</h3>
+            <p>{service.text}</p>
+          </div>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .services {
+    background: var(--ds-color-surface-muted);
+  }
+
+  .services__header {
+    margin: 0 auto var(--ds-space-12);
+    max-width: 860px;
+    text-align: center;
+  }
+
+  .services h2 {
+    color: var(--ds-color-primary);
+    font-family: var(--ds-font-heading);
+    font-size: clamp(var(--ds-text-3xl), 4vw, var(--ds-text-5xl));
+  }
+
+  .services__header p,
+  .service-row p {
+    color: var(--ds-color-text-muted);
+    line-height: var(--ds-leading-relaxed);
+  }
+
+  .services__list {
+    display: grid;
+    gap: var(--ds-space-2);
+    margin-inline: auto;
+    max-width: 980px;
+  }
+
+  .service-row {
+    align-items: flex-start;
+    border-bottom: var(--ds-border-width) solid var(--ds-color-border);
+    border-radius: var(--ds-radius-lg);
+    display: grid;
+    gap: var(--ds-space-6);
+    grid-template-columns: auto 1fr;
+    padding: var(--ds-space-6);
+  }
+
+  .service-row:hover {
+    background: rgba(255, 255, 255, 0.52);
+  }
+
+  .service-row__icon {
+    align-items: center;
+    background: rgba(0, 59, 61, 0.06);
+    border-radius: var(--ds-radius-full);
+    color: var(--ds-color-primary);
+    display: inline-flex;
+    height: 52px;
+    justify-content: center;
+    width: 52px;
+  }
+
+  .service-row h3 {
+    color: var(--ds-color-primary);
+    font-family: var(--ds-font-heading);
+    font-size: var(--ds-text-2xl);
+    margin: 0 0 var(--ds-space-2);
+  }
+
+  @media (max-width: 640px) {
+    .service-row {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

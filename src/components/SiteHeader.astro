@@ -1,0 +1,73 @@
+---
+import { siteContent } from '../data/site';
+---
+
+<header class="site-header">
+  <div class="container site-header__inner">
+    <a class="site-header__logo" href="#uvod" aria-label="WAVE Marketing úvod">
+      <img src={siteContent.assets.logo} alt="WAVE Marketing logo" width="180" height="120" />
+    </a>
+    <nav class="site-header__nav" aria-label="Hlavní navigace">
+      {siteContent.navigation.map((item) => (
+        <a href={item.href}>{item.label}</a>
+      ))}
+    </nav>
+  </div>
+</header>
+
+<style>
+  .site-header {
+    background: var(--ds-color-surface-glass);
+    backdrop-filter: blur(8px);
+    border-bottom: var(--ds-border-width) solid var(--ds-color-border);
+    box-shadow: var(--ds-shadow-sm);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+
+  .site-header__inner {
+    align-items: center;
+    display: flex;
+    gap: var(--ds-space-6);
+    justify-content: space-between;
+    min-height: 96px;
+    padding-block: var(--ds-space-3);
+  }
+
+  .site-header__logo img {
+    height: 72px;
+    object-fit: contain;
+    width: auto;
+  }
+
+  .site-header__nav {
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--ds-space-6);
+    justify-content: flex-end;
+  }
+
+  .site-header__nav a {
+    color: var(--ds-color-text-muted);
+    font-weight: 700;
+    text-decoration: none;
+  }
+
+  .site-header__nav a:hover {
+    color: var(--ds-color-secondary);
+  }
+
+  @media (max-width: 720px) {
+    .site-header__inner {
+      align-items: flex-start;
+      flex-direction: column;
+      min-height: auto;
+    }
+
+    .site-header__logo img {
+      height: 60px;
+    }
+  }
+</style>

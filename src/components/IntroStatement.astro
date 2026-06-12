@@ -1,0 +1,41 @@
+---
+import { siteContent } from '../data/site';
+---
+
+<section class="intro section" aria-labelledby="intro-heading">
+  <div class="container intro__card">
+    <h2 id="intro-heading">{siteContent.intro.heading}</h2>
+    <p class="intro__main">{siteContent.intro.main}</p>
+    <p>{siteContent.intro.support}</p>
+  </div>
+</section>
+
+<style>
+  .intro__card {
+    background: var(--ds-color-surface-raised);
+    border: var(--ds-border-width) solid var(--ds-color-border);
+    border-radius: var(--ds-radius-3xl);
+    box-shadow: var(--ds-shadow-sm);
+    padding: clamp(var(--ds-space-8), 6vw, var(--ds-space-16));
+    text-align: center;
+  }
+
+  .intro h2 {
+    color: var(--ds-color-primary);
+    font-family: var(--ds-font-heading);
+    font-size: clamp(var(--ds-text-3xl), 4vw, var(--ds-text-5xl));
+    margin: 0 0 var(--ds-space-6);
+  }
+
+  .intro p {
+    color: var(--ds-color-text-muted);
+    margin-inline: auto;
+    max-width: 820px;
+  }
+
+  .intro__main {
+    color: var(--ds-color-primary) !important;
+    font-size: var(--ds-text-xl);
+    font-weight: 700;
+  }
+</style>

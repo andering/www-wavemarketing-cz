@@ -1,0 +1,68 @@
+---
+import { siteContent } from '../data/site';
+---
+
+<footer class="site-footer">
+  <div class="container site-footer__main">
+    <div>
+      <strong>{siteContent.footer.brand}</strong>
+      <p>{siteContent.footer.copy}</p>
+    </div>
+    <nav aria-label="Patička">
+      {siteContent.navigation.map((item) => <a href={item.href}>{item.label}</a>)}
+    </nav>
+  </div>
+  <div class="container site-footer__bottom">{siteContent.footer.copyright}</div>
+</footer>
+
+<style>
+  .site-footer {
+    background: var(--ds-color-surface-muted);
+    color: var(--ds-color-text-muted);
+  }
+
+  .site-footer__main {
+    display: flex;
+    gap: var(--ds-space-8);
+    justify-content: space-between;
+    padding-block: var(--ds-space-16);
+  }
+
+  .site-footer strong {
+    color: var(--ds-color-primary);
+    display: block;
+    font-family: var(--ds-font-heading);
+    font-size: var(--ds-text-3xl);
+    margin-bottom: var(--ds-space-4);
+  }
+
+  .site-footer p {
+    max-width: 440px;
+  }
+
+  .site-footer nav {
+    display: flex;
+    flex-direction: column;
+    gap: var(--ds-space-3);
+  }
+
+  .site-footer a {
+    color: var(--ds-color-text-muted);
+    text-decoration: none;
+  }
+
+  .site-footer a:hover {
+    color: var(--ds-color-secondary);
+  }
+
+  .site-footer__bottom {
+    border-top: var(--ds-border-width) solid var(--ds-color-border);
+    padding-block: var(--ds-space-6);
+  }
+
+  @media (max-width: 720px) {
+    .site-footer__main {
+      flex-direction: column;
+    }
+  }
+</style>
