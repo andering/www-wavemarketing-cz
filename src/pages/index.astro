@@ -1,0 +1,35 @@
+---
+import SiteHeader from '../components/SiteHeader.astro';
+import MarketingHero from '../components/MarketingHero.astro';
+import WaveDivider from '../components/WaveDivider.astro';
+import IntroStatement from '../components/IntroStatement.astro';
+import ServiceList from '../components/ServiceList.astro';
+import ProcessSteps from '../components/ProcessSteps.astro';
+import ContactCardGrid from '../components/ContactCardGrid.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+import { siteContent } from '../data/site';
+import '../styles/design-system.css';
+---
+
+<!doctype html>
+<html lang={siteContent.meta.language}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{siteContent.meta.title}</title>
+    <meta name="description" content={siteContent.meta.description} />
+  </head>
+  <body>
+    <SiteHeader />
+    <main>
+      <MarketingHero />
+      <WaveDivider tone="teal" />
+      <IntroStatement />
+      <ServiceList />
+      <WaveDivider tone="sand" />
+      <ProcessSteps />
+      <ContactCardGrid />
+    </main>
+    <SiteFooter />
+  </body>
+</html>
