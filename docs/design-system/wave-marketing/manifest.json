@@ -1,0 +1,22 @@
+{
+  "schemaVersion": "design-system-package/v1",
+  "id": "wave-marketing",
+  "name": "WAVE Marketing Design System",
+  "description": "A warm, human, wave-inspired design system for the WAVE Marketing static website.",
+  "source": {
+    "type": "stitch",
+    "items": [
+      {
+        "id": "projects/105594184207261317/screens/5af0cf05032a4c45b119685d472fd43f",
+        "label": "Kontakt | WAVE marketing (Updated Portfolio)",
+        "role": "Visual source for the website design system"
+      }
+    ]
+  },
+  "files": {
+    "design": "DESIGN.md",
+    "usage": "USAGE.md",
+    "tokens": "tokens.css",
+    "kitchensink": "kitchensink.html"
+  }
+}

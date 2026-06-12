@@ -1,0 +1,782 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>WAVE Marketing Design System Fixture</title>
+    <link rel="stylesheet" href="./tokens.css" />
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        background: var(--ds-color-background);
+        color: var(--ds-color-text);
+        font-family: var(--ds-font-body);
+        line-height: var(--ds-leading-normal);
+      }
+      a {
+        color: inherit;
+      }
+      .container {
+        width: min(100% - 32px, var(--ds-space-container-max));
+        margin: 0 auto;
+      }
+      .section {
+        padding: var(--ds-space-16) 0;
+      }
+      .eyebrow {
+        display: inline-flex;
+        padding: var(--ds-space-2) var(--ds-space-4);
+        border-radius: var(--ds-radius-full);
+        background: rgba(0, 59, 61, 0.06);
+        color: var(--ds-color-primary);
+        font-size: var(--ds-text-xs);
+        font-weight: 700;
+        letter-spacing: var(--ds-tracking-widest);
+        text-transform: uppercase;
+      }
+      h1,
+      h2,
+      h3 {
+        font-family: var(--ds-font-heading);
+        color: var(--ds-color-primary);
+        line-height: var(--ds-leading-tight);
+        margin: 0 0 var(--ds-space-4);
+      }
+      h1 {
+        font-size: clamp(var(--ds-text-4xl), 7vw, var(--ds-text-6xl));
+        letter-spacing: var(--ds-tracking-tight);
+      }
+      h2 {
+        font-size: clamp(var(--ds-text-3xl), 4vw, var(--ds-text-5xl));
+      }
+      h3 {
+        font-size: var(--ds-text-2xl);
+      }
+      p {
+        color: var(--ds-color-text-muted);
+        margin: 0 0 var(--ds-space-4);
+      }
+      .grid {
+        display: grid;
+        gap: var(--ds-space-6);
+      }
+      .grid-2 {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+      .grid-3 {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+      .card {
+        background: var(--ds-color-surface-raised);
+        border: var(--ds-border-width) solid var(--ds-color-border);
+        border-radius: var(--ds-radius-2xl);
+        padding: var(--ds-space-8);
+      }
+      .card.elevated {
+        box-shadow: var(--ds-shadow-lg);
+      }
+      .swatches {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: var(--ds-space-4);
+      }
+      .swatch {
+        overflow: hidden;
+        border-radius: var(--ds-radius-xl);
+        border: var(--ds-border-width) solid var(--ds-color-border);
+        background: var(--ds-color-surface-raised);
+      }
+      .swatch-color {
+        height: 74px;
+        border-bottom: var(--ds-border-width) solid var(--ds-color-border);
+      }
+      .swatch-body {
+        padding: var(--ds-space-4);
+        font-size: var(--ds-text-sm);
+      }
+      .token-name {
+        display: block;
+        font-weight: 700;
+        color: var(--ds-color-text);
+      }
+      .token-value {
+        color: var(--ds-color-text-muted);
+      }
+      .button-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--ds-space-4);
+        align-items: center;
+      }
+      .btn {
+        min-height: 48px;
+        border: 0;
+        border-radius: var(--ds-radius-md);
+        padding: var(--ds-space-3) var(--ds-space-6);
+        font-family: var(--ds-font-body);
+        font-weight: 700;
+        cursor: pointer;
+        transition:
+          transform var(--ds-duration-normal) var(--ds-ease-standard),
+          box-shadow var(--ds-duration-normal) var(--ds-ease-standard),
+          background var(--ds-duration-fast) var(--ds-ease-standard);
+      }
+      .btn:focus-visible,
+      input:focus-visible,
+      textarea:focus-visible,
+      select:focus-visible {
+        outline: 4px solid var(--ds-color-focus);
+        outline-offset: 2px;
+      }
+      .btn-primary {
+        background: var(--ds-color-secondary);
+        color: var(--ds-color-secondary-foreground);
+        box-shadow: var(--ds-shadow-button);
+        transform: translateY(-2px);
+      }
+      .btn-primary:active {
+        box-shadow: none;
+        transform: translateY(var(--ds-space-press-offset));
+      }
+      .btn-secondary {
+        background: var(--ds-color-surface-raised);
+        color: var(--ds-color-primary);
+        border: var(--ds-border-width) solid var(--ds-color-border);
+      }
+      .btn-ghost {
+        background: transparent;
+        color: var(--ds-color-secondary);
+      }
+      .btn-error {
+        background: var(--ds-color-error);
+        color: #fff;
+      }
+      .btn:disabled {
+        opacity: 0.45;
+        cursor: not-allowed;
+        transform: none;
+        box-shadow: none;
+      }
+      label {
+        display: block;
+        margin-bottom: var(--ds-space-2);
+        font-weight: 700;
+        color: var(--ds-color-primary);
+      }
+      input[type="text"],
+      textarea,
+      select {
+        width: 100%;
+        border: var(--ds-border-width) solid var(--ds-color-border);
+        border-radius: var(--ds-radius-xl);
+        padding: var(--ds-space-4);
+        background: rgba(255, 255, 255, 0.72);
+        color: var(--ds-color-text);
+        font: inherit;
+      }
+      .field {
+        margin-bottom: var(--ds-space-5);
+      }
+      .helper {
+        font-size: var(--ds-text-sm);
+        color: var(--ds-color-text-muted);
+        margin-top: var(--ds-space-2);
+      }
+      .error {
+        color: var(--ds-color-error);
+      }
+      .nav {
+        position: sticky;
+        top: 0;
+        z-index: 1;
+        background: var(--ds-color-surface-glass);
+        backdrop-filter: blur(8px);
+        border-bottom: var(--ds-border-width) solid var(--ds-color-border);
+        box-shadow: var(--ds-shadow-sm);
+      }
+      .nav-inner {
+        min-height: 86px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: var(--ds-space-6);
+      }
+      .brand {
+        font-family: var(--ds-font-heading);
+        font-size: var(--ds-text-2xl);
+        color: var(--ds-color-primary);
+        font-weight: 700;
+      }
+      .nav-links {
+        display: flex;
+        gap: var(--ds-space-6);
+        align-items: center;
+      }
+      .nav-link {
+        color: var(--ds-color-text-muted);
+        text-decoration: none;
+        font-weight: 600;
+      }
+      .nav-link.active {
+        color: var(--ds-color-secondary);
+        border-bottom: 2px solid var(--ds-color-secondary);
+      }
+      .badge {
+        display: inline-flex;
+        border-radius: var(--ds-radius-full);
+        padding: var(--ds-space-1) var(--ds-space-3);
+        font-size: var(--ds-text-xs);
+        font-weight: 700;
+        letter-spacing: var(--ds-tracking-wide);
+        text-transform: uppercase;
+      }
+      .badge.neutral {
+        background: var(--ds-color-surface-muted);
+        color: var(--ds-color-primary);
+      }
+      .badge.success {
+        background: rgba(74, 222, 128, 0.18);
+        color: #166534;
+      }
+      .badge.warning {
+        background: rgba(245, 158, 11, 0.18);
+        color: #92400e;
+      }
+      .badge.error {
+        background: rgba(186, 26, 26, 0.14);
+        color: var(--ds-color-error);
+      }
+      .alert {
+        border-radius: var(--ds-radius-xl);
+        padding: var(--ds-space-4);
+        border: var(--ds-border-width) solid var(--ds-color-border);
+        background: var(--ds-color-surface-raised);
+      }
+      .media-placeholder {
+        min-height: 180px;
+        border-radius: var(--ds-radius-organic);
+        background: radial-gradient(
+          circle at 30% 30%,
+          var(--ds-color-accent),
+          var(--ds-color-primary)
+        );
+        box-shadow: var(--ds-shadow-warm);
+      }
+      .wave {
+        height: 64px;
+        background: var(--ds-color-wave-strong);
+        clip-path: polygon(
+          0 42%,
+          16% 55%,
+          32% 36%,
+          50% 51%,
+          68% 37%,
+          84% 56%,
+          100% 42%,
+          100% 100%,
+          0 100%
+        );
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        overflow: hidden;
+        border-radius: var(--ds-radius-xl);
+        background: var(--ds-color-surface-raised);
+      }
+      th,
+      td {
+        padding: var(--ds-space-4);
+        border-bottom: var(--ds-border-width) solid var(--ds-color-border);
+        text-align: left;
+      }
+      th {
+        color: var(--ds-color-primary);
+        font-size: var(--ds-text-sm);
+        text-transform: uppercase;
+        letter-spacing: var(--ds-tracking-wide);
+      }
+      @media (max-width: 760px) {
+        .grid-2,
+        .grid-3 {
+          grid-template-columns: 1fr;
+        }
+        .nav-inner {
+          align-items: flex-start;
+          flex-direction: column;
+          padding: var(--ds-space-4) 0;
+        }
+        .nav-links {
+          flex-wrap: wrap;
+          gap: var(--ds-space-4);
+        }
+        .section {
+          padding: var(--ds-space-12) 0;
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        *,
+        *::before,
+        *::after {
+          transition: none !important;
+          animation: none !important;
+        }
+        .btn-primary {
+          transform: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="nav">
+      <div class="container nav-inner">
+        <div class="brand">WAVE Marketing</div>
+        <nav class="nav-links" aria-label="Fixture navigation">
+          <a class="nav-link active" href="#">Intro</a>
+          <a class="nav-link" href="#">Services</a>
+          <a class="nav-link" href="#">Contact</a>
+          <button class="btn btn-primary">Start a Wave</button>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <section class="section container">
+        <span class="eyebrow">Design fixture</span>
+        <h1>Warm marketing pages with a human wave rhythm</h1>
+        <p>
+          This fixture demonstrates reusable tokens and component behavior for
+          the WAVE Marketing design system.
+        </p>
+        <div class="button-row">
+          <button class="btn btn-primary">Primary CTA</button>
+          <button class="btn btn-secondary">Secondary CTA</button>
+          <button class="btn btn-ghost">Ghost Link</button>
+        </div>
+      </section>
+
+      <div class="wave" aria-hidden="true"></div>
+
+      <section class="section container">
+        <h2>Color Tokens</h2>
+        <div class="swatches">
+          <div class="swatch">
+            <div
+              class="swatch-color"
+              style="background: var(--ds-color-background)"
+            ></div>
+            <div class="swatch-body">
+              <span class="token-name">--ds-color-background</span
+              ><span class="token-value">#fbf9f4</span>
+            </div>
+          </div>
+          <div class="swatch">
+            <div
+              class="swatch-color"
+              style="background: var(--ds-color-surface)"
+            ></div>
+            <div class="swatch-body">
+              <span class="token-name">--ds-color-surface</span
+              ><span class="token-value">#fbf9f4</span>
+            </div>
+          </div>
+          <div class="swatch">
+            <div
+              class="swatch-color"
+              style="background: var(--ds-color-surface-muted)"
+            ></div>
+            <div class="swatch-body">
+              <span class="token-name">--ds-color-surface-muted</span
+              ><span class="token-value">#f5f3ee</span>
+            </div>
+          </div>
+          <div class="swatch">
+            <div
+              class="swatch-color"
+              style="background: var(--ds-color-surface-raised)"
+            ></div>
+            <div class="swatch-body">
+              <span class="token-name">--ds-color-surface-raised</span
+              ><span class="token-value">#ffffff</span>
+            </div>
+          </div>
+          <div class="swatch">
+            <div
+              class="swatch-color"
+              style="background: var(--ds-color-surface-glass)"
+            ></div>
+            <div class="swatch-body">
+              <span class="token-name">--ds-color-surface-glass</span
+              ><span class="token-value">rgba(251, 249, 244, 0.95)</span>
+            </div>
+          </div>
+          <div class="swatch">
+            <div
+              class="swatch-color"
+              style="background: var(--ds-color-text)"
+            ></div>
+            <div class="swatch-body">
+              <span class="token-name">--ds-color-text</span
+              ><span class="token-value">#1a1c1c</span>
+            </div>
+          </div>
+          <div class="swatch">
+            <div
+              class="swatch-color"
+              style="background: var(--ds-color-text-muted)"
+            ></div>
+            <div class="swatch-body">
+              <span class="token-name">--ds-color-text-muted</span
+              ><span class="token-value">#404949</span>
+            </div>
+          </div>
+          <div class="swatch">
+            <div
+              class="swatch-color"
+              style="background: var(--ds-color-border)"
+            ></div>
+            <div class="swatch-body">
+              <span class="token-name">--ds-color-border</span
+              ><span class="token-value">#e0ddd5</span>
+            </div>
+          </div>
+          <div class="swatch">
+            <div
+              class="swatch-color"
+              style="background: var(--ds-color-border-strong)"
+            ></div>
+            <div class="swatch-body">
+              <span class="token-name">--ds-color-border-strong</span
+              ><span class="token-value">#707979</span>
+            </div>
+          </div>
+          <div class="swatch">
+            <div
+              class="swatch-color"
+              style="background: var(--ds-color-primary)"
+            ></div>
+            <div class="swatch-body">
+              <span class="token-name">--ds-color-primary</span
+              ><span class="token-value">#003b3d</span>
+            </div>
+          </div>
+          <div class="swatch">
+            <div
+              class="swatch-color"
+              style="background: var(--ds-color-primary-foreground)"
+            ></div>
+            <div class="swatch-body">
+              <span class="token-name">--ds-color-primary-foreground</span
+              ><span class="token-value">#ffffff</span>
+            </div>
+          </div>
+          <div class="swatch">
+            <div
+              class="swatch-color"
+              style="background: var(--ds-color-primary-hover)"
+            ></div>
+            <div class="swatch-body">
+              <span class="token-name">--ds-color-primary-hover</span
+              ><span class="token-value">#012f31</span>
+            </div>
+          </div>
+          <div class="swatch">
+            <div
+              class="swatch-color"
+              style="background: var(--ds-color-secondary)"
+            ></div>
+            <div class="swatch-body">
+              <span class="token-name">--ds-color-secondary</span
+              ><span class="token-value">#74593c</span>
+            </div>
+          </div>
+          <div class="swatch">
+            <div
+              class="swatch-color"
+              style="background: var(--ds-color-secondary-foreground)"
+            ></div>
+            <div class="swatch-body">
+              <span class="token-name">--ds-color-secondary-foreground</span
+              ><span class="token-value">#ffffff</span>
+            </div>
+          </div>
+          <div class="swatch">
+            <div
+              class="swatch-color"
+              style="background: var(--ds-color-accent)"
+            ></div>
+            <div class="swatch-body">
+              <span class="token-name">--ds-color-accent</span
+              ><span class="token-value">#f0e8dc</span>
+            </div>
+          </div>
+          <div class="swatch">
+            <div
+              class="swatch-color"
+              style="background: var(--ds-color-success)"
+            ></div>
+            <div class="swatch-body">
+              <span class="token-name">--ds-color-success</span
+              ><span class="token-value">#4ade80</span>
+            </div>
+          </div>
+          <div class="swatch">
+            <div
+              class="swatch-color"
+              style="background: var(--ds-color-warning)"
+            ></div>
+            <div class="swatch-body">
+              <span class="token-name">--ds-color-warning</span
+              ><span class="token-value">#f59e0b</span>
+            </div>
+          </div>
+          <div class="swatch">
+            <div
+              class="swatch-color"
+              style="background: var(--ds-color-error)"
+            ></div>
+            <div class="swatch-body">
+              <span class="token-name">--ds-color-error</span
+              ><span class="token-value">#ba1a1a</span>
+            </div>
+          </div>
+          <div class="swatch">
+            <div
+              class="swatch-color"
+              style="background: var(--ds-color-button-edge)"
+            ></div>
+            <div class="swatch-body">
+              <span class="token-name">--ds-color-button-edge</span
+              ><span class="token-value">#4d3a27</span>
+            </div>
+          </div>
+          <div class="swatch">
+            <div
+              class="swatch-color"
+              style="background: var(--ds-color-focus)"
+            ></div>
+            <div class="swatch-body">
+              <span class="token-name">--ds-color-focus</span
+              ><span class="token-value">rgba(0, 59, 61, 0.22)</span>
+            </div>
+          </div>
+          <div class="swatch">
+            <div
+              class="swatch-color"
+              style="background: var(--ds-color-wave-strong)"
+            ></div>
+            <div class="swatch-body">
+              <span class="token-name">--ds-color-wave-strong</span
+              ><span class="token-value">rgba(0, 59, 61, 0.6)</span>
+            </div>
+          </div>
+          <div class="swatch">
+            <div
+              class="swatch-color"
+              style="background: var(--ds-color-wave-soft)"
+            ></div>
+            <div class="swatch-body">
+              <span class="token-name">--ds-color-wave-soft</span
+              ><span class="token-value">rgba(0, 59, 61, 0.4)</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section container">
+        <h2>Typography Scale</h2>
+        <div class="card">
+          <h1>Heading XL</h1>
+          <h2>Heading Large</h2>
+          <h3>Heading Medium</h3>
+          <p>
+            Body copy uses Work Sans with relaxed line height for approachable,
+            easy reading on marketing pages.
+          </p>
+          <span class="eyebrow">Label caps</span>
+        </div>
+      </section>
+
+      <section class="section container">
+        <h2>Spacing / Radius / Elevation</h2>
+        <div class="grid grid-3">
+          <div class="card">Plain card with border and large radius.</div>
+          <div class="card elevated">Elevated card with warm page depth.</div>
+          <div class="card">
+            <div
+              class="media-placeholder"
+              aria-label="Organic media placeholder"
+            ></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section container">
+        <h2>Buttons</h2>
+        <div class="button-row">
+          <button class="btn btn-primary">Primary</button>
+          <button class="btn btn-secondary">Secondary</button>
+          <button class="btn btn-ghost">Ghost</button>
+          <button class="btn btn-error">Destructive</button>
+          <button class="btn btn-primary" disabled>Disabled</button>
+        </div>
+      </section>
+
+      <section class="section container">
+        <h2>Form Controls</h2>
+        <form class="card" action="#">
+          <div class="field">
+            <label for="name">Name</label
+            ><input id="name" type="text" value="Sample Person" />
+            <div class="helper">Helper text explains what to enter.</div>
+          </div>
+          <div class="field">
+            <label for="message">Message</label
+            ><textarea id="message" rows="4">
+A warm textarea style for future forms.</textarea
+            >
+          </div>
+          <div class="field">
+            <label for="topic">Topic</label
+            ><select id="topic">
+              <option>Strategy</option>
+              <option>Social media</option>
+            </select>
+          </div>
+          <div class="field">
+            <label><input type="checkbox" /> Checkbox option</label
+            ><label
+              ><input type="radio" name="radio" checked /> Radio option</label
+            >
+          </div>
+          <div class="helper error">
+            Validation error text uses the error color.
+          </div>
+        </form>
+      </section>
+
+      <section class="section container">
+        <h2>Cards</h2>
+        <div class="grid grid-3">
+          <article class="card">
+            <span class="badge neutral">Plain</span>
+            <h3>Service row</h3>
+            <p>Useful for concise service descriptions with icons.</p>
+          </article>
+          <article class="card elevated">
+            <span class="badge success">Elevated</span>
+            <h3>Contact tile</h3>
+            <p>Useful for phone, email, or direct action blocks.</p>
+          </article>
+          <article class="card">
+            <div class="media-placeholder"></div>
+            <h3>Media card</h3>
+            <p>Image treatment is rounded, organic, and warm.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section container">
+        <h2>Navigation / Header</h2>
+        <div class="card">
+          <div class="nav-inner">
+            <div class="brand">Logo</div>
+            <nav class="nav-links">
+              <a class="nav-link active" href="#">Active</a
+              ><a class="nav-link" href="#">Link</a
+              ><button class="btn btn-secondary">Action</button>
+            </nav>
+          </div>
+        </div>
+      </section>
+
+      <section class="section container">
+        <h2>Badges and Alerts</h2>
+        <div class="button-row">
+          <span class="badge neutral">Neutral</span
+          ><span class="badge success">Success</span
+          ><span class="badge warning">Warning</span
+          ><span class="badge error">Error</span>
+        </div>
+        <div class="grid grid-3" style="margin-top: var(--ds-space-6)">
+          <div class="alert">Neutral alert</div>
+          <div class="alert">Success feedback</div>
+          <div class="alert">Error feedback</div>
+        </div>
+      </section>
+
+      <section class="section container">
+        <h2>Tables or Data Rows</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Item</th>
+              <th>Status</th>
+              <th>Meta</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Strategy sprint</td>
+              <td><span class="badge success">Ready</span></td>
+              <td>Warm card row</td>
+            </tr>
+            <tr>
+              <td>Content plan</td>
+              <td><span class="badge warning">Review</span></td>
+              <td>Muted metadata</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section class="section container">
+        <h2>Empty / Loading / Error States</h2>
+        <div class="grid grid-3">
+          <div class="card">
+            <h3>Empty</h3>
+            <p>No items yet.</p>
+          </div>
+          <div class="card">
+            <h3>Loading</h3>
+            <p>Preparing the next wave.</p>
+          </div>
+          <div class="card">
+            <h3>Error</h3>
+            <p class="error">Something needs attention.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section container">
+        <h2>Media / Image Treatment</h2>
+        <div class="grid grid-2">
+          <div class="media-placeholder"></div>
+          <div class="card">
+            <h3>Organic crop</h3>
+            <p>
+              Use verified real assets only. This abstract fixture demonstrates
+              the shape, not production imagery.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section container">
+        <h2>Responsive Example</h2>
+        <div class="grid grid-2">
+          <div>
+            <h3>Desktop split</h3>
+            <p>Two-column compositions collapse cleanly on mobile.</p>
+          </div>
+          <div class="card elevated">
+            <button class="btn btn-primary">Mobile-safe action</button>
+          </div>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>
