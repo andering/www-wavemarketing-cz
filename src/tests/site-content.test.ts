@@ -1,4 +1,4 @@
-import { existsSync } from 'node:fs';
+import { existsSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { describe, expect, it } from 'vitest';
 import { siteContent } from '../data/site';
@@ -16,6 +16,12 @@ describe('siteContent', () => {
     expect(siteContent.contact.person.phoneDisplay).toBe('605 461 440');
     expect(siteContent.contact.person.phoneHref).toBe('tel:+420605461440');
     expect(siteContent.contact.email.href).toBe('mailto:jana.skalnikova@wavemarketing.cz');
+  });
+
+  it('renders the contact phone display in the contact card', () => {
+    const component = readFileSync(join(process.cwd(), 'src/components/ContactCardGrid.astro'), 'utf8');
+
+    expect(component).toContain('siteContent.contact.person.phoneDisplay');
   });
 
   it('records resolved production asset paths', () => {

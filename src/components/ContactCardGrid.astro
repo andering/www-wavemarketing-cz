@@ -14,7 +14,9 @@ import { siteContent } from '../data/site';
         <div>
           <h3>{siteContent.contact.person.name}</h3>
           <p>{siteContent.contact.person.role}</p>
-          <a class="button button-primary" href={siteContent.contact.person.phoneHref}>{siteContent.contact.person.phoneLabel}</a>
+          <a class="button button-primary" href={siteContent.contact.person.phoneHref}>
+            {siteContent.contact.person.phoneLabel}: {siteContent.contact.person.phoneDisplay}
+          </a>
         </div>
       </article>
       <a class="contact-card contact-card--action" href={siteContent.contact.email.href}>
