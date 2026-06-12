@@ -4,10 +4,16 @@ import { siteContent } from '../data/site';
 
 <footer class="site-footer">
   <div class="container site-footer__main">
-    <div>
+    <div class="site-footer__brand">
       <strong>{siteContent.footer.brand}</strong>
       <p>{siteContent.footer.copy}</p>
     </div>
+    <section class="site-footer__company" aria-labelledby="footer-company-heading">
+      <h2 id="footer-company-heading">Fakturační údaje</h2>
+      <ul>
+        {siteContent.contact.company.map((fact) => <li>{fact}</li>)}
+      </ul>
+    </section>
     <nav aria-label="Patička">
       {siteContent.navigation.map((item) => <a href={item.href}>{item.label}</a>)}
     </nav>
@@ -22,8 +28,9 @@ import { siteContent } from '../data/site';
   }
 
   .site-footer__main {
-    display: flex;
+    display: grid;
     gap: var(--ds-space-8);
+    grid-template-columns: minmax(0, 1.4fr) minmax(220px, 0.9fr) auto;
     justify-content: space-between;
     padding-block: var(--ds-space-16);
   }
@@ -38,6 +45,23 @@ import { siteContent } from '../data/site';
 
   .site-footer p {
     max-width: 440px;
+  }
+
+  .site-footer h2 {
+    color: var(--ds-color-text);
+    font-family: var(--ds-font-heading);
+    font-size: var(--ds-text-lg);
+    margin: 0 0 var(--ds-space-3);
+  }
+
+  .site-footer ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .site-footer li + li {
+    margin-top: var(--ds-space-2);
   }
 
   .site-footer nav {
@@ -62,7 +86,7 @@ import { siteContent } from '../data/site';
 
   @media (max-width: 720px) {
     .site-footer__main {
-      flex-direction: column;
+      grid-template-columns: 1fr;
     }
   }
 </style>

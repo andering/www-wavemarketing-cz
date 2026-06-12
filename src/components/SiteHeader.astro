@@ -7,11 +7,19 @@ import { siteContent } from '../data/site';
     <a class="site-header__logo" href="#uvod" aria-label="WAVE Marketing úvod">
       <img src={siteContent.assets.logo} alt="WAVE Marketing logo" width="180" height="120" />
     </a>
-    <nav class="site-header__nav" aria-label="Hlavní navigace">
+    <nav class="site-header__desktop-nav" aria-label="Hlavní navigace">
       {siteContent.navigation.map((item) => (
         <a href={item.href}>{item.label}</a>
       ))}
     </nav>
+    <details class="site-header__mobile-nav">
+      <summary aria-label="Otevřít hlavní navigaci">Menu</summary>
+      <nav aria-label="Mobilní navigace">
+        {siteContent.navigation.map((item) => (
+          <a href={item.href}>{item.label}</a>
+        ))}
+      </nav>
+    </details>
   </div>
 </header>
 
@@ -41,7 +49,7 @@ import { siteContent } from '../data/site';
     width: auto;
   }
 
-  .site-header__nav {
+  .site-header__desktop-nav {
     align-items: center;
     display: flex;
     flex-wrap: wrap;
@@ -49,25 +57,73 @@ import { siteContent } from '../data/site';
     justify-content: flex-end;
   }
 
-  .site-header__nav a {
+  .site-header__desktop-nav a,
+  .site-header__mobile-nav a {
     color: var(--ds-color-text-muted);
     font-weight: 700;
     text-decoration: none;
   }
 
-  .site-header__nav a:hover {
+  .site-header__desktop-nav a:hover,
+  .site-header__mobile-nav a:hover {
     color: var(--ds-color-secondary);
+  }
+
+  .site-header__mobile-nav {
+    display: none;
+    position: relative;
+  }
+
+  .site-header__mobile-nav summary {
+    border: var(--ds-border-width) solid var(--ds-color-border);
+    border-radius: var(--ds-radius-full);
+    color: var(--ds-color-primary);
+    cursor: pointer;
+    font-weight: 700;
+    list-style: none;
+    padding: var(--ds-space-3) var(--ds-space-5);
+  }
+
+  .site-header__mobile-nav summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .site-header__mobile-nav summary:focus-visible {
+    outline: 3px solid var(--ds-color-secondary);
+    outline-offset: 3px;
+  }
+
+  .site-header__mobile-nav nav {
+    background: var(--ds-color-surface);
+    border: var(--ds-border-width) solid var(--ds-color-border);
+    border-radius: var(--ds-radius-xl);
+    box-shadow: var(--ds-shadow-md);
+    display: flex;
+    flex-direction: column;
+    gap: var(--ds-space-3);
+    margin-top: var(--ds-space-3);
+    min-width: 180px;
+    padding: var(--ds-space-4);
+    position: absolute;
+    right: 0;
   }
 
   @media (max-width: 720px) {
     .site-header__inner {
-      align-items: flex-start;
-      flex-direction: column;
+      align-items: center;
       min-height: auto;
     }
 
     .site-header__logo img {
       height: 60px;
+    }
+
+    .site-header__desktop-nav {
+      display: none;
+    }
+
+    .site-header__mobile-nav {
+      display: block;
     }
   }
 </style>
