@@ -7,7 +7,7 @@ import { siteContent } from '../data/site';
     <div class="hero__copy">
       <span class="eyebrow">{siteContent.hero.eyebrow}</span>
       <h1>{siteContent.hero.heading}</h1>
-      <p>{siteContent.hero.lead}</p>
+      <p class="lead">{siteContent.hero.lead}</p>
       <div class="hero__actions">
         <a class="button button-primary" href={siteContent.hero.primaryCta.href}>{siteContent.hero.primaryCta.label}</a>
         <a class="button button-secondary" href={siteContent.hero.secondaryCta.href}>{siteContent.hero.secondaryCta.label}</a>
@@ -46,8 +46,6 @@ import { siteContent } from '../data/site';
 
   .hero p {
     color: var(--ds-color-text-muted);
-    font-size: var(--ds-text-lg);
-    line-height: var(--ds-leading-relaxed);
     margin: 0 0 var(--ds-space-8);
     max-width: 720px;
   }

@@ -139,7 +139,7 @@ The three-layer documentation stack is in place and verified:
 - Layer 2 content specs: `docs/website/site.md` and `docs/website/sections/*.md`.
 - Layer 3 component mapping: `docs/website/page-map.md`.
 
-No production website code has been created yet. The next action is a review/approval gate before implementation planning. The required logo and Jana/contact photo asset gates are resolved.
+The Astro static site has been implemented from the documentation stack and extracted production assets. Current refinement work should update the canonical design-system and website specs first, then mirror those decisions in implementation.
 
 ## Immediate Next Step
 
@@ -148,7 +148,11 @@ Review and approve the documentation stack, then choose the planning route:
 1. `writing-plans`: create a single implementation plan for building the static website. Recommended for this project because it is one small static site and should be implemented as one coherent build.
 2. `spec-to-linear`: convert the spec stack into Linear project/issues. Use this only if the work should be split across multiple people or tracked as separate tickets.
 
-Before implementation starts, choose the static build stack and hosting/deployment target. Social links can remain omitted until final URLs exist.
+Social links can remain omitted until final URLs exist.
+
+## Refinement Decisions
+
+- Lead and intro paragraphs should use a shared `lead` typography pattern: larger than standard body copy, `--ds-font-weight-light` (`300`), 20px expressed as `1.25rem`, and relaxed leading. Standard body copy remains `--ds-font-weight-regular` (`400`), while UI labels/buttons should use semibold/medium tokens instead of hard-coded heavy weights where possible.
 
 ## Open Inputs Before Implementation
 
@@ -160,6 +164,27 @@ Before implementation starts, choose the static build stack and hosting/deployme
 - Selected static build stack: Astro static site.
 - Plan path: `docs/superpowers/plans/2026-06-12-wave-marketing-static-site.md`.
 - Plan scope: build the one-page static website from the three-layer docs and extracted assets.
+- Before implementation continues, create a root `AGENTS.md` file so future agents get the project-specific rules without rediscovering them.
+
+## Testing Approach Note
+
+Tests should exist, but their main purpose is to keep source-of-truth content and production constraints stable rather than to overtest visual styling.
+
+- Use lightweight JavaScript/Vitest tests for content and configuration invariants.
+- Tests should verify that generated or copied site data keeps the approved facts from `client_brief.md`, `docs/website/`, `docs/website/page-map.md`, and `docs/design-system/wave-marketing/`.
+- Tests should guard important launch constraints: no fake references, no contact form, no placeholder social links, correct contact details, correct production asset paths, expected navigation labels, and expected section/component mapping.
+- A reusable test template or skill-derived checklist may be useful so future static-site projects can generate similar content-invariant tests from their docs.
+- Visual finish, responsive polish, spacing feel, image treatment, and animation details should be verified mostly through browser review and `npm run build`, not brittle snapshot-style tests.
+
+## Implementation Breakdown Note
+
+The implementation plan should divide the website build into clear work phases instead of treating it as one undifferentiated build:
+
+1. `brut build`: rough first pass that gets the complete page structure, content, assets, anchors, and Astro project wiring in place.
+2. `component specifics`: refine each reusable component against the design-system contracts, including header, hero, service blocks, process section, contact blocks, footer, buttons, and image treatments.
+3. `responsive specifics`: tune the layout and spacing for mobile, tablet, and desktop breakpoints instead of relying only on the desktop design.
+4. `detail finish`: final polish pass for typography, spacing, color accuracy, hover/focus states, accessibility, SEO metadata, and production cleanup.
+5. `maybe movable parts`: identify any parts that should remain easy to reorder, swap, or extract later, such as section order, repeated service items, navigation links, and asset references.
 
 ## Resolved Production Assets
 
@@ -207,3 +232,10 @@ Before implementation starts, choose the static build stack and hosting/deployme
 - Verified both extracted files are non-empty PNG assets.
 - Selected Astro as the static build stack.
 - Created implementation plan `docs/superpowers/plans/2026-06-12-wave-marketing-static-site.md`.
+
+### 2026-06-13
+
+- Implemented the Astro static site from the approved documentation stack and extracted assets.
+- Confirmed the global lead/intro paragraph typography should be larger and use font weight `300`.
+- Recorded lead typography as a reusable design-system token pattern and mirrored it in the site CSS and lead-bearing homepage sections.
+- Refined the lead paragraph size so both desktop and mobile/default lead tokens resolve to `1.25rem` instead of `1.125rem`.

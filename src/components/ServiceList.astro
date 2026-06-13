@@ -6,7 +6,7 @@ import { siteContent } from '../data/site';
   <div class="container">
     <div class="services__header">
       <h2 id="services-heading">{siteContent.services.heading}</h2>
-      <p>{siteContent.services.intro}</p>
+      <p class="lead">{siteContent.services.intro}</p>
     </div>
     <div class="services__list">
       {siteContent.services.items.map((service) => (
@@ -40,7 +40,6 @@ import { siteContent } from '../data/site';
     font-size: clamp(var(--ds-text-3xl), 4vw, var(--ds-text-5xl));
   }
 
-  .services__header p,
   .service-row p {
     color: var(--ds-color-text-muted);
     line-height: var(--ds-leading-relaxed);

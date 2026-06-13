@@ -5,7 +5,7 @@ import { siteContent } from '../data/site';
 <section class="intro section" aria-labelledby="intro-heading">
   <div class="container intro__card">
     <h2 id="intro-heading">{siteContent.intro.heading}</h2>
-    <p class="intro__main">{siteContent.intro.main}</p>
+    <p class="intro__main lead">{siteContent.intro.main}</p>
     <p>{siteContent.intro.support}</p>
   </div>
 </section>
@@ -35,7 +35,5 @@ import { siteContent } from '../data/site';
 
   .intro__main {
     color: var(--ds-color-primary) !important;
-    font-size: var(--ds-text-xl);
-    font-weight: 700;
   }
 </style>

@@ -26,10 +26,18 @@
   --ds-font-body: "Work Sans", system-ui, sans-serif;
   --ds-font-label: "Work Sans", system-ui, sans-serif;
 
+  --ds-font-weight-light: 300;
+  --ds-font-weight-regular: 400;
+  --ds-font-weight-medium: 500;
+  --ds-font-weight-semibold: 600;
+  --ds-font-weight-bold: 700;
+
   --ds-text-xs: 0.75rem;
   --ds-text-sm: 0.875rem;
   --ds-text-base: 1rem;
   --ds-text-lg: 1.125rem;
+  --ds-text-lead: 1.25rem;
+  --ds-text-lead-mobile: 1.25rem;
   --ds-text-xl: 1.25rem;
   --ds-text-2xl: 1.5rem;
   --ds-text-3xl: 1.875rem;
@@ -41,6 +49,7 @@
   --ds-leading-snug: 1.25;
   --ds-leading-normal: 1.5;
   --ds-leading-relaxed: 1.65;
+  --ds-leading-lead: 1.7;
   --ds-tracking-tight: -0.02em;
   --ds-tracking-normal: 0;
   --ds-tracking-wide: 0.05em;

@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@400&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Work+Sans:wght@300;400;500;600;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@400&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Work+Sans:wght@300;400;500;600;700&display=swap");
 
 :root {
   --ds-color-background: #fbf9f4;
@@ -28,10 +28,18 @@
   --ds-font-body: "Work Sans", system-ui, sans-serif;
   --ds-font-label: "Work Sans", system-ui, sans-serif;
 
+  --ds-font-weight-light: 300;
+  --ds-font-weight-regular: 400;
+  --ds-font-weight-medium: 500;
+  --ds-font-weight-semibold: 600;
+  --ds-font-weight-bold: 700;
+
   --ds-text-xs: 0.75rem;
   --ds-text-sm: 0.875rem;
   --ds-text-base: 1rem;
   --ds-text-lg: 1.125rem;
+  --ds-text-lead: 1.25rem;
+  --ds-text-lead-mobile: 1.25rem;
   --ds-text-xl: 1.25rem;
   --ds-text-2xl: 1.5rem;
   --ds-text-3xl: 1.875rem;
@@ -43,6 +51,7 @@
   --ds-leading-snug: 1.25;
   --ds-leading-normal: 1.5;
   --ds-leading-relaxed: 1.65;
+  --ds-leading-lead: 1.7;
   --ds-tracking-tight: -0.02em;
   --ds-tracking-normal: 0;
   --ds-tracking-wide: 0.05em;
@@ -103,6 +112,7 @@ body {
   background: var(--ds-color-background);
   color: var(--ds-color-text);
   font-family: var(--ds-font-body);
+  font-weight: var(--ds-font-weight-regular);
   line-height: var(--ds-leading-normal);
 }
 
@@ -121,7 +131,7 @@ a {
 }
 
 .material-symbols-outlined {
-  font-family: 'Material Symbols Outlined';
+  font-family: "Material Symbols Outlined";
   font-weight: normal;
   font-style: normal;
   font-size: 24px;
@@ -132,7 +142,7 @@ a {
   white-space: nowrap;
   word-wrap: normal;
   direction: ltr;
-  -webkit-font-feature-settings: 'liga';
+  -webkit-font-feature-settings: "liga";
   -webkit-font-smoothing: antialiased;
 }
 
@@ -152,7 +162,7 @@ a {
   background: rgba(0, 59, 61, 0.06);
   color: var(--ds-color-primary);
   font-size: var(--ds-text-xs);
-  font-weight: 700;
+  font-weight: var(--ds-font-weight-semibold);
   letter-spacing: var(--ds-tracking-widest);
   padding: var(--ds-space-2) var(--ds-space-4);
   text-transform: uppercase;
@@ -164,13 +174,16 @@ a {
   border-radius: var(--ds-radius-md);
   cursor: pointer;
   display: inline-flex;
-  font-weight: 700;
+  font-weight: var(--ds-font-weight-semibold);
   gap: var(--ds-space-2);
   justify-content: center;
   min-height: 48px;
   padding: var(--ds-space-3) var(--ds-space-6);
   text-decoration: none;
-  transition: transform var(--ds-duration-normal) var(--ds-ease-standard), box-shadow var(--ds-duration-normal) var(--ds-ease-standard), background var(--ds-duration-fast) var(--ds-ease-standard);
+  transition:
+    transform var(--ds-duration-normal) var(--ds-ease-standard),
+    box-shadow var(--ds-duration-normal) var(--ds-ease-standard),
+    background var(--ds-duration-fast) var(--ds-ease-standard);
 }
 
 .button-primary {
@@ -191,9 +204,23 @@ a {
   color: var(--ds-color-primary);
 }
 
+.lead {
+  color: var(--ds-color-text-muted);
+  font-size: var(--ds-text-lead-mobile);
+  font-weight: var(--ds-font-weight-light);
+  line-height: var(--ds-leading-lead);
+}
+
 @media (min-width: 768px) {
   .container {
-    width: min(100% - calc(var(--ds-space-gutter-desktop) * 2), var(--ds-space-container-max));
+    width: min(
+      100% - calc(var(--ds-space-gutter-desktop) * 2),
+      var(--ds-space-container-max)
+    );
+  }
+
+  .lead {
+    font-size: var(--ds-text-lead);
   }
 }
 

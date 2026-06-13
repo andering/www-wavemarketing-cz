@@ -6,7 +6,7 @@ import { siteContent } from '../data/site';
   <div class="container">
     <div class="process__header">
       <h2 id="process-heading">{siteContent.process.heading}</h2>
-      <p>{siteContent.process.intro}</p>
+      <p class="lead">{siteContent.process.intro}</p>
     </div>
     <ol class="process__grid">
       {siteContent.process.steps.map((step, index) => (
@@ -33,7 +33,6 @@ import { siteContent } from '../data/site';
     font-size: clamp(var(--ds-text-3xl), 4vw, var(--ds-text-5xl));
   }
 
-  .process__header p,
   .process-card p {
     color: var(--ds-color-text-muted);
     line-height: var(--ds-leading-relaxed);
@@ -58,7 +57,7 @@ import { siteContent } from '../data/site';
 
   .process-card span {
     color: var(--ds-color-secondary);
-    font-weight: 800;
+    font-weight: var(--ds-font-weight-bold);
     letter-spacing: var(--ds-tracking-widest);
   }
 

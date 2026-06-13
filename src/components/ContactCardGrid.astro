@@ -6,7 +6,7 @@ import { siteContent } from '../data/site';
   <div class="container contact__wrap">
     <div class="contact__header">
       <h2 id="contact-heading">{siteContent.contact.heading}</h2>
-      <p>{siteContent.contact.intro}</p>
+      <p class="lead">{siteContent.contact.intro}</p>
     </div>
     <div class="contact__grid">
       <article class="contact-card contact-card--person">
@@ -58,11 +58,6 @@ import { siteContent } from '../data/site';
     color: var(--ds-color-primary);
     font-family: var(--ds-font-heading);
     font-size: clamp(var(--ds-text-3xl), 4vw, var(--ds-text-5xl));
-  }
-
-  .contact__header p {
-    color: var(--ds-color-text-muted);
-    line-height: var(--ds-leading-relaxed);
   }
 
   .contact__grid {
