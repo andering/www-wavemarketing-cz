@@ -13,8 +13,8 @@ github_workflows = [
   "pages-deploy",
 ]
 
-# Static-site deployment only. Runtime GCP modules stay disabled.
-gcp_project_bootstrap_enabled = false
+# Static-site deployment only. GCP bootstrap is still needed for project setup and Terraform state.
+gcp_project_bootstrap_enabled = true
 github_wif_enabled            = false
 artifact_registry_enabled     = false
 secret_manager_enabled        = false
