@@ -5,7 +5,8 @@ import { siteContent } from '../data/site';
 <section class="intro section" aria-labelledby="intro-heading">
   <div class="container intro__grid">
     <div class="intro__visual" aria-hidden="true">
-      <svg class="intro__wave" viewBox="0 80 720 500" role="presentation" focusable="false">
+      <canvas class="intro__shader-canvas" data-intro-shader></canvas>
+      <svg class="intro__wave intro__fallback-wave" viewBox="0 80 720 500" role="presentation" focusable="false">
         <defs>
           <linearGradient id="intro-ribbon-primary" x1="0" y1="0" x2="1" y2="1">
             <stop offset="0" stop-color="var(--ds-color-primary)" />
@@ -31,6 +32,10 @@ import { siteContent } from '../data/site';
   </div>
 </section>
 
+<script>
+  import '../scripts/intro-shader';
+</script>
+
 <style>
   .intro {
     background: var(--ds-color-background);
@@ -50,6 +55,29 @@ import { siteContent } from '../data/site';
     min-height: clamp(280px, 36vw, 460px);
     overflow: hidden;
     position: relative;
+  }
+
+  .intro__shader-canvas {
+    height: 100%;
+    inset: 0;
+    opacity: 0;
+    pointer-events: none;
+    position: absolute;
+    transition: opacity var(--ds-duration-slow) var(--ds-ease-standard);
+    width: 100%;
+    z-index: 1;
+  }
+
+  .intro__visual[data-shader-ready="true"] .intro__shader-canvas {
+    opacity: 1;
+  }
+
+  .intro__fallback-wave {
+    transition: opacity var(--ds-duration-slow) var(--ds-ease-standard);
+  }
+
+  .intro__visual[data-shader-ready="true"] .intro__fallback-wave {
+    opacity: 0;
   }
 
   .intro__wave {
@@ -140,6 +168,10 @@ import { siteContent } from '../data/site';
     .intro__wave,
     .intro__ribbon {
       animation: none;
+    }
+
+    .intro__shader-canvas {
+      display: none;
     }
   }
 

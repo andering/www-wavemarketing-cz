@@ -125,7 +125,7 @@ The implementation should define or generate these component/widget contracts fr
 - Variant: `split-editorial-wave-panel`.
 - Design contracts: `Composition Cues`, `Typography`, `Decorative Elements`, `Cards` if rendered inside a surface.
 - Content slots: heading, main copy, supporting copy.
-- Visual slot rule: on desktop and wider layouts, render a local token-colored layered ribbon-wave SVG inspired by the approved Stitch node, using a cropped wave viewport so empty space above and below the ribbon does not inflate the section. The desktop ribbon-wave may use a subtle breathing animation with gentle vertical drift, slight scale, and tiny staggered ribbon offsets; disable this non-essential motion for reduced-motion preferences. On mobile, omit the decorative wave panel and keep only the text statement. Do not render metrics, remote Stitch imagery, or fake proof.
+- Visual slot rule: on desktop and wider layouts, render a panel-scoped WebGL shader canvas inspired by the supplied flowing-line shader, with a local SVG/CSS fallback behind it. The shader must be initialized only for the `Kdo jsme` visual panel, use WAVE colors, clean up resize and animation frame work, and skip animation for reduced-motion preferences. On no-WebGL, shader failure, JavaScript-disabled, reduced-motion, and mobile contexts, preserve a static local SVG/CSS fallback or the existing mobile omission. Do not add React, shadcn, Tailwind, `/components/ui`, Unsplash assets, lucide icons, full-page fixed backgrounds, remote imagery, metrics, fake proof, or new dependencies.
 - Placement rule: render `Kdo jsme` as the final main content section after the contact conversion area.
 
 ### 8. Footer

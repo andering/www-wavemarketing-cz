@@ -164,7 +164,7 @@ Header social links are approved for launch using the supplied Facebook, Instagr
 - Responsive responsibility decision: responsive refinement must explicitly track where mobile and desktop have different section or component responsibilities, such as when a desktop visual slot becomes a mobile background treatment or is omitted entirely, instead of treating responsive work as spacing changes only.
 - Mobile hero refinement: remove the mobile-only decorative gradient background, keep the desktop hero visual omitted on mobile, and increase the mobile hero headline so the opening message keeps enough weight without the background treatment.
 - Header behavior refinement: add active section tracking for the one-page navigation so desktop and mobile/offcanvas links reflect the current scroll section with the active-link treatment and `aria-current="page"`.
-- Intro motion refinement: animate the desktop `Kdo jsme` ribbon-wave with a slow, subtle breathing movement only; keep the mobile decorative panel omitted and disable non-essential motion for reduced-motion preferences.
+- Intro visual refinement: adapt the supplied shader as a panel-scoped WebGL canvas enhancement for desktop `Kdo jsme`, with a local SVG/CSS fallback, WAVE palette colors, cleanup for resize and animation work, and reduced-motion/mobile safeguards. Do not add React, shadcn, Tailwind, `/components/ui`, Unsplash assets, lucide icons, full-page fixed backgrounds, remote imagery, fake proof, or new dependencies.
 
 ## Open Inputs Before Implementation
 
@@ -263,3 +263,5 @@ The implementation plan should divide the website build into clear work phases i
 
 - Approved subtle breathing motion for the desktop `Kdo jsme` local ribbon-wave SVG, with reduced-motion handling and no changes to content, assets, or mobile layout.
 - Reverted the `Kdo jsme` motion direction from actual wave drift back to the previous subtle breathing animation after the drift version did not work as intended.
+- Reverted the shader-inspired `Kdo jsme` flow-line concept back to the previous local ribbon-wave breathing visual after review.
+- Approved trying the supplied shader as real WebGL for `Kdo jsme`, scoped to the desktop visual panel with a local static fallback and without adopting the pasted React/shadcn/Tailwind integration instructions.

@@ -415,7 +415,7 @@ describe("siteContent", () => {
     expect(designSystem).toContain("omit the decorative wave panel");
     expect(pageMap).toContain("omit the image visually");
     expect(pageMap).toContain("do not add a decorative replacement gradient");
-    expect(pageMap).toContain("omit the decorative wave panel");
+    expect(pageMap).toContain("existing mobile omission");
     expect(roadmap).toContain("Responsive responsibility decision");
     expect(roadmap).toContain(
       "different section or component responsibilities",
@@ -545,14 +545,22 @@ describe("siteContent", () => {
       join(process.cwd(), "src/components/IntroStatement.astro"),
       "utf8",
     );
+    const shaderScript = readFileSync(
+      join(process.cwd(), "src/scripts/intro-shader.ts"),
+      "utf8",
+    );
 
     expect(siteContent.intro.eyebrow).toBe("O nás");
     expect(introSpec).toContain("## Eyebrow");
     expect(introSpec).toContain("`O nás`");
     expect(pageMap).toContain("Variant: `split-editorial-wave-panel`");
-    expect(pageMap).toContain("cropped wave viewport");
+    expect(pageMap).toContain("panel-scoped WebGL shader canvas");
     expect(component).toContain("intro__visual");
     expect(component).toContain("intro__wave");
+    expect(component).toContain("intro__shader-canvas");
+    expect(component).toContain("data-intro-shader");
+    expect(component).toContain("intro__fallback-wave");
+    expect(component).toContain("../scripts/intro-shader");
     expect(component).toContain('viewBox="0 80 720 500"');
     expect(component).toContain('class="intro__ribbon intro__ribbon--back"');
     expect(component).toContain('class="intro__ribbon intro__ribbon--front"');
@@ -563,16 +571,22 @@ describe("siteContent", () => {
     expect(component).toContain("background: transparent;");
     expect(component).toContain("min-height: clamp(280px, 36vw, 460px);");
     expect(component).toContain("height: 100%;");
+    expect(component).toContain("position: absolute;");
+    expect(component).toContain("inset: 0;");
+    expect(component).toContain("opacity: 0;");
     expect(component).toContain(
-      "animation: intro-wave-breathe 12s var(--ds-ease-standard) infinite;",
+      '.intro__visual[data-shader-ready="true"] .intro__shader-canvas',
     );
-    expect(component).toContain("transform-origin: center;");
-    expect(component).toContain("@keyframes intro-wave-breathe");
-    expect(component).toContain("@keyframes intro-ribbon-drift");
-    expect(component).toContain("animation-delay: -4s;");
-    expect(component).toContain("animation-delay: -8s;");
+    expect(component).toContain(
+      '.intro__visual[data-shader-ready="true"] .intro__fallback-wave',
+    );
     expect(component).toContain("@media (prefers-reduced-motion: reduce)");
-    expect(component).toContain("animation: none;");
+    expect(component).toContain("display: none;");
+    expect(component).not.toContain("components/ui");
+    expect(component).not.toContain("from 'react'");
+    expect(component).not.toContain('from "react"');
+    expect(component).not.toContain("tailwind");
+    expect(component).not.toContain("lucide-react");
     expect(component).not.toContain("min-height: clamp(360px, 50vw, 620px);");
     expect(component).not.toContain("height: 112%;");
     expect(component).not.toContain("radial-gradient(circle at 35% 28%");
@@ -580,6 +594,29 @@ describe("siteContent", () => {
       "linear-gradient(135deg, var(--ds-color-surface-muted), var(--ds-color-accent))",
     );
     expect(component).not.toContain("lh3.googleusercontent.com");
+
+    expect(shaderScript).toContain("data-intro-shader");
+    expect(shaderScript).toContain('getContext("webgl")');
+    expect(shaderScript).toContain(
+      'matchMedia("(prefers-reduced-motion: reduce)")',
+    );
+    expect(shaderScript).toContain("ResizeObserver");
+    expect(shaderScript).toContain("requestAnimationFrame");
+    expect(shaderScript).toContain("cancelAnimationFrame");
+    expect(shaderScript).toContain("removeEventListener");
+    expect(shaderScript).toContain('getComputedStyle(host).display === "none"');
+    expect(shaderScript).toContain("--ds-color-primary");
+    expect(shaderScript).toContain("--ds-color-secondary");
+    expect(shaderScript).toContain("--ds-color-accent");
+    expect(shaderScript).toContain("saturatedLineColor");
+    expect(shaderScript).toContain("lineAlpha");
+    expect(shaderScript).not.toContain(
+      "gl_FragColor = vec4(background + lines, 1.0);",
+    );
+    expect(shaderScript).not.toContain("window.innerWidth");
+    expect(shaderScript).not.toContain("window.innerHeight");
+    expect(shaderScript).not.toContain("fixed top-0 left-0");
+    expect(shaderScript).not.toContain("React");
 
     expect(component).not.toContain("10+");
     expect(component).not.toContain("250+");
