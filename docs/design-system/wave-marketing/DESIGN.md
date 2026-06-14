@@ -46,7 +46,7 @@ Use wave dividers between major sections, warm radial background washes, subtle 
 
 ## Buttons
 
-Primary buttons use `--ds-color-secondary` background, `--ds-color-secondary-foreground` text, `--ds-radius-md` or stronger rounding, `--ds-shadow-button`, and a raised transform. On hover, keep the button warm and slightly more prominent. On active, translate the button down by `--ds-space-press-offset` and collapse the edge shadow. Secondary buttons use a white or raised surface, `--ds-color-primary` text, and `--ds-color-border` border. Ghost/link buttons use text color transitions and optional underline on hover. Disabled buttons lower opacity, remove movement, and keep keyboard focus visible when focusable.
+The primary button uses the warm brown (`--ds-color-secondary`) background, `--ds-color-secondary-foreground` text, tactile shadow, and raised transform. The secondary button uses the deep teal (`--ds-color-primary`) background with white foreground for important direct actions that should differ from the warm hero CTA. The tertiary button uses a white or raised surface, `--ds-color-primary` text, and `--ds-color-border` border; the hero's second button is tertiary. On active, tactile filled buttons translate down by `--ds-space-press-offset` and collapse the edge shadow. Ghost/link buttons use text color transitions and optional underline on hover. Disabled buttons lower opacity, remove movement, and keep keyboard focus visible when focusable.
 
 ## Forms
 
@@ -58,7 +58,11 @@ Plain cards use raised white surfaces with subtle borders and rounded corners. E
 
 ## Navigation / Header
 
-Use a fixed or sticky glass-like header with `--ds-color-surface-glass`, blur, subtle bottom border, and soft shadow. Desktop navigation may center the logo with nav links split left and right. Active links use `--ds-color-secondary`, bold weight, and a subtle underline. Mobile navigation should collapse to a compact logo plus menu control. Social icons must only render when real URLs exist.
+Use a fixed or sticky glass-like header with `--ds-color-surface-glass`, blur, subtle bottom border, and soft shadow. Desktop navigation should center the logo with approved nav links split left and right, giving the logo more vertical presence than standard nav text. The approved launch navigation includes `Reference` immediately before `Kontakt`; `Reference` points to the collaboration process section, not to reference or case-study content. Active links use `--ds-color-secondary`, bold weight, a subtle underline, and `aria-current="page"` while their target section is current. Header social links may render as real brand-colored SVG icons when real social profile URLs are supplied. On desktop, align the social cluster to the far right with a subtle left divider, matching the approved Stitch reference structure. Mobile navigation should open as a mobile offcanvas panel from the right, with a compact logo plus an accessible hamburger trigger in the header; the supplied social links may repeat inside the offcanvas below the anchor navigation. Place the fixed offcanvas layer outside the sticky glass header so it starts at the viewport top. Social icons must only render when real URLs exist.
+
+## Contact Modules
+
+Launch contact sections should prefer a compact direct-contact bento over a form-like grid. On desktop, use a 4-column by 2-row layout where the focused person card spans the left two columns and both rows, while email and availability occupy the two right-side rows. Use a local avatar, name, role, `+420` phone display directly under the role, secondary phone CTA, stacked email action with the address below `Napište nám`, short meeting note, and muted company facts. Contact bento cards use `--ds-radius-2xl` instead of the larger bubble radius. Do not render a contact form, social widget, placeholder links, or remote imagery.
 
 ## Footer
 
@@ -66,11 +70,17 @@ Footer uses a muted warm surface, brand title or logo, short positioning copy, m
 
 ## Images and Media
 
-Use real, verified assets only for production. Hero and human imagery should use organic blob crops or large rounded frames, white borders, and warm shadows. Media cards use object-cover cropping, large internal padding when framed, and rounded corners. If real imagery is unavailable, prefer abstract wave shapes or reserved placeholders over stock-looking fake team images.
+Use real, verified assets only for production. Hero and human imagery should use organic blob crops or large rounded frames, white borders, and warm shadows. The approved homepage hero image uses the organic crop treatment from `public/assets/wave-marketing-hero-collaboration.png` on desktop and wider layouts. On mobile, the hero image may be omitted visually without replacing it with a decorative gradient; keep the hero on the standard page surface and rely on the larger headline, copy, and CTA group for emphasis. Media cards use object-cover cropping, large internal padding when framed, and rounded corners. If real imagery is unavailable, prefer abstract wave shapes or reserved placeholders over stock-looking fake team images.
 
 ## Decorative Elements
 
-Use SVG wave dividers, circular icon wells, pill badges, warm radial washes, and occasional floating stats/contact tiles. Decorative elements should support the message and not introduce fake metrics or fake proof. Dividers should be soft, wave-based, and colored with `--ds-color-wave-strong` or `--ds-color-wave-soft`.
+Use SVG wave dividers, circular icon wells, pill badges, warm radial washes, and occasional floating stats/contact tiles. Decorative elements should support the message and not introduce fake metrics or fake proof unless a metric is explicitly approved in the content source of truth, such as the hero `Růst tržeb` `+124%` popup. Dividers should use the original Stitch-style layered wave with a wavy top edge and straight lower closure, colored with `--ds-color-wave-strong` or `--ds-color-wave-soft`.
+
+### Intro Statement Variant: Split Editorial Wave Panel
+
+Use `intro-statement` with variant `split-editorial-wave-panel` when a short human-positioning section needs stronger presence than a centered text card. The layout pairs a large decorative wave panel with an editorial text stack. The visual panel must be generated from WAVE design-system tokens, SVG, gradients, or CSS shapes; do not use Stitch-hosted imagery or unapproved production assets. For the current homepage, the visual panel uses a layered ribbon-wave composition adapted from the approved Stitch node `200080ac556b4fe489265d619b4c9e64`; recreate it locally with SVG/CSS and WAVE tokens instead of using the Stitch-hosted image.
+
+The visual panel should keep a transparent background so the wave motif sits directly on the page surface. Crop SVG wave viewports to the visible ribbon bounds so unused top or bottom whitespace does not make the section feel too tall. The desktop visual may use a slow, subtle breathing animation on the local ribbon-wave SVG: gentle vertical drift and slight scale only, with small staggered ribbon offsets, so the motif feels alive without behaving like a prominent animated hero element. The content stack uses a small uppercase eyebrow, heading, lead paragraph, short warm accent divider, and supporting paragraph. On mobile, omit the decorative wave panel so the section becomes a focused text statement with reduced visual weight. Do not add metrics, case-study counts, client logos, testimonials, or other proof claims unless they are approved in the content source of truth first.
 
 ## Shape and Iconography System
 
@@ -78,7 +88,7 @@ Icons are simple, filled or outlined, and placed inside circular or rounded icon
 
 ## Motion System
 
-Use `--ds-duration-fast` for small hover transitions, `--ds-duration-normal` for button and card interactions, and `--ds-duration-slow` only for decorative state changes. Use `--ds-ease-standard`. Honor reduced-motion preferences by disabling transforms and non-essential animation while preserving color and focus changes.
+Use `--ds-duration-fast` for small hover transitions, `--ds-duration-normal` for button and card interactions, and `--ds-duration-slow` only for decorative state changes. Decorative ambient motion, such as the desktop `Kdo jsme` ribbon-wave breathing effect, must be slow, low-amplitude, and non-interactive. Use `--ds-ease-standard`. Honor reduced-motion preferences by disabling transforms and non-essential animation while preserving color and focus changes.
 
 ## Accessibility Rules
 
@@ -86,9 +96,11 @@ Maintain strong contrast between text and surfaces. All interactive elements nee
 
 ## Responsive Rules
 
-Desktop layouts may use split hero, centered nav, horizontal service rows, and card grids. Tablet layouts should reduce gaps and keep cards readable. Mobile layouts stack content, simplify navigation, reduce hero type size, and keep primary actions prominent. Wave dividers can be shorter on mobile, but should remain visible enough to preserve the brand motif.
+Desktop layouts may use split hero, centered nav, horizontal service rows, and card grids. Tablet layouts should reduce gaps and keep cards readable. Mobile layouts stack content, simplify navigation, reduce hero type size, and keep primary actions prominent. Responsive decisions should explicitly define whether each visual slot keeps, changes, or drops its responsibility on mobile rather than only adjusting spacing. Wave dividers can be shorter on mobile, but should remain visible enough to preserve the brand motif unless a section-specific rule omits a decorative motif.
 
 ## Component Guidance
+
+Process sections may use a centered vertical timeline when explaining a small number of collaboration steps. Use circular numbered nodes, a subtle dotted connector in the secondary color, generous vertical rhythm, and text-first content blocks. Approved support slots may include a muted outcome box, compact chips, the approved local solution proposal workshop image for the `Návrh řešení` step, and an existing contact CTA. Do not add unapproved media, fake artifacts, remote images, or new CTA copy inside the process timeline.
 
 When creating a missing component, start from the closest existing contract: use card rules for content blocks, form rules for controls, button rules for actions, and navigation rules for persistent chrome. Prefer fewer variants with strong consistency. If a component requires new brand behavior not evidenced in this package, ask before extending.
 

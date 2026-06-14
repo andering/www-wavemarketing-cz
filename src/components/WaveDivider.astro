@@ -17,7 +17,10 @@ const fill = tone === 'teal' ? 'var(--ds-color-primary)' : 'var(--ds-color-surfa
 <style>
   .wave-divider {
     line-height: 0;
+    margin-top: clamp(-48px, -4vw, -28px);
     overflow: hidden;
+    position: relative;
+    z-index: 1;
   }
 
   .wave-divider svg {

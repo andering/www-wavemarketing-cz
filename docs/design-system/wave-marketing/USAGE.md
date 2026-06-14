@@ -31,7 +31,7 @@ Treat `kitchensink.html` as a style fixture and state reference, not production 
 ## Do Not
 
 - Do not use raw colors, spacing, font stacks, shadows, or radii when a `--ds-*` token exists.
-- Do not use Stitch-hosted images, fake client names, fake metrics, or placeholder social links as production content.
+- Do not use Stitch-hosted images, fake client names, fake metrics, or placeholder social links as production content. Metric-style content is allowed only when explicitly approved in the website content source of truth, such as the hero popup recorded in `docs/website/sections/hero.md`.
 - Do not introduce sharp corporate SaaS styling that conflicts with the warm organic direction.
 - Do not add heavy animation, parallax, or JavaScript-only interactions as baseline design-system behavior.
 - Do not reopen Stitch for normal implementation decisions.

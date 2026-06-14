@@ -1,29 +1,50 @@
 ---
 import { siteContent } from '../data/site';
+
+const heroHeadingEmphasis = 'správnou vlnu';
+const [heroHeadingPrefix, heroHeadingSuffix = ''] = siteContent.hero.heading.split(heroHeadingEmphasis);
 ---
 
 <section class="hero section" id="uvod">
   <div class="container hero__grid">
     <div class="hero__copy">
       <span class="eyebrow">{siteContent.hero.eyebrow}</span>
-      <h1>{siteContent.hero.heading}</h1>
+      <h1>
+        {heroHeadingPrefix}<span class="hero__heading-emphasis">{heroHeadingEmphasis}</span>{heroHeadingSuffix}
+      </h1>
       <p class="lead">{siteContent.hero.lead}</p>
       <div class="hero__actions">
         <a class="button button-primary" href={siteContent.hero.primaryCta.href}>{siteContent.hero.primaryCta.label}</a>
-        <a class="button button-secondary" href={siteContent.hero.secondaryCta.href}>{siteContent.hero.secondaryCta.label}</a>
+        <a class="button button-tertiary" href={siteContent.hero.secondaryCta.href}>{siteContent.hero.secondaryCta.label}</a>
       </div>
     </div>
-    <div class="hero__visual" aria-hidden="true">
-      <div class="hero__orb hero__orb--large"></div>
-      <div class="hero__orb hero__orb--small"></div>
+    <div class="hero__visual">
+      <div class="hero__visual-frame">
+        <img
+          src={siteContent.assets.heroImage}
+          alt="Creative marketing team collaboration"
+          loading="eager"
+          fetchpriority="high"
+          decoding="async"
+        />
+      </div>
+      <div class="hero__popup" aria-label={`${siteContent.hero.popup.label}: ${siteContent.hero.popup.value}`}>
+        <span class="hero__popup-icon material-symbols-outlined" aria-hidden="true">{siteContent.hero.popup.icon}</span>
+        <span class="hero__popup-copy">
+          <span>{siteContent.hero.popup.label}</span>
+          <strong>{siteContent.hero.popup.value}</strong>
+        </span>
+      </div>
     </div>
   </div>
 </section>
 
 <style>
   .hero {
+    isolation: isolate;
     overflow: hidden;
     padding-top: var(--ds-space-24);
+    position: relative;
     scroll-margin-top: 112px;
   }
 
@@ -32,6 +53,8 @@ import { siteContent } from '../data/site';
     display: grid;
     gap: var(--ds-space-12);
     grid-template-columns: minmax(0, 1.05fr) minmax(320px, 0.95fr);
+    position: relative;
+    z-index: 1;
   }
 
   .hero h1 {
@@ -42,6 +65,11 @@ import { siteContent } from '../data/site';
     line-height: var(--ds-leading-tight);
     margin: var(--ds-space-6) 0;
     max-width: 780px;
+  }
+
+  .hero__heading-emphasis {
+    color: var(--ds-color-secondary);
+    font-style: italic;
   }
 
   .hero p {
@@ -58,41 +86,105 @@ import { siteContent } from '../data/site';
 
   .hero__visual {
     aspect-ratio: 1;
-    background: radial-gradient(circle at 35% 30%, var(--ds-color-accent), var(--ds-color-primary));
-    border: 8px solid var(--ds-color-surface-raised);
-    border-radius: var(--ds-radius-organic);
-    box-shadow: var(--ds-shadow-warm);
     min-height: 320px;
     position: relative;
   }
 
-  .hero__orb {
-    background: color-mix(in srgb, var(--ds-color-surface-raised) 24%, transparent);
-    border-radius: var(--ds-radius-full);
+  .hero__visual-frame {
+    aspect-ratio: 1;
+    background: var(--ds-color-surface-raised);
+    border: 8px solid var(--ds-color-surface-raised);
+    border-radius: var(--ds-radius-organic);
+    box-shadow: var(--ds-shadow-warm);
+    overflow: hidden;
+  }
+
+  .hero__visual-frame img {
+    display: block;
+    height: 100%;
+    object-fit: cover;
+    width: 100%;
+  }
+
+  .hero__popup {
+    align-items: center;
+    animation: hero-popup-float 1.6s ease-in-out infinite;
+    background: var(--ds-color-surface-raised);
+    border: var(--ds-border-width) solid var(--ds-color-border);
+    border-radius: var(--ds-radius-2xl);
+    box-shadow: var(--ds-shadow-lg);
+    display: inline-flex;
+    gap: var(--ds-space-4);
+    padding: var(--ds-space-5);
     position: absolute;
+    right: calc(-1 * var(--ds-space-6));
+    top: calc(-1 * var(--ds-space-6));
+    z-index: 2;
   }
 
-  .hero__orb--large {
-    height: 42%;
-    right: 14%;
-    top: 16%;
-    width: 42%;
+  @keyframes hero-popup-float {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+
+    50% {
+      transform: translateY(-12px);
+    }
   }
 
-  .hero__orb--small {
-    bottom: 18%;
-    height: 22%;
-    left: 18%;
-    width: 22%;
+  .hero__popup-icon {
+    align-items: center;
+    background: rgba(0, 59, 61, 0.1);
+    border-radius: var(--ds-radius-full);
+    color: var(--ds-color-primary);
+    display: inline-flex;
+    height: 48px;
+    justify-content: center;
+    width: 48px;
+  }
+
+  .hero__popup-copy {
+    display: grid;
+    gap: var(--ds-space-1);
+  }
+
+  .hero__popup-copy span {
+    color: var(--ds-color-text-muted);
+    font-size: var(--ds-text-xs);
+    font-weight: var(--ds-font-weight-bold);
+    letter-spacing: var(--ds-tracking-widest);
+    text-transform: uppercase;
+  }
+
+  .hero__popup-copy strong {
+    color: var(--ds-color-primary);
+    font-family: var(--ds-font-heading);
+    font-size: var(--ds-text-2xl);
+    line-height: var(--ds-leading-tight);
   }
 
   @media (max-width: 900px) {
+    .hero {
+      padding-bottom: var(--ds-space-20);
+    }
+
+    .hero h1 {
+      font-size: clamp(var(--ds-text-5xl), 12vw, var(--ds-text-6xl));
+    }
+
     .hero__grid {
       grid-template-columns: 1fr;
     }
 
     .hero__visual {
-      min-height: 240px;
+      display: none;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero__popup {
+      animation: none;
     }
   }
 </style>

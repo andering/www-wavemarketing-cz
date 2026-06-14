@@ -3,37 +3,157 @@ import { siteContent } from '../data/site';
 ---
 
 <section class="intro section" aria-labelledby="intro-heading">
-  <div class="container intro__card">
-    <h2 id="intro-heading">{siteContent.intro.heading}</h2>
-    <p class="intro__main lead">{siteContent.intro.main}</p>
-    <p>{siteContent.intro.support}</p>
+  <div class="container intro__grid">
+    <div class="intro__visual" aria-hidden="true">
+      <svg class="intro__wave" viewBox="0 80 720 500" role="presentation" focusable="false">
+        <defs>
+          <linearGradient id="intro-ribbon-primary" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="var(--ds-color-primary)" />
+            <stop offset="1" stop-color="color-mix(in srgb, var(--ds-color-primary) 72%, var(--ds-color-accent))" />
+          </linearGradient>
+          <linearGradient id="intro-ribbon-secondary" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="var(--ds-color-secondary)" />
+            <stop offset="1" stop-color="var(--ds-color-primary)" />
+          </linearGradient>
+        </defs>
+        <path class="intro__ribbon intro__ribbon--back" d="M-120 236C10 346 111 394 216 331C327 265 378 118 510 104C594 95 666 139 780 252L780 342C663 230 596 186 522 194C410 206 354 348 238 411C121 475 8 430 -120 320Z" />
+        <path class="intro__ribbon intro__ribbon--shadow" d="M-120 276C20 392 126 441 235 378C350 312 403 160 534 150C616 144 687 190 780 292L780 370C675 279 614 239 545 244C431 254 378 397 255 462C131 527 10 482 -120 356Z" />
+        <path class="intro__ribbon intro__ribbon--front" d="M-120 324C8 424 120 486 241 437C365 386 424 252 540 236C625 224 693 266 780 354L780 430C684 348 628 314 558 326C444 344 386 474 262 522C132 573 5 516 -120 406Z" />
+      </svg>
+    </div>
+    <div class="intro__copy">
+      <span class="eyebrow">{siteContent.intro.eyebrow}</span>
+      <h2 id="intro-heading">{siteContent.intro.heading}</h2>
+      <p class="intro__main lead">{siteContent.intro.main}</p>
+      <div class="intro__accent" aria-hidden="true"></div>
+      <p>{siteContent.intro.support}</p>
+    </div>
   </div>
 </section>
 
 <style>
-  .intro__card {
-    background: var(--ds-color-surface-raised);
-    border: var(--ds-border-width) solid var(--ds-color-border);
-    border-radius: var(--ds-radius-3xl);
-    box-shadow: var(--ds-shadow-sm);
-    padding: clamp(var(--ds-space-8), 6vw, var(--ds-space-16));
-    text-align: center;
+  .intro {
+    background: var(--ds-color-background);
+  }
+
+  .intro__grid {
+    align-items: stretch;
+    display: grid;
+    grid-template-columns: minmax(280px, 0.95fr) minmax(0, 1.05fr);
+    overflow: hidden;
+  }
+
+  .intro__visual {
+    align-items: center;
+    background: transparent;
+    display: flex;
+    min-height: clamp(280px, 36vw, 460px);
+    overflow: hidden;
+    position: relative;
+  }
+
+  .intro__wave {
+    animation: intro-wave-breathe 12s var(--ds-ease-standard) infinite;
+    height: 100%;
+    margin-left: -28%;
+    transform-origin: center;
+    width: 150%;
+  }
+
+  .intro__ribbon {
+    animation: intro-ribbon-drift 12s var(--ds-ease-standard) infinite;
+    filter: drop-shadow(0 20px 26px rgba(0, 59, 61, 0.18));
+    transform-origin: center;
+  }
+
+  .intro__ribbon--back {
+    animation-delay: -4s;
+    fill: url(#intro-ribbon-primary);
+  }
+
+  .intro__ribbon--shadow {
+    animation-delay: -8s;
+    fill: color-mix(in srgb, var(--ds-color-primary) 84%, #000000);
+    opacity: 0.9;
+  }
+
+  .intro__ribbon--front {
+    fill: url(#intro-ribbon-secondary);
+  }
+
+  @keyframes intro-wave-breathe {
+    0%,
+    100% {
+      transform: translateY(0) scale(1);
+    }
+
+    50% {
+      transform: translateY(-10px) scale(1.018);
+    }
+  }
+
+  @keyframes intro-ribbon-drift {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+
+    50% {
+      transform: translateY(4px);
+    }
+  }
+
+  .intro__copy {
+    align-self: center;
+    padding: clamp(var(--ds-space-10), 6vw, var(--ds-space-20));
   }
 
   .intro h2 {
     color: var(--ds-color-primary);
     font-family: var(--ds-font-heading);
     font-size: clamp(var(--ds-text-3xl), 4vw, var(--ds-text-5xl));
-    margin: 0 0 var(--ds-space-6);
+    line-height: var(--ds-leading-tight);
+    margin: var(--ds-space-4) 0 var(--ds-space-5);
   }
 
   .intro p {
     color: var(--ds-color-text-muted);
-    margin-inline: auto;
-    max-width: 820px;
+    line-height: var(--ds-leading-relaxed);
+    margin: 0;
+    max-width: 680px;
   }
 
   .intro__main {
     color: var(--ds-color-primary) !important;
+    margin-bottom: var(--ds-space-6) !important;
+  }
+
+  .intro__accent {
+    background: var(--ds-color-secondary);
+    border-radius: var(--ds-radius-full);
+    height: var(--ds-border-strong);
+    margin-bottom: var(--ds-space-6);
+    width: var(--ds-space-16);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .intro__wave,
+    .intro__ribbon {
+      animation: none;
+    }
+  }
+
+  @media (max-width: 840px) {
+    .intro__grid {
+      grid-template-columns: 1fr;
+    }
+
+    .intro__visual {
+      display: none;
+    }
+
+    .intro__copy {
+      padding-inline: 0;
+    }
   }
 </style>

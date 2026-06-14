@@ -8,6 +8,10 @@ Explain who WAVE Marketing is and frame the relationship as partnership, listeni
 
 Derived from `client_brief.md`, section `Kdo jsme (Představení přístupu)`.
 
+## Eyebrow
+
+`O nás`
+
 ## Heading
 
 `Kdo jsme`
@@ -30,3 +34,4 @@ Derived from `client_brief.md`, section `Kdo jsme (Představení přístupu)`.
 
 - This content can be rendered as a compact intro block, quote-like statement, or two-column text section.
 - Visual treatment must come from the design system, not this file.
+- Approved visual treatment: layered ribbon-wave panel adapted from Stitch node `200080ac556b4fe489265d619b4c9e64`, recolored with WAVE design-system tokens.

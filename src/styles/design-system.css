@@ -193,12 +193,20 @@ a {
   transform: translateY(-2px);
 }
 
-.button-primary:active {
+.button-primary:active,
+.button-secondary:active {
   box-shadow: none;
   transform: translateY(var(--ds-space-press-offset));
 }
 
 .button-secondary {
+  background: var(--ds-color-primary);
+  box-shadow: 0 4px 0 0 var(--ds-color-primary-hover);
+  color: var(--ds-color-primary-foreground);
+  transform: translateY(-2px);
+}
+
+.button-tertiary {
   background: var(--ds-color-surface-raised);
   border: var(--ds-border-width) solid var(--ds-color-border);
   color: var(--ds-color-primary);
@@ -233,7 +241,8 @@ a {
     transition: none !important;
   }
 
-  .button-primary {
+  .button-primary,
+  .button-secondary {
     transform: none;
   }
 }

@@ -42,7 +42,7 @@ Legal links are optional for launch and require supplied target pages or documen
 
 - Keep footer concise.
 - Do not include references link at launch.
-- Do not include social links until real URLs exist.
+- Do not include social links in the footer unless that placement is explicitly requested; supplied social URLs are rendered in the header/offcanvas for launch.
 - Do not include placeholder legal links.
 
 ## Notes For Page Mapping

@@ -1163,7 +1163,6 @@ import '../styles/design-system.css';
       <WaveDivider tone="teal" />
       <IntroStatement />
       <ServiceList />
-      <WaveDivider tone="sand" />
       <ProcessSteps />
       <ContactCardGrid />
     </main>

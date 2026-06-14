@@ -2,18 +2,43 @@
 import { siteContent } from '../data/site';
 ---
 
-<section class="process section" aria-labelledby="process-heading">
+<section id="spoluprace" class="process section" aria-labelledby="process-heading">
   <div class="container">
     <div class="process__header">
       <h2 id="process-heading">{siteContent.process.heading}</h2>
       <p class="lead">{siteContent.process.intro}</p>
     </div>
-    <ol class="process__grid">
+    <ol class="process__timeline">
       {siteContent.process.steps.map((step, index) => (
-        <li class="process-card">
-          <span>{String(index + 1).padStart(2, '0')}</span>
-          <h3>{step.title}</h3>
-          <p>{step.text}</p>
+        <li class="process-step">
+          <div class="process-step__line" aria-hidden="true">
+            <span class="process-step__node">{String(index + 1).padStart(2, '0')}</span>
+          </div>
+          <div class="process-step__content">
+            <h3>{step.title}</h3>
+            <p>{step.text}</p>
+            {step.support.type === 'outcome' && (
+              <div class="process-step__support process-step__outcome">
+                <span>{step.support.label}</span>
+                <p>{step.support.text}</p>
+              </div>
+            )}
+            {step.support.type === 'chips' && (
+              <div class="process-step__support process-step__chips">
+                {step.support.items.map((item) => <span>{item}</span>)}
+              </div>
+            )}
+            {step.support.type === 'image' && (
+              <div class="process-step__support process-step__visual">
+                <img class="process-step__visual-image" src={siteContent.assets.processSolutionProposalImage} alt={step.support.alt} loading="lazy" decoding="async" />
+              </div>
+            )}
+            {step.support.type === 'cta' && (
+              <a class="button button-primary process-step__support process-step__cta" href={step.support.href}>
+                {step.support.label}
+              </a>
+            )}
+          </div>
         </li>
       ))}
     </ol>
@@ -33,49 +58,163 @@ import { siteContent } from '../data/site';
     font-size: clamp(var(--ds-text-3xl), 4vw, var(--ds-text-5xl));
   }
 
-  .process-card p {
-    color: var(--ds-color-text-muted);
-    line-height: var(--ds-leading-relaxed);
-  }
-
-  .process__grid {
-    display: grid;
-    gap: var(--ds-space-6);
-    grid-template-columns: repeat(4, minmax(0, 1fr));
+  .process__timeline {
     list-style: none;
-    margin: 0;
+    margin: 0 auto;
+    max-width: 760px;
     padding: 0;
   }
 
-  .process-card {
+  .process-step {
+    display: grid;
+    gap: var(--ds-space-6);
+    grid-template-columns: 56px minmax(0, 1fr);
+    margin: 0;
+    padding: 0 0 var(--ds-space-16);
+    position: relative;
+  }
+
+  .process-step:last-child {
+    padding-bottom: 0;
+  }
+
+  .process-step__line {
+    display: flex;
+    justify-content: center;
+    position: relative;
+  }
+
+  .process-step__line::before {
+    background: repeating-linear-gradient(
+      to bottom,
+      color-mix(in srgb, var(--ds-color-secondary) 38%, transparent) 0,
+      color-mix(in srgb, var(--ds-color-secondary) 38%, transparent) 6px,
+      transparent 6px,
+      transparent 14px
+    );
+    bottom: calc(var(--ds-space-16) * -1);
+    content: "";
+    position: absolute;
+    top: 56px;
+    width: 2px;
+  }
+
+  .process-step:last-child .process-step__line::before {
+    display: none;
+  }
+
+  .process-step__node {
+    align-items: center;
+    background: var(--ds-color-background);
+    border: 2px solid var(--ds-color-secondary);
+    border-radius: var(--ds-radius-full);
+    color: var(--ds-color-secondary);
+    display: inline-flex;
+    font-family: var(--ds-font-heading);
+    font-size: var(--ds-text-sm);
+    font-weight: var(--ds-font-weight-bold);
+    height: 48px;
+    justify-content: center;
+    line-height: 1;
+    position: relative;
+    width: 48px;
+    z-index: 1;
+  }
+
+  .process-step__content {
+    padding-top: var(--ds-space-1);
+  }
+
+  .process-step__content h3 {
+    color: var(--ds-color-primary);
+    font-family: var(--ds-font-heading);
+    font-size: clamp(var(--ds-text-2xl), 3vw, var(--ds-text-3xl));
+    line-height: var(--ds-leading-snug);
+    margin: 0 0 var(--ds-space-4);
+  }
+
+  .process-step__content p {
+    color: var(--ds-color-text-muted);
+    line-height: var(--ds-leading-relaxed);
+    margin: 0;
+    max-width: 620px;
+  }
+
+  .process-step__support {
+    margin-top: var(--ds-space-6);
+  }
+
+  .process-step__outcome {
+    background: var(--ds-color-surface-muted);
+    border: var(--ds-border-width) solid var(--ds-color-border);
+    border-radius: var(--ds-radius-xl);
+    padding: var(--ds-space-5);
+  }
+
+  .process-step__outcome span {
+    color: var(--ds-color-secondary);
+    display: block;
+    font-size: var(--ds-text-xs);
+    font-weight: var(--ds-font-weight-semibold);
+    letter-spacing: var(--ds-tracking-widest);
+    margin-bottom: var(--ds-space-2);
+    text-transform: uppercase;
+  }
+
+  .process-step__chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--ds-space-3);
+  }
+
+  .process-step__chips span {
+    align-items: center;
+    background: var(--ds-color-surface-muted);
+    border: var(--ds-border-width) solid var(--ds-color-border);
+    border-radius: var(--ds-radius-full);
+    color: var(--ds-color-primary);
+    display: inline-flex;
+    font-size: var(--ds-text-sm);
+    font-weight: var(--ds-font-weight-medium);
+    padding: var(--ds-space-2) var(--ds-space-4);
+  }
+
+  .process-step__visual {
+    aspect-ratio: 16 / 9;
     background: var(--ds-color-surface-raised);
     border: var(--ds-border-width) solid var(--ds-color-border);
     border-radius: var(--ds-radius-2xl);
-    box-shadow: var(--ds-shadow-sm);
-    padding: var(--ds-space-6);
+    box-shadow: var(--ds-shadow-warm);
+    overflow: hidden;
+    position: relative;
   }
 
-  .process-card span {
-    color: var(--ds-color-secondary);
-    font-weight: var(--ds-font-weight-bold);
-    letter-spacing: var(--ds-tracking-widest);
+  .process-step__visual-image {
+    display: block;
+    height: 100%;
+    object-fit: cover;
+    width: 100%;
   }
 
-  .process-card h3 {
-    color: var(--ds-color-primary);
-    font-family: var(--ds-font-heading);
-    font-size: var(--ds-text-2xl);
-  }
-
-  @media (max-width: 980px) {
-    .process__grid {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
+  .process-step__cta {
+    width: fit-content;
   }
 
   @media (max-width: 620px) {
-    .process__grid {
-      grid-template-columns: 1fr;
+    .process-step {
+      gap: var(--ds-space-4);
+      grid-template-columns: 44px minmax(0, 1fr);
+      padding-bottom: var(--ds-space-12);
+    }
+
+    .process-step__line::before {
+      bottom: calc(var(--ds-space-12) * -1);
+      top: 48px;
+    }
+
+    .process-step__node {
+      height: 40px;
+      width: 40px;
     }
   }
 </style>

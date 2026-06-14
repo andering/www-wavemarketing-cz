@@ -31,12 +31,26 @@ Derived from `client_brief.md`, section `Úvod` and `Hero sekce`.
 
 - Label: `Jaké vlny chytáme`
 - Destination: services section.
+- Button variant: tertiary white/surface button.
+
+### Visual Asset
+
+- Asset: `public/assets/wave-marketing-hero-collaboration.png`
+- Alt text: `Creative marketing team collaboration`
+- Source note: approved by the user from Stitch project `5807734643959771855`, screen/node `13738335041884507219`.
+
+### Approved hero popup
+
+- Label: `Růst tržeb`
+- Value: `+124%`
+- Icon: `trending_up`
+- Source note: approved by the user from Stitch project `1618198505265661547`, screen/node `13738335041884507219`.
 
 ## Content Requirements
 
 - Keep the hero focused on trust, human approach, and fit.
-- Do not add fake metrics, fake proof, or fake client claims.
-- If a hero image is used, it must come from verified real assets or an approved non-deceptive abstract treatment.
+- Do not add fake metrics, fake proof, or fake client claims beyond the explicitly approved hero popup metric above.
+- Use the approved local hero image asset. Do not reference Stitch-hosted or other remote image URLs in production.
 
 ## Notes For Page Mapping
 

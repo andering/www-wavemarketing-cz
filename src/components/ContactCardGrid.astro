@@ -8,33 +8,44 @@ import { siteContent } from '../data/site';
       <h2 id="contact-heading">{siteContent.contact.heading}</h2>
       <p class="lead">{siteContent.contact.intro}</p>
     </div>
-    <div class="contact__grid">
-      <article class="contact-card contact-card--person">
-        <img src={siteContent.assets.janaPhoto} alt="Jana Skalníková" width="180" height="180" />
-        <div>
-          <h3>{siteContent.contact.person.name}</h3>
-          <p>{siteContent.contact.person.role}</p>
-          <a class="button button-primary" href={siteContent.contact.person.phoneHref}>
-            {siteContent.contact.person.phoneLabel}: {siteContent.contact.person.phoneDisplay}
+    <div class="contact__module">
+      <article class="contact__person-card">
+        <div class="contact__person-head">
+          <div class="contact__avatar-wrap">
+            <img src={siteContent.assets.janaPhoto} alt="Jana Skalníková" width="180" height="180" />
+            <span class="contact__status-dot" aria-hidden="true"></span>
+          </div>
+          <div class="contact__person-meta">
+            <h3>{siteContent.contact.person.name}</h3>
+            <p>{siteContent.contact.person.role}</p>
+            <a class="contact__phone-number" href={siteContent.contact.person.phoneHref}>
+              {siteContent.contact.person.phoneDisplay}
+            </a>
+          </div>
+        </div>
+        <a class="button button-secondary contact__phone" href={siteContent.contact.person.phoneHref}>
+          {siteContent.contact.person.phoneLabel}
+        </a>
+      </article>
+      <article class="contact__quick-actions contact__email-card">
+          <a href={siteContent.contact.email.href}>
+            <span class="material-symbols-outlined" aria-hidden="true">mail</span>
+            <span class="contact__action-copy">
+              <span>{siteContent.contact.email.label}</span>
+              <small>{siteContent.contact.email.display}</small>
+            </span>
           </a>
+      </article>
+      <article class="contact__quick-actions contact__availability-card">
+        <span class="material-symbols-outlined" aria-hidden="true">groups</span>
+        <div>
+          <strong>Kde se můžeme vidět</strong>
+          <p class="contact__meeting">{siteContent.contact.meeting}</p>
         </div>
       </article>
-      <a class="contact-card contact-card--action" href={siteContent.contact.email.href}>
-        <span class="material-symbols-outlined" aria-hidden="true">mail</span>
-        <strong>{siteContent.contact.email.label}</strong>
-        <small>{siteContent.contact.email.display}</small>
-      </a>
-      <article class="contact-card contact-card--action">
-        <span class="material-symbols-outlined" aria-hidden="true">groups</span>
-        <strong>Kde se můžeme vidět</strong>
-        <small>{siteContent.contact.meeting}</small>
-      </article>
-      <article class="contact-card contact-card--facts">
-        <h3>Fakturační údaje</h3>
-        <ul>
-          {siteContent.contact.company.map((item) => <li>{item}</li>)}
-        </ul>
-      </article>
+      <div class="contact__facts-strip" aria-label="Fakturační údaje">
+        {siteContent.contact.company.map((item) => <span>{item}</span>)}
+      </div>
     </div>
   </div>
 </section>
@@ -46,7 +57,7 @@ import { siteContent } from '../data/site';
   }
 
   .contact__wrap {
-    max-width: 1050px;
+    max-width: 880px;
   }
 
   .contact__header {
@@ -60,94 +71,176 @@ import { siteContent } from '../data/site';
     font-size: clamp(var(--ds-text-3xl), 4vw, var(--ds-text-5xl));
   }
 
-  .contact__grid {
+  .contact__module {
     display: grid;
     gap: var(--ds-space-5);
     grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 
-  .contact-card {
-    background: color-mix(in srgb, var(--ds-color-surface-raised) 58%, transparent);
-    border: var(--ds-border-width) solid color-mix(in srgb, var(--ds-color-surface-raised) 72%, transparent);
-    border-radius: var(--ds-radius-3xl);
-    box-shadow: var(--ds-shadow-md);
+  .contact__person-card,
+  .contact__quick-actions {
+    background: color-mix(in srgb, var(--ds-color-surface-raised) 70%, transparent);
+    border: var(--ds-border-width) solid color-mix(in srgb, var(--ds-color-surface-raised) 80%, transparent);
+    border-radius: var(--ds-radius-2xl);
+    box-shadow: var(--ds-shadow-lg);
     color: var(--ds-color-primary);
     padding: var(--ds-space-6);
-    text-decoration: none;
   }
 
-  .contact-card--person {
-    align-items: center;
+  .contact__person-card {
     display: grid;
-    gap: var(--ds-space-6);
-    grid-column: span 2;
-    grid-row: span 2;
-    grid-template-columns: auto 1fr;
+    gap: var(--ds-space-5);
+    grid-column: 1 / 3;
+    grid-row: 1 / 3;
   }
 
-  .contact-card--person img {
+  .contact__email-card,
+  .contact__availability-card {
+    grid-column: 3 / 5;
+  }
+
+  .contact__person-head {
+    align-items: center;
+    display: flex;
+    gap: var(--ds-space-5);
+  }
+
+  .contact__avatar-wrap {
+    position: relative;
+  }
+
+  .contact__avatar-wrap img {
     border: 4px solid var(--ds-color-surface-raised);
     border-radius: var(--ds-radius-full);
     box-shadow: var(--ds-shadow-md);
-    height: 112px;
+    display: block;
+    height: 80px;
     object-fit: cover;
-    width: 112px;
+    width: 80px;
   }
 
-  .contact-card h3 {
+  .contact__status-dot {
+    background: var(--ds-color-success);
+    border: 3px solid var(--ds-color-surface-raised);
+    border-radius: var(--ds-radius-full);
+    bottom: 4px;
+    height: 16px;
+    position: absolute;
+    right: 4px;
+    width: 16px;
+  }
+
+  .contact__person-card h3 {
     font-family: var(--ds-font-heading);
     font-size: var(--ds-text-2xl);
     margin: 0 0 var(--ds-space-2);
   }
 
-  .contact-card p,
-  .contact-card small,
-  .contact-card li {
+  .contact__person-card p,
+  .contact__person-card small,
+  .contact__meeting,
+  .contact__facts-strip span {
     color: var(--ds-color-text-muted);
   }
 
-  .contact-card--action {
+  .contact__person-meta p {
+    margin: 0 0 var(--ds-space-2);
+  }
+
+  .contact__phone-number {
+    color: var(--ds-color-primary);
+    display: inline-flex;
+    font-size: var(--ds-text-sm);
+    font-weight: var(--ds-font-weight-medium);
+    text-decoration: none;
+  }
+
+  .contact__phone {
+    justify-content: center;
+  }
+
+  .contact__quick-actions {
     align-items: center;
     display: flex;
-    flex-direction: column;
-    gap: var(--ds-space-3);
+    gap: var(--ds-space-4);
+    text-decoration: none;
+  }
+
+  .contact__quick-actions a {
+    align-items: center;
+    color: inherit;
+    display: flex;
+    gap: var(--ds-space-4);
+    text-decoration: none;
+    width: 100%;
+  }
+
+  .contact__quick-actions .material-symbols-outlined {
+    align-items: center;
+    background: var(--ds-color-secondary);
+    border-radius: var(--ds-radius-full);
+    color: var(--ds-color-secondary-foreground);
+    display: inline-flex;
+    flex: 0 0 auto;
+    height: 44px;
+    justify-content: center;
+    width: 44px;
+  }
+
+  .contact__action-copy {
+    display: grid;
+    gap: var(--ds-space-1);
+  }
+
+  .contact__action-copy small {
+    color: var(--ds-color-text-muted);
+  }
+
+  .contact__availability-card strong {
+    display: block;
+    margin-bottom: var(--ds-space-2);
+  }
+
+  .contact__meeting {
+    margin: 0;
+  }
+
+  .contact__facts-strip {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--ds-space-3) var(--ds-space-5);
+    grid-column: 1 / 5;
     justify-content: center;
     text-align: center;
   }
 
-  .contact-card--action .material-symbols-outlined {
-    align-items: center;
-    background: var(--ds-color-primary);
-    border-radius: var(--ds-radius-full);
-    color: var(--ds-color-primary-foreground);
-    display: inline-flex;
-    height: 56px;
-    justify-content: center;
-    width: 56px;
-  }
-
-  .contact-card--facts {
-    grid-column: span 4;
-  }
-
-  .contact-card--facts ul {
-    display: grid;
-    gap: var(--ds-space-2);
-    list-style: none;
-    margin: 0;
-    padding: 0;
+  .contact__facts-strip span {
+    font-size: var(--ds-text-sm);
   }
 
   @media (max-width: 900px) {
-    .contact__grid,
-    .contact-card--person {
+    .contact__module {
       grid-template-columns: 1fr;
     }
 
-    .contact-card--person,
-    .contact-card--facts,
-    .contact-card--action {
-      grid-column: span 1;
+    .contact__person-card,
+    .contact__email-card,
+    .contact__availability-card,
+    .contact__facts-strip {
+      grid-column: 1;
+      grid-row: auto;
+    }
+
+    .contact__person-head,
+    .contact__quick-actions,
+    .contact__quick-actions a {
+      align-items: center;
+      flex-direction: column;
+      text-align: center;
+    }
+
+    .contact__action-copy {
+      justify-items: center;
     }
   }
 </style>

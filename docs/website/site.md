@@ -22,8 +22,8 @@ This file defines the content architecture for the launch version of canonical `
 
 - `Úvod` links to the hero section.
 - `Naše služby` links to the services section.
+- `Reference` links to the collaboration process section labeled `Jak probíhá spolupráce`; it is a navigation label only, not a references/case-study section.
 - `Kontakt` links to the contact section.
-- `Reference` is not shown at launch because real references are not available yet.
 
 ## Launch Sections
 
@@ -36,9 +36,9 @@ This file defines the content architecture for the launch version of canonical `
 
 ## Omitted At Launch
 
-- References, case studies, client logos, fake metrics, and fake testimonials are omitted.
+- References, case studies, client logos, fake metrics, and fake testimonials are omitted; the `Reference` navigation label does not introduce reference content. The only approved metric-style content is the hero popup `Růst tržeb` `+124%` recorded in `sections/hero.md`.
 - Contact form is omitted.
-- Social links are omitted until real LinkedIn, Instagram, and Facebook URLs are supplied.
+- Supplied social profile URLs are approved for launch header links: Facebook `https://www.facebook.com/wavemarketingsro`, Instagram `https://www.instagram.com/wave.marketing.cz/`, and LinkedIn `https://www.linkedin.com/company/wave-marketing-s-r-o/`.
 - Production images are limited to verified approved assets. The logo and Jana/contact photo are available under `public/assets/`.
 
 ## Resolved Production Assets
@@ -48,7 +48,6 @@ This file defines the content architecture for the launch version of canonical `
 
 ## Optional Inputs Before Implementation
 
-- Final social profile URLs.
 - Preferred privacy/GDPR page content if legal footer links are required.
 - Hosting/deployment target.
 
@@ -65,5 +64,5 @@ Use Czech copy that feels warm, clear, human, reliable, and professional. Avoid 
 ## Future Scope
 
 - Add references only when real client approvals, logos, case studies, numbers, and testimonials exist.
-- Add social links only when final profile URLs are available.
+- Extend social links beyond the header only if those placements are explicitly requested.
 - Add a contact form only after a form handling service or backend decision exists.

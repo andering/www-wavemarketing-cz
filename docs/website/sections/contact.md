@@ -20,8 +20,8 @@ Derived from `client_brief.md`, section `Kontakt`, with launch decisions recorde
 
 - Name: `Jana Skalníková`
 - Suggested role label: `CEO & Strategist`
-- Phone CTA label: `Zavolejte Janě a domluvte se na kafe`
-- Phone number display: `605 461 440`
+- Phone CTA label: `Zavolejte Janě`
+- Phone number display: `+420 605 461 440`
 - Phone link target: `tel:+420605461440`
 - Photo: `public/assets/jana-skalnikova-photo.png`.
 
@@ -46,17 +46,22 @@ Derived from `client_brief.md`, section `Kontakt`, with launch decisions recorde
 ## Omitted At Launch
 
 - Contact form is omitted.
-- Social profile links are omitted until final LinkedIn, Instagram, and Facebook URLs are supplied.
+- Social profile links are omitted from the contact module for launch; supplied social URLs are rendered in the header/offcanvas only.
 - No placeholder social links may be rendered.
 
 ## Content Requirements
 
 - Keep the tone personal and concrete.
 - Prioritize phone and email actions.
+- Use the secondary deep-teal button variant for Jana's phone CTA; keep the phone number visible separately from the shortened CTA label.
+- Place the `+420` phone display directly below `CEO & Strategist` in Jana's card.
+- Place `jana.skalnikova@wavemarketing.cz` below `Napište nám`, not beside it.
 - Do not show a form unless a form handling decision exists.
-- Do not show social icons unless real URLs exist.
+- Do not show social icons in the contact module unless that placement is explicitly requested.
 
 ## Notes For Page Mapping
 
-- This content likely maps to a contact card grid with direct action cards.
+- This content maps to a compact direct-contact module inspired by the approved Stitch layout.
+- Desktop layout should use a 4-column by 2-row contact bento: Jana/person card spans the left half and both rows, email occupies the top-right half, availability occupies the bottom-right half, and muted company facts sit below.
+- Contact bento card corners should use `--ds-radius-2xl`, not the larger `--ds-radius-3xl` bubble radius.
 - Visual treatment must come from the design system, not this file.
