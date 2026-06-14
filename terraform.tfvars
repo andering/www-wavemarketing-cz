@@ -49,6 +49,5 @@ cloudflare_pages_redirect_ruleset_enabled   = false
 cloudflare_security_enabled     = false
 cloudflare_health_check_enabled = false
 
-# Unused runtime values kept explicit for template validation/default clarity.
-storage_buckets = {}
-secrets         = {}
+# Unused runtime secrets kept explicit for template validation/default clarity.
+secrets = {}
