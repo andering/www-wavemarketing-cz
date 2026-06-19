@@ -174,6 +174,7 @@ Do not add side specs or temporary implementation plans as durable requirements.
 - Intro visual refinement: adapt the supplied shader as a panel-scoped WebGL shader for desktop `Kdo jsme`, with a local SVG/CSS fallback, WAVE palette colors, cleanup for resize and animation work, and reduced-motion/mobile safeguards. Do not add React, shadcn, Tailwind, `/components/ui`, Unsplash assets, lucide icons, full-page fixed backgrounds, remote imagery, fake proof, or new dependencies.
 - Mobile header/hero density refinement: use a balanced three-column mobile header so the logo is optically centered, increase the mobile logo to 56px tall, keep moderate hero top padding, and apply global mobile section spacing so stacked sections no longer feel separated by empty bands.
 - 2026-06-19: The hero lead may emphasize only the first `marketing` word as an inline shopping-tag label. Approved styling: teal face, balanced rounded corners, slight rotation, thin warm brown underside, and a small brown-bordered tag hole with clear spacing before the word.
+- 2026-06-19: Tests were demoted from source-of-truth documents to optional validators. The current priority is to keep all important product, content, visual, and launch decisions in the canonical specs. Future tests should only check spec completeness or implementation conformance against those specs.
 
 ## Open Inputs Before Implementation
 
@@ -187,13 +188,16 @@ Do not add side specs or temporary implementation plans as durable requirements.
 
 ## Testing Approach Note
 
-Tests should exist, but their main purpose is to keep source-of-truth content and production constraints stable rather than to overtest visual styling.
+Specs are the source of truth. Tests must not become a second requirements layer.
 
-- Use lightweight JavaScript/Vitest tests for content and configuration invariants.
-- Tests should verify that generated or copied site data keeps the approved facts from `client_brief.md`, `docs/site-content/`, `docs/site-content/page-map.md`, and `docs/design-system/wave-marketing/`.
-- Tests should guard important launch constraints: no fake references, no contact form, no placeholder social links, correct contact details, correct production asset paths, expected navigation labels, and expected section/component mapping.
-- A reusable test template or skill-derived checklist may be useful so future static-site projects can generate similar content-invariant tests from their docs.
-- Visual finish, responsive polish, spacing feel, image treatment, and animation details should be verified mostly through browser review and `npm run build`, not brittle snapshot-style tests.
+- Keep durable website requirements in `docs/site-content/`, `docs/site-content/page-map.md`, `docs/design-system/wave-marketing/`, and this roadmap.
+- Tests may be absent while the canonical specs are being refined.
+- When tests exist, they should validate one of two things only: spec completeness or implementation conformance.
+- Spec-completeness tests should check whether the source-of-truth documents contain the minimum required structure to implement from: sections, anchors, asset gates, component mappings, launch exclusions, and no placeholders.
+- Implementation-conformance tests should check whether the Astro site follows approved specs: required sections exist, approved content data is used, local assets exist, forbidden launch content is absent, contact form remains omitted, and no placeholder or remote Stitch URLs enter production.
+- Tests should not define visual taste, exact CSS, class names, animation declarations, grid measurements, or component internals. Visual finish, responsive polish, spacing feel, image treatment, and animation details should be verified mostly through browser review and `npm run build`.
+
+Future testing step: after the canonical specs are complete and stable, add a small validator suite split into spec-completeness checks and implementation-conformance checks. Generate or maintain those tests from the docs so changing requirements starts in the specs, not in tests.
 
 ## Local Development Note
 
@@ -214,6 +218,7 @@ The implementation plan should divide the website build into clear work phases i
 - Logo: `public/assets/wave-marketing-logo.png`.
 - Jana/contact photo: `public/assets/jana-skalnikova-photo.png`.
 - Hero collaboration image: `public/assets/wave-marketing-hero-collaboration.png`.
+- Process solution proposal image: `public/assets/wave-marketing-process-solution-proposal.jpg`.
 
 ## Asset Extraction Notes
 

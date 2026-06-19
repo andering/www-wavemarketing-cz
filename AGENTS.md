@@ -42,8 +42,9 @@ Use these phases when planning or reviewing remaining work:
 
 ## Testing And Verification
 
-- Tests should primarily protect content and configuration invariants, not visual taste.
-- Keep `src/tests/site-content.test.ts` focused on approved facts, launch exclusions, production asset paths, navigation labels, and design-system invariants that should not regress.
+- The canonical docs are the source of truth; tests must not introduce product, content, or design requirements that are absent from those docs.
+- Tests may be absent while the source-of-truth stack is being refined. When present, they should validate spec completeness and implementation conformance, not define requirements themselves.
+- Tests should protect high-risk approved facts and launch constraints, not visual taste, exact CSS, class names, or component internals.
 - Do not use brittle visual snapshots for responsive polish or final visual feel; use browser review for that.
 - Before claiming implementation work is complete, run `npm run test` and `npm run build`.
 - For markdown-only documentation edits, inspect the relevant diff before summarizing the change.
@@ -58,7 +59,7 @@ Use these phases when planning or reviewing remaining work:
 ## Current Launch Constraints
 
 - Canonical target: `www.wavemarketing.cz`.
-- Approved production assets: `public/assets/wave-marketing-logo.png` and `public/assets/jana-skalnikova-photo.png`.
+- Approved production assets: `public/assets/wave-marketing-logo.png`, `public/assets/jana-skalnikova-photo.png`, `public/assets/wave-marketing-hero-collaboration.png`, and `public/assets/wave-marketing-process-solution-proposal.jpg`.
 - Primary conversion: direct phone or email contact.
 - Open input: final social profile URLs, if social links should appear later.
 - Open input: hosting/deployment target.

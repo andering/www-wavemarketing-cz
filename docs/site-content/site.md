@@ -28,10 +28,10 @@ This file defines the content architecture for the launch version of canonical `
 ## Launch Sections
 
 1. `sections/hero.md`: headline, positioning, and primary CTAs.
-2. `sections/intro.md`: short human explanation of who WAVE Marketing is.
-3. `sections/services-overview.md`: services and their benefit-led descriptions.
-4. `sections/cooperation-process.md`: collaboration steps.
-5. `sections/contact.md`: direct contact information and final CTA.
+2. `sections/services-overview.md`: services and their benefit-led descriptions.
+3. `sections/cooperation-process.md`: collaboration steps.
+4. `sections/contact.md`: direct contact information and final CTA.
+5. `sections/intro.md`: short human explanation of who WAVE Marketing is, rendered as the final main content section.
 6. `sections/footer.md`: footer copy, navigation, and company facts.
 
 ## Omitted At Launch
@@ -39,12 +39,14 @@ This file defines the content architecture for the launch version of canonical `
 - References, case studies, client logos, fake metrics, and fake testimonials are omitted; the `Reference` navigation label does not introduce reference content. The only approved metric-style content is the hero popup `Růst tržeb` `+124%` recorded in `sections/hero.md`.
 - Contact form is omitted.
 - Supplied social profile URLs are approved for launch header links: Facebook `https://www.facebook.com/wavemarketingsro`, Instagram `https://www.instagram.com/wave.marketing.cz/`, and LinkedIn `https://www.linkedin.com/company/wave-marketing-s-r-o/`.
-- Production images are limited to verified approved assets. The logo and Jana/contact photo are available under `public/assets/`.
+- Production images are limited to verified approved assets under `public/assets/`.
 
 ## Resolved Production Assets
 
 - Real WAVE Marketing logo asset: `public/assets/wave-marketing-logo.png`.
 - Real Jana/contact photo asset: `public/assets/jana-skalnikova-photo.png`.
+- Approved hero collaboration image: `public/assets/wave-marketing-hero-collaboration.png`.
+- Approved process solution proposal image: `public/assets/wave-marketing-process-solution-proposal.jpg`.
 
 ## Optional Inputs Before Implementation
 
