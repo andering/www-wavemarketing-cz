@@ -151,20 +151,27 @@ Review and approve the documentation stack, then choose the planning route:
 
 Header social links are approved for launch using the supplied Facebook, Instagram, and LinkedIn URLs.
 
-## Refinement Decisions
+## Decision Log
+
+This section is the central decision log for durable production decisions. Historical workflow artifacts under `docs/superpowers/` may explain how a decision was reached, but the active source of truth is this decision log plus the relevant canonical document: `docs/design-system/wave-marketing/` for reusable visual/component rules, `docs/website/page-map.md` for page-specific component responsibilities, and `docs/website/sections/*.md` for content.
+
+Historical workflow artifacts should not be used as active requirements unless their decisions are also represented in the canonical docs listed above.
 
 - Lead and intro paragraphs should use a shared `lead` typography pattern: larger than standard body copy, `--ds-font-weight-light` (`300`), 20px expressed as `1.25rem`, and relaxed leading. Standard body copy remains `--ds-font-weight-regular` (`400`), while UI labels/buttons should use semibold/medium tokens instead of hard-coded heavy weights where possible.
 - Button variants are named intentionally: primary is the warm brown filled CTA, secondary is the deep teal filled CTA, and tertiary is the white/surface CTA. The hero's second button uses the tertiary variant; Jana's contact phone CTA uses the secondary deep teal variant with label `Zavolejte Janě`.
 - Header logo refinement: keep the centered split navigation but reduce the logo to 72px tall on desktop and 48px tall on mobile so it no longer dominates the header.
+- Header/contact Stitch alignment decision: keep the centered split desktop header with real social URLs only, use a mobile offcanvas menu, and render the contact area as a compact direct-contact bento rather than a form.
 - Hero popup refinement: add the approved Stitch-style floating growth card over the desktop hero visual with label `Růst tržeb`, value `+124%`, and icon `trending_up`; omit it on mobile with the hero visual.
 - Contact refinement: show `+420 605 461 440` under Jana's `CEO & Strategist` role, stack the email address below `Napište nám`, use `--ds-radius-2xl` for contact bento cards, and replace the mobile dropdown with a right-side offcanvas menu.
+- Process section decision: render `Jak probíhá spolupráce` as a centered vertical timeline with numbered nodes, a subtle dotted connector, approved support slots, and no unapproved artifacts or fake proof.
 - Process visual refinement: step 3 `Návrh řešení` uses the approved local solution proposal workshop image generated for this site, stored locally at `public/assets/wave-marketing-process-solution-proposal.jpg`.
 - Section order refinement: show `S čím vám pomůžeme rozvlnit vody internetu?` before the process section, then place the contact conversion area before `Kdo jsme` so `Kdo jsme` is the final main content section. Mobile menu offcanvas must be rendered outside the sticky glass header shell so it starts at the viewport top.
 - Wave divider decision: keep the hero-to-services divider in the original Stitch-style layered wave with a wavy top edge and straight lower closure; remove the bottom divider before contact so `Kdo jsme` flows directly into the contact conversion area.
+- Intro visual decision: render `Kdo jsme` as a metric-free split editorial wave panel, using local SVG/CSS or scoped shader enhancement from WAVE tokens rather than Stitch-hosted imagery or fake metric tiles.
 - Responsive responsibility decision: responsive refinement must explicitly track where mobile and desktop have different section or component responsibilities, such as when a desktop visual slot becomes a mobile background treatment or is omitted entirely, instead of treating responsive work as spacing changes only.
 - Mobile hero refinement: remove the mobile-only decorative gradient background, keep the desktop hero visual omitted on mobile, and increase the mobile hero headline so the opening message keeps enough weight without the background treatment.
 - Header behavior refinement: add active section tracking for the one-page navigation so desktop and mobile/offcanvas links reflect the current scroll section with the active-link treatment and `aria-current="page"`.
-- Intro visual refinement: adapt the supplied shader as a panel-scoped WebGL canvas enhancement for desktop `Kdo jsme`, with a local SVG/CSS fallback, WAVE palette colors, cleanup for resize and animation work, and reduced-motion/mobile safeguards. Do not add React, shadcn, Tailwind, `/components/ui`, Unsplash assets, lucide icons, full-page fixed backgrounds, remote imagery, fake proof, or new dependencies.
+- Intro visual refinement: adapt the supplied shader as a panel-scoped WebGL shader for desktop `Kdo jsme`, with a local SVG/CSS fallback, WAVE palette colors, cleanup for resize and animation work, and reduced-motion/mobile safeguards. Do not add React, shadcn, Tailwind, `/components/ui`, Unsplash assets, lucide icons, full-page fixed backgrounds, remote imagery, fake proof, or new dependencies.
 - Mobile header/hero density refinement: use a balanced three-column mobile header so the logo is optically centered, increase the mobile logo to 56px tall, keep moderate hero top padding, and apply global mobile section spacing so stacked sections no longer feel separated by empty bands.
 - 2026-06-19: The hero lead may emphasize only the first `marketing` word as an inline shopping-tag label. Approved styling: teal face, balanced rounded corners, slight rotation, thin warm brown underside, and a small brown-bordered tag hole with clear spacing before the word.
 

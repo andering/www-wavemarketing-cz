@@ -465,6 +465,60 @@ describe("siteContent", () => {
     expect(intro).toContain("display: none;");
   });
 
+  it("routes durable decisions to canonical source-of-truth docs", () => {
+    const roadmap = readFileSync(
+      join(process.cwd(), "docs/website-production-roadmap.md"),
+      "utf8",
+    );
+    const designSystem = readFileSync(
+      join(process.cwd(), "docs/design-system/wave-marketing/DESIGN.md"),
+      "utf8",
+    );
+    const pageMap = readFileSync(
+      join(process.cwd(), "docs/website/page-map.md"),
+      "utf8",
+    );
+    const superpowersReadme = readFileSync(
+      join(process.cwd(), "docs/superpowers/README.md"),
+      "utf8",
+    );
+
+    expect(roadmap).toContain("## Decision Log");
+    expect(roadmap).toContain("central decision log");
+    expect(roadmap).toContain("Historical workflow artifacts");
+    expect(roadmap).toContain("centered vertical timeline");
+    expect(roadmap).toContain("metric-free split editorial wave panel");
+    expect(roadmap).toContain("panel-scoped WebGL shader");
+    expect(roadmap).toContain("inline shopping-tag label");
+
+    expect(designSystem).toContain(
+      "Hero lead copy may use a single inline shopping-tag emphasis",
+    );
+    expect(designSystem).toContain(
+      "Intro Statement Variant: Split Editorial Wave Panel",
+    );
+    expect(designSystem).toContain("panel-scoped WebGL canvas shader");
+    expect(designSystem).toContain(
+      "Process sections may use a centered vertical timeline",
+    );
+
+    expect(pageMap).toContain("Component: `marketing-hero`");
+    expect(pageMap).toContain("Component: `process-steps`");
+    expect(pageMap).toContain("Component: `intro-statement`");
+    expect(pageMap).toContain("Visual slot rule:");
+
+    expect(superpowersReadme).toContain("not an active source of truth");
+    expect(superpowersReadme).toContain(
+      "Use `docs/website-production-roadmap.md` for durable decisions",
+    );
+    expect(superpowersReadme).toContain(
+      "Use `docs/design-system/wave-marketing/` for reusable visual and component rules",
+    );
+    expect(superpowersReadme).toContain(
+      "Use `docs/website/` for content and page/component mapping",
+    );
+  });
+
   it("uses tighter global section spacing on mobile while keeping desktop breathing room", () => {
     const designSystem = readFileSync(
       join(process.cwd(), "docs/design-system/wave-marketing/DESIGN.md"),
