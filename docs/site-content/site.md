@@ -2,12 +2,12 @@
 
 ## Purpose
 
-This file defines the content architecture for the launch version of canonical `www.wavemarketing.cz`. It is content-only: visual styling, component behavior, colors, typography, and layout rules belong to `docs/design-system/wave-marketing/` and `docs/site-content/page-map.md`.
+This file defines the content architecture for the launch version of canonical `www.wavemarketing.cz`. It is content-only: visual styling, component behavior, colors, typography, and layout rules belong to `docs/design-system/` and `docs/site-content/page-map.md`.
 
 ## Source Of Truth
 
 - Content source: `client_brief.md`.
-- Visual source: `docs/design-system/wave-marketing/`.
+- Visual source: `docs/design-system/`.
 - Conflict rule: use this website content spec for what the page says and what content exists; use the design system for how it looks.
 
 ## Launch Scope

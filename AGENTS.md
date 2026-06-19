@@ -2,33 +2,39 @@
 
 This repository contains the static production website for `www.wavemarketing.cz`. Keep implementation decisions traceable to the approved documentation stack.
 
-## Source Of Truth
+## Source Of Truth Index
 
 - Content source: `client_brief.md` and `docs/site-content/`.
-- Visual source: `docs/design-system/wave-marketing/`.
+- Visual source: `docs/design-system/`.
 - Section/component mapping: `docs/site-content/page-map.md`.
-- Production roadmap and decisions: `docs/website-production-roadmap.md`.
+- Durable cross-cutting production decisions: `docs/decisions.md`.
+- Process and implementation workflow: `docs/workflow.md`.
+- Current state, open inputs, launch constraints, and resolved assets: `docs/status.md`.
+- Chronological audit trail: `docs/history.md`.
 - There is no separate active side-spec or implementation-plan directory; keep durable requirements in the source-of-truth files above.
 
-When these sources conflict, follow the rules in `docs/website-production-roadmap.md`. If the conflict is ambiguous, ask before deciding.
+When these sources conflict, follow the source-of-truth rules in `docs/decisions.md`. If the conflict is ambiguous, ask before deciding.
 
 ## Project Rules
 
 - Do not invent production content.
 - Do not add references, case studies, client logos, testimonials, fake metrics, or a `Reference` nav item unless the docs are explicitly updated first.
 - Do not add a contact form for launch.
-- Do not add social links or placeholder `#` links until final URLs are supplied.
+- Do not add new social-link placements or placeholder `#` links unless final URLs and placements are approved in the docs.
 - Do not use Stitch-hosted images as production assets unless the user confirms they are real client assets.
 - Use only approved production assets under `public/assets/` unless a new asset gate is resolved.
-- Keep the site one static Czech homepage unless the roadmap is changed first.
+- Keep the site one static Czech homepage unless `docs/decisions.md` and the relevant content specs are changed first.
 
 ## Docs-First Workflow
 
 - Make changes by editing the existing source-of-truth files, not by adding side specs that bypass them.
 - For content changes, update `docs/site-content/` first, then mirror the approved change in `src/data/site.ts` or components.
-- For visual or component-pattern changes, update `docs/design-system/wave-marketing/` first, then mirror the approved change in `src/styles/design-system.css` and components.
+- For visual or component-pattern changes, update `docs/design-system/` first, then mirror the approved change in `src/styles/design-system.css` and components.
 - For section ordering, navigation, anchors, or component responsibilities, update `docs/site-content/page-map.md` first.
-- After meaningful decisions, update `docs/website-production-roadmap.md`.
+- After meaningful durable cross-cutting decisions, update `docs/decisions.md` and the relevant canonical spec.
+- For process changes, update `docs/workflow.md`.
+- For open inputs, current state, launch constraints, or resolved assets, update `docs/status.md`.
+- For audit-only chronology, update `docs/history.md`.
 
 ## Implementation Phases
 
@@ -61,5 +67,5 @@ Use these phases when planning or reviewing remaining work:
 - Canonical target: `www.wavemarketing.cz`.
 - Approved production assets: `public/assets/wave-marketing-logo.png`, `public/assets/jana-skalnikova-photo.png`, `public/assets/wave-marketing-hero-collaboration.png`, and `public/assets/wave-marketing-process-solution-proposal.jpg`.
 - Primary conversion: direct phone or email contact.
-- Open input: final social profile URLs, if social links should appear later.
+- Open input: additional social-link placements, if socials should appear outside the header/offcanvas.
 - Open input: hosting/deployment target.

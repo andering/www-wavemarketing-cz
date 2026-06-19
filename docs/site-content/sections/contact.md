@@ -6,7 +6,7 @@ Make the final contact step friendly, direct, and low-friction.
 
 ## Source
 
-Derived from `client_brief.md`, section `Kontakt`, with launch decisions recorded in `docs/website-production-roadmap.md`.
+Derived from `client_brief.md`, section `Kontakt`, with launch decisions recorded in `docs/decisions.md`.
 
 ## Section Heading
 
