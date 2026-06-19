@@ -17,7 +17,7 @@ This file is the glue layer between content specs and the WAVE Marketing design 
 - Language: Czech.
 - Canonical target: `www.wavemarketing.cz`.
 - Primary conversion: phone or email contact.
-- Content source: section markdown files under `docs/website/sections/`.
+- Content source: section markdown files under `docs/site-content/sections/`.
 - Visual/component source: `docs/design-system/wave-marketing/DESIGN.md`, `tokens.css`, and `kitchensink.html`.
 - Normal implementation must not copy Stitch placeholder content, fake references, fake metrics, or hosted generated images.
 
@@ -148,7 +148,7 @@ The implementation should define or generate these component/widget contracts fr
 
 ## Implementation Notes For Future Agents
 
-- Read order: `docs/design-system/wave-marketing/USAGE.md`, then `docs/website/site.md`, then this file, then each section file.
+- Read order: `docs/design-system/wave-marketing/USAGE.md`, then `docs/site-content/site.md`, then this file, then each section file.
 - Treat component names in this file as implementation contracts. The implementation can choose actual file/component names that fit the stack, but must preserve these responsibilities.
 - If a section needs a visual pattern not documented in the design system, derive it conservatively from the closest contract or ask before inventing a new pattern.
 - If supplied assets are missing at implementation time, stop and ask unless the section explicitly allows an abstract or omitted visual fallback.

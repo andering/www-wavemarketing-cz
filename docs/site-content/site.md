@@ -2,7 +2,7 @@
 
 ## Purpose
 
-This file defines the content architecture for the launch version of canonical `www.wavemarketing.cz`. It is content-only: visual styling, component behavior, colors, typography, and layout rules belong to `docs/design-system/wave-marketing/` and the future `docs/website/page-map.md`.
+This file defines the content architecture for the launch version of canonical `www.wavemarketing.cz`. It is content-only: visual styling, component behavior, colors, typography, and layout rules belong to `docs/design-system/wave-marketing/` and `docs/site-content/page-map.md`.
 
 ## Source Of Truth
 

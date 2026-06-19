@@ -64,7 +64,7 @@ Purpose: convert `client_brief.md` into structured content files without visual 
 Recommended path:
 
 ```text
-docs/website/
+docs/site-content/
   site.md
   sections/
     hero.md
@@ -89,7 +89,7 @@ Purpose: bridge content sections to reusable components/widgets.
 Recommended path:
 
 ```text
-docs/website/page-map.md
+docs/site-content/page-map.md
 ```
 
 Responsibilities:
@@ -126,8 +126,8 @@ Example mapping style:
 ## Current Recommended Roadmap
 
 1. Complete: Extract `docs/design-system/wave-marketing/` from the Stitch visual source.
-2. Complete: Create `docs/website/site.md` and section markdown files from `client_brief.md`.
-3. Complete: Create `docs/website/page-map.md` to connect sections to design-system components.
+2. Complete: Create `docs/site-content/site.md` and section markdown files from `client_brief.md`.
+3. Complete: Create `docs/site-content/page-map.md` to connect sections to design-system components.
 4. Next: Review all docs for source-of-truth conflicts, fake content, missing assets, and unresolved placeholders.
 5. After approval: create an implementation plan for the static site.
 6. Implement the static website from the docs, not directly from Stitch or the raw brief.
@@ -137,8 +137,8 @@ Example mapping style:
 The three-layer documentation stack is in place and verified:
 
 - Layer 1 design system: `docs/design-system/wave-marketing/`.
-- Layer 2 content specs: `docs/website/site.md` and `docs/website/sections/*.md`.
-- Layer 3 component mapping: `docs/website/page-map.md`.
+- Layer 2 content specs: `docs/site-content/site.md` and `docs/site-content/sections/*.md`.
+- Layer 3 component mapping: `docs/site-content/page-map.md`.
 
 The Astro static site has been implemented from the documentation stack and extracted production assets. Current refinement work should update the canonical design-system and website specs first, then mirror those decisions in implementation.
 
@@ -153,7 +153,7 @@ Header social links are approved for launch using the supplied Facebook, Instagr
 
 ## Decision Log
 
-This section is the central decision log for durable production decisions. Historical workflow artifacts under `docs/superpowers/` may explain how a decision was reached, but the active source of truth is this decision log plus the relevant canonical document: `docs/design-system/wave-marketing/` for reusable visual/component rules, `docs/website/page-map.md` for page-specific component responsibilities, and `docs/website/sections/*.md` for content.
+This section is the central decision log for durable production decisions. Historical workflow artifacts under `docs/superpowers/` may explain how a decision was reached, but the active source of truth is this decision log plus the relevant canonical document: `docs/design-system/wave-marketing/` for reusable visual/component rules, `docs/site-content/page-map.md` for page-specific component responsibilities, and `docs/site-content/sections/*.md` for content.
 
 Historical workflow artifacts should not be used as active requirements unless their decisions are also represented in the canonical docs listed above.
 
@@ -192,7 +192,7 @@ Historical workflow artifacts should not be used as active requirements unless t
 Tests should exist, but their main purpose is to keep source-of-truth content and production constraints stable rather than to overtest visual styling.
 
 - Use lightweight JavaScript/Vitest tests for content and configuration invariants.
-- Tests should verify that generated or copied site data keeps the approved facts from `client_brief.md`, `docs/website/`, `docs/website/page-map.md`, and `docs/design-system/wave-marketing/`.
+- Tests should verify that generated or copied site data keeps the approved facts from `client_brief.md`, `docs/site-content/`, `docs/site-content/page-map.md`, and `docs/design-system/wave-marketing/`.
 - Tests should guard important launch constraints: no fake references, no contact form, no placeholder social links, correct contact details, correct production asset paths, expected navigation labels, and expected section/component mapping.
 - A reusable test template or skill-derived checklist may be useful so future static-site projects can generate similar content-invariant tests from their docs.
 - Visual finish, responsive polish, spacing feel, image treatment, and animation details should be verified mostly through browser review and `npm run build`, not brittle snapshot-style tests.
@@ -248,11 +248,11 @@ The implementation plan should divide the website build into clear work phases i
 - Approved and wrote the Layer 1 design-system package with five canonical files.
 - Verified the package files, required sections, manifest structure, token groups, fixture sections, and color-token swatches.
 - Started Layer 2 content specification from `client_brief.md`.
-- Created `docs/website/site.md` for site-level content architecture, launch navigation, omissions, SEO basics, and required inputs.
-- Created section content specs under `docs/website/sections/` for hero, intro, services overview, cooperation process, contact, and footer.
+- Created `docs/site-content/site.md` for site-level content architecture, launch navigation, omissions, SEO basics, and required inputs.
+- Created section content specs under `docs/site-content/sections/` for hero, intro, services overview, cooperation process, contact, and footer.
 - Verified the Layer 2 files contain no placeholder markers and record key launch omissions and contact facts.
 - Started Layer 3 widget/component mapping.
-- Created `docs/website/page-map.md` to connect content sections to design-system component contracts and variants.
+- Created `docs/site-content/page-map.md` to connect content sections to design-system component contracts and variants.
 - Verified the page map references existing files, includes required component mappings and anchors, records launch exclusions, and contains no placeholder markers.
 - Confirmed the Stitch logo and Jana/contact photo are approved production assets.
 - Extracted `public/assets/wave-marketing-logo.png` and `public/assets/jana-skalnikova-photo.png`.

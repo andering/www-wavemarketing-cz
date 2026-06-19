@@ -4,9 +4,9 @@ This repository contains the static production website for `www.wavemarketing.cz
 
 ## Source Of Truth
 
-- Content source: `client_brief.md` and `docs/website/`.
+- Content source: `client_brief.md` and `docs/site-content/`.
 - Visual source: `docs/design-system/wave-marketing/`.
-- Section/component mapping: `docs/website/page-map.md`.
+- Section/component mapping: `docs/site-content/page-map.md`.
 - Production roadmap and decisions: `docs/website-production-roadmap.md`.
 - Implementation plan: `docs/superpowers/plans/2026-06-12-wave-marketing-static-site.md`.
 
@@ -25,9 +25,9 @@ When these sources conflict, follow the rules in `docs/website-production-roadma
 ## Docs-First Workflow
 
 - Make changes by editing the existing source-of-truth files, not by adding side specs that bypass them.
-- For content changes, update `docs/website/` first, then mirror the approved change in `src/data/site.ts` or components.
+- For content changes, update `docs/site-content/` first, then mirror the approved change in `src/data/site.ts` or components.
 - For visual or component-pattern changes, update `docs/design-system/wave-marketing/` first, then mirror the approved change in `src/styles/design-system.css` and components.
-- For section ordering, navigation, anchors, or component responsibilities, update `docs/website/page-map.md` first.
+- For section ordering, navigation, anchors, or component responsibilities, update `docs/site-content/page-map.md` first.
 - After meaningful decisions, update `docs/website-production-roadmap.md`.
 
 ## Implementation Phases

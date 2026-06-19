@@ -1,5 +1,5 @@
 import { createHash } from "node:crypto";
-import { existsSync, readFileSync } from "node:fs";
+import { existsSync, readFileSync, readdirSync } from "node:fs";
 import { join } from "node:path";
 import { describe, expect, it } from "vitest";
 import { siteContent } from "../data/site";
@@ -127,11 +127,11 @@ describe("siteContent", () => {
       "utf8",
     );
     const siteSpec = readFileSync(
-      join(process.cwd(), "docs/website/site.md"),
+      join(process.cwd(), "docs/site-content/site.md"),
       "utf8",
     );
     const pageMap = readFileSync(
-      join(process.cwd(), "docs/website/page-map.md"),
+      join(process.cwd(), "docs/site-content/page-map.md"),
       "utf8",
     );
     const designSystem = readFileSync(
@@ -197,11 +197,11 @@ describe("siteContent", () => {
       "utf8",
     );
     const heroSpec = readFileSync(
-      join(process.cwd(), "docs/website/sections/hero.md"),
+      join(process.cwd(), "docs/site-content/sections/hero.md"),
       "utf8",
     );
     const pageMap = readFileSync(
-      join(process.cwd(), "docs/website/page-map.md"),
+      join(process.cwd(), "docs/site-content/page-map.md"),
       "utf8",
     );
 
@@ -267,7 +267,7 @@ describe("siteContent", () => {
       "utf8",
     );
     const pageMap = readFileSync(
-      join(process.cwd(), "docs/website/page-map.md"),
+      join(process.cwd(), "docs/site-content/page-map.md"),
       "utf8",
     );
 
@@ -286,7 +286,7 @@ describe("siteContent", () => {
       "utf8",
     );
     const pageMap = readFileSync(
-      join(process.cwd(), "docs/website/page-map.md"),
+      join(process.cwd(), "docs/site-content/page-map.md"),
       "utf8",
     );
     const designSystem = readFileSync(
@@ -326,7 +326,7 @@ describe("siteContent", () => {
       "utf8",
     );
     const pageMap = readFileSync(
-      join(process.cwd(), "docs/website/page-map.md"),
+      join(process.cwd(), "docs/site-content/page-map.md"),
       "utf8",
     );
 
@@ -364,7 +364,7 @@ describe("siteContent", () => {
       "utf8",
     );
     const pageMap = readFileSync(
-      join(process.cwd(), "docs/website/page-map.md"),
+      join(process.cwd(), "docs/site-content/page-map.md"),
       "utf8",
     );
     const designSystem = readFileSync(
@@ -411,7 +411,7 @@ describe("siteContent", () => {
       "utf8",
     );
     const pageMap = readFileSync(
-      join(process.cwd(), "docs/website/page-map.md"),
+      join(process.cwd(), "docs/site-content/page-map.md"),
       "utf8",
     );
     const roadmap = readFileSync(
@@ -475,7 +475,7 @@ describe("siteContent", () => {
       "utf8",
     );
     const pageMap = readFileSync(
-      join(process.cwd(), "docs/website/page-map.md"),
+      join(process.cwd(), "docs/site-content/page-map.md"),
       "utf8",
     );
     const superpowersReadme = readFileSync(
@@ -515,8 +515,51 @@ describe("siteContent", () => {
       "Use `docs/design-system/wave-marketing/` for reusable visual and component rules",
     );
     expect(superpowersReadme).toContain(
-      "Use `docs/website/` for content and page/component mapping",
+      "Use `docs/site-content/` for content and page/component mapping",
     );
+  });
+
+  it("uses docs/site-content as the active content source-of-truth directory", () => {
+    const siteContentDir = join(process.cwd(), "docs/site-content");
+    const oldWebsiteDir = join(process.cwd(), "docs/website");
+    const canonicalFiles = [
+      "site.md",
+      "page-map.md",
+      "sections/hero.md",
+      "sections/intro.md",
+      "sections/services-overview.md",
+      "sections/cooperation-process.md",
+      "sections/contact.md",
+      "sections/footer.md",
+    ];
+
+    expect(existsSync(siteContentDir)).toBe(true);
+    expect(existsSync(oldWebsiteDir)).toBe(false);
+
+    for (const relativePath of canonicalFiles) {
+      expect(existsSync(join(siteContentDir, relativePath))).toBe(true);
+    }
+
+    const activeDocs = [
+      "AGENTS.md",
+      "docs/website-production-roadmap.md",
+      "docs/design-system/wave-marketing/USAGE.md",
+      "docs/site-content/site.md",
+      "docs/site-content/page-map.md",
+      "docs/superpowers/README.md",
+    ];
+    const staleWebsitePath = ["docs", "website", ""].join("/");
+
+    for (const docPath of activeDocs) {
+      const content = readFileSync(join(process.cwd(), docPath), "utf8");
+      expect(content).toContain("docs/site-content");
+      expect(content).not.toContain(staleWebsitePath);
+    }
+
+    const historicalPlans = readdirSync(
+      join(process.cwd(), "docs/superpowers/plans"),
+    );
+    expect(historicalPlans.length).toBeGreaterThan(0);
   });
 
   it("uses tighter global section spacing on mobile while keeping desktop breathing room", () => {
@@ -569,7 +612,7 @@ describe("siteContent", () => {
       "utf8",
     );
     const pageMap = readFileSync(
-      join(process.cwd(), "docs/website/page-map.md"),
+      join(process.cwd(), "docs/site-content/page-map.md"),
       "utf8",
     );
 
@@ -659,11 +702,11 @@ describe("siteContent", () => {
 
   it("keeps the intro section as a metric-free split wave variant", () => {
     const introSpec = readFileSync(
-      join(process.cwd(), "docs/website/sections/intro.md"),
+      join(process.cwd(), "docs/site-content/sections/intro.md"),
       "utf8",
     );
     const pageMap = readFileSync(
-      join(process.cwd(), "docs/website/page-map.md"),
+      join(process.cwd(), "docs/site-content/page-map.md"),
       "utf8",
     );
     const component = readFileSync(
@@ -751,11 +794,11 @@ describe("siteContent", () => {
 
   it("renders the cooperation process as an approved vertical timeline", () => {
     const processSpec = readFileSync(
-      join(process.cwd(), "docs/website/sections/cooperation-process.md"),
+      join(process.cwd(), "docs/site-content/sections/cooperation-process.md"),
       "utf8",
     );
     const pageMap = readFileSync(
-      join(process.cwd(), "docs/website/page-map.md"),
+      join(process.cwd(), "docs/site-content/page-map.md"),
       "utf8",
     );
     const component = readFileSync(
@@ -815,7 +858,7 @@ describe("siteContent", () => {
       "utf8",
     );
     const pageMap = readFileSync(
-      join(process.cwd(), "docs/website/page-map.md"),
+      join(process.cwd(), "docs/site-content/page-map.md"),
       "utf8",
     );
 
