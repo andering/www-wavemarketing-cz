@@ -25,7 +25,9 @@ This file defines the content architecture for the launch version of canonical `
 - `Reference` links to the collaboration process section labeled `Jak probíhá spolupráce`; it is a navigation label only, not a references/case-study section.
 - `Kontakt` links to the contact section.
 
-## Launch Sections
+## Launch Content Inventory
+
+The launch site contains these content sections. Render order, anchors, navigation routing, and component mapping are defined in `page-map.md`.
 
 1. `sections/hero.md`: headline, positioning, and primary CTAs.
 2. `sections/services-overview.md`: services and their benefit-led descriptions.

@@ -56,6 +56,28 @@ cloudflare_extra_dns_records = {
 cloudflare_pages_redirect_pages_dev_enabled = true
 cloudflare_pages_redirect_ruleset_enabled   = false
 
+# Shared Google ownership verification used by external Google services.
+google_site_verification_enabled    = true
+google_site_verification_domain     = "wavemarketing.cz"
+google_site_verification_record_ttl = 1
+
+# External Google services bootstrap: GA4, GTM, and Search Console.
+external_services_enabled         = true
+external_google_services_enabled  = true
+external_google_display_name      = "wavemarketing.cz"
+external_google_time_zone         = "Europe/Prague"
+external_google_currency_code     = "EUR"
+external_google_ga4_enabled       = true
+external_google_ga4_account_id    = "398526472"
+external_google_ga4_property_id   = null
+external_google_ga4_web_stream_id = null
+external_google_gtm_enabled       = true
+external_google_gtm_account_id    = "6361842694"
+external_google_gtm_container_id  = null
+external_google_gsc_enabled       = true
+external_google_gsc_owner_email   = "andering@gmail.com"
+external_google_gsc_site_url      = null
+
 # Keep optional Cloudflare controls off until a reviewed plan explicitly enables them.
 cloudflare_security_enabled     = false
 cloudflare_health_check_enabled = false

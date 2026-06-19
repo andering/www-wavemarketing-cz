@@ -46,7 +46,7 @@ docs/site-content/
 
 Responsibilities:
 
-- Define sitemap and one-page section order.
+- Define site content inventory and section content.
 - Store section purpose, final or approved Czech copy, CTA labels, links, contact facts, and SEO notes.
 - Keep content independent from colors, fonts, layout measurements, and component styling.
 - Explicitly record omitted launch content, especially references and social links.
@@ -65,7 +65,7 @@ Responsibilities:
 
 - Map each content section to a component contract from the design system.
 - Choose component variants per section.
-- Define page-level glue such as navigation, footer, anchors, CTA destinations, and section ordering.
+- Define page-level glue such as render order, navigation routing, footer, anchors, CTA destinations, and component mapping.
 - Keep structural choices separate from raw content and reusable visual rules.
 
 ## Docs-First Workflow
