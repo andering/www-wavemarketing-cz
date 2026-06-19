@@ -52,6 +52,14 @@ cloudflare_extra_dns_records = {
     proxied = true
     comment = "Terraform-managed apex route so Cloudflare can redirect to the canonical www host."
   }
+  external_services_google_site_verification = {
+    name    = "wavemarketing.cz"
+    type    = "TXT"
+    content = "google-site-verification=xqBToqtx6mEO6_c0aYfNbbbxDjBzJSEEY006KPGmuh4"
+    ttl     = 1
+    proxied = false
+    comment = "External-services Google Site Verification token for Search Console ownership."
+  }
 }
 cloudflare_pages_redirect_pages_dev_enabled = true
 cloudflare_pages_redirect_ruleset_enabled   = false
