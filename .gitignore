@@ -2,6 +2,7 @@
 node_modules/
 dist/
 .astro/
+.superpowers/
 screen_*.png
 
 # Local deployment and Terraform state

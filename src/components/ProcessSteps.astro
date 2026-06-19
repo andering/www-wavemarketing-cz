@@ -201,14 +201,18 @@ import { siteContent } from '../data/site';
   }
 
   @media (max-width: 620px) {
+    .process__header {
+      margin-bottom: var(--ds-space-8);
+    }
+
     .process-step {
       gap: var(--ds-space-4);
       grid-template-columns: 44px minmax(0, 1fr);
-      padding-bottom: var(--ds-space-12);
+      padding-bottom: var(--ds-space-10);
     }
 
     .process-step__line::before {
-      bottom: calc(var(--ds-space-12) * -1);
+      bottom: calc(var(--ds-space-10) * -1);
       top: 48px;
     }
 

@@ -110,7 +110,7 @@ describe("siteContent", () => {
       .digest("hex");
 
     expect(logoHash).toBe(
-      "2a873b50b92fc6e807eed31c587b4c0457df72282d239ab83d794a08368e42d8",
+      "4776f8b325d98c350c7924f5a576c2a2195d92d189649e849e447cf230da9bbc",
     );
   });
 
@@ -240,6 +240,27 @@ describe("siteContent", () => {
     expect(component).toContain("font-style: italic;");
   });
 
+  it("styles the first hero marketing word as an approved shopping tag", () => {
+    const component = readFileSync(
+      join(process.cwd(), "src/components/MarketingHero.astro"),
+      "utf8",
+    );
+
+    expect(siteContent.hero.lead).toContain("Děláme marketing lidsky.");
+    expect(component).toContain("heroLeadEmphasis");
+    expect(component).toContain("heroLeadParts");
+    expect(component).toContain("join(heroLeadEmphasis)");
+    expect(component).toContain('class="hero__lead-tag"');
+    expect(component).toContain("border-radius: var(--ds-radius-md);");
+    expect(component).toContain("0 3px 0 var(--ds-color-secondary)");
+    expect(component).toContain("padding: 0.04em 0.64em 0.08em 34px;");
+    expect(component).toContain(
+      "transform: rotate(-4deg) translateY(-0.08em);",
+    );
+    expect(component).toContain(".hero__lead-tag::before");
+    expect(component).toContain("border: 2px solid var(--ds-color-secondary);");
+  });
+
   it("renders the header as an approved centered-logo split navigation", () => {
     const component = readFileSync(
       join(process.cwd(), "src/components/SiteHeader.astro"),
@@ -294,7 +315,9 @@ describe("siteContent", () => {
     expect(component).toContain("max-height: 100px");
     expect(component).toContain("padding-block: 0");
     expect(component).toContain("height: 72px");
-    expect(component).toContain("height: 48px");
+    expect(component).toContain("grid-template-columns: 44px 1fr 44px");
+    expect(component).toContain("height: 56px");
+    expect(component).toContain("justify-self: center");
   });
 
   it("renders contact as a compact direct-contact module", () => {
@@ -420,6 +443,8 @@ describe("siteContent", () => {
     expect(roadmap).toContain(
       "different section or component responsibilities",
     );
+    expect(roadmap).toContain("Mobile header/hero density refinement");
+    expect(roadmap).toContain("global mobile section spacing");
     expect(hero).not.toContain("radial-gradient(");
     expect(hero).not.toContain("ellipse at 142% 34%");
     expect(hero).not.toContain("rgba(219, 240, 235, 0.28) 0%");
@@ -431,11 +456,57 @@ describe("siteContent", () => {
     );
     expect(hero).not.toContain(".hero::before");
     expect(hero).not.toContain(".hero::after");
+    expect(hero).toContain("padding-top: var(--ds-space-12);");
     expect(hero).toContain("display: none;");
     expect(header).toContain("site-header__hamburger");
+    expect(header).toContain("grid-template-columns: 44px 1fr 44px");
     expect(header).toContain("site-header__mobile-nav-text");
     expect(intro).toContain(".intro__visual {");
     expect(intro).toContain("display: none;");
+  });
+
+  it("uses tighter global section spacing on mobile while keeping desktop breathing room", () => {
+    const designSystem = readFileSync(
+      join(process.cwd(), "docs/design-system/wave-marketing/DESIGN.md"),
+      "utf8",
+    );
+    const styles = readFileSync(
+      join(process.cwd(), "src/styles/design-system.css"),
+      "utf8",
+    );
+
+    expect(designSystem).toContain("Mobile sections reduce vertical padding");
+    expect(styles).toContain(
+      ".section {\n  padding-block: var(--ds-space-20);",
+    );
+    expect(styles).toContain("@media (max-width: 720px) {");
+    expect(styles).toContain("padding-block: var(--ds-space-12);");
+  });
+
+  it("tightens repeated section header and timeline gaps on mobile", () => {
+    const services = readFileSync(
+      join(process.cwd(), "src/components/ServiceList.astro"),
+      "utf8",
+    );
+    const processSteps = readFileSync(
+      join(process.cwd(), "src/components/ProcessSteps.astro"),
+      "utf8",
+    );
+    const contact = readFileSync(
+      join(process.cwd(), "src/components/ContactCardGrid.astro"),
+      "utf8",
+    );
+
+    expect(services).toContain(
+      ".services__header {\n      margin-bottom: var(--ds-space-8);",
+    );
+    expect(processSteps).toContain(
+      ".process__header {\n      margin-bottom: var(--ds-space-8);",
+    );
+    expect(processSteps).toContain("padding-bottom: var(--ds-space-10);");
+    expect(contact).toContain(
+      ".contact__header {\n      margin-bottom: var(--ds-space-8);",
+    );
   });
 
   it("renders the contact conversion area before the final Kdo jsme section", () => {

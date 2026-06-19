@@ -155,6 +155,12 @@ a {
   padding-block: var(--ds-space-20);
 }
 
+@media (max-width: 720px) {
+  .section {
+    padding-block: var(--ds-space-12);
+  }
+}
+
 .eyebrow {
   display: inline-flex;
   align-items: center;

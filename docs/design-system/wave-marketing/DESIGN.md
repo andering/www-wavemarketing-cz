@@ -14,7 +14,7 @@ WAVE Marketing uses a warm, human, wave-inspired visual identity for a small mar
 
 ## Composition Cues
 
-Use a centered maximum-width page rhythm with generous vertical spacing. Hero and major sections should breathe, with ample negative space and restrained density. Alternate text-heavy areas with visual components such as organic image frames, service rows, CTA cards, and wave dividers. Align content to a `--ds-space-container-max` container with mobile and desktop gutters from `tokens.css`.
+Use a centered maximum-width page rhythm with generous vertical spacing. Hero and major sections should breathe, with ample negative space and restrained density. Mobile sections reduce vertical padding from the desktop rhythm so stacked content does not feel separated by empty bands. Alternate text-heavy areas with visual components such as organic image frames, service rows, CTA cards, and wave dividers. Align content to a `--ds-space-container-max` container with mobile and desktop gutters from `tokens.css`.
 
 ## Color System
 
@@ -24,13 +24,15 @@ Use `--ds-color-background` for the page base and `--ds-color-surface` or `--ds-
 
 Use `--ds-font-heading` for all major headings, hero headlines, card titles, and editorial emphasis. Use `--ds-font-body` for paragraphs, navigation, buttons, form controls, and metadata. Hero headlines should use large heading sizes with `--ds-leading-tight` and `--ds-tracking-tight`. Standard body copy uses `--ds-font-weight-regular`, `--ds-text-base`, and `--ds-leading-relaxed`. Lead and intro paragraphs use `--ds-font-weight-light`, `--ds-text-lead` (`1.25rem`), and `--ds-leading-lead`; the mobile/default lead token also stays at `1.25rem` so lead copy never drops below 20px at a 16px root size. Labels and badges should use uppercase body-family text with `--ds-font-weight-semibold` and `--ds-tracking-widest`.
 
+Hero lead copy may use a single inline shopping-tag emphasis for a strategically important word when approved by the website content/design source of truth. The approved homepage treatment applies only to the first `marketing` in `Děláme marketing lidsky.` and renders it as a slightly rotated teal label with equal corner rounding, off-white uppercase text, a thin warm brown underside, and a small left-side circular hole with a warm brown border. Keep clear spacing between the hole and the word, do not add extra highlight lines, and keep the element inline so the lead remains readable on mobile.
+
 ## Layout System
 
 Use one main container width from `--ds-space-container-max`. Desktop sections use `--ds-space-gutter-desktop`; mobile sections use `--ds-space-gutter-mobile`. Use one-column mobile layouts and two-column desktop layouts for hero, media cards, and contact compositions. Services may use a vertical row list on desktop and stacked rows on mobile.
 
 ## Spacing Scale
 
-Use `--ds-space-2` through `--ds-space-4` for small internal gaps, `--ds-space-6` through `--ds-space-8` for card padding and row spacing, and `--ds-space-16` through `--ds-space-24` for major sections. Keep CTAs visually separated with at least `--ds-space-6` between button groups and surrounding text.
+Use `--ds-space-2` through `--ds-space-4` for small internal gaps, `--ds-space-6` through `--ds-space-8` for card padding and row spacing, and `--ds-space-16` through `--ds-space-24` for major desktop sections. Use `--ds-space-12` for major mobile section padding and `--ds-space-8` for repeated mobile section header gaps. Keep CTAs visually separated with at least `--ds-space-6` between button groups and surrounding text.
 
 ## Border Radius System
 
@@ -58,7 +60,7 @@ Plain cards use raised white surfaces with subtle borders and rounded corners. E
 
 ## Navigation / Header
 
-Use a fixed or sticky glass-like header with `--ds-color-surface-glass`, blur, subtle bottom border, and soft shadow. Desktop navigation should center the logo with approved nav links split left and right, giving the logo more vertical presence than standard nav text. The approved launch navigation includes `Reference` immediately before `Kontakt`; `Reference` points to the collaboration process section, not to reference or case-study content. Active links use `--ds-color-secondary`, bold weight, a subtle underline, and `aria-current="page"` while their target section is current. Header social links may render as real brand-colored SVG icons when real social profile URLs are supplied. On desktop, align the social cluster to the far right with a subtle left divider, matching the approved Stitch reference structure. Mobile navigation should open as a mobile offcanvas panel from the right, with a compact logo plus an accessible hamburger trigger in the header; the supplied social links may repeat inside the offcanvas below the anchor navigation. Place the fixed offcanvas layer outside the sticky glass header so it starts at the viewport top. Social icons must only render when real URLs exist.
+Use a fixed or sticky glass-like header with `--ds-color-surface-glass`, blur, subtle bottom border, and soft shadow. Desktop navigation should center the logo with approved nav links split left and right, giving the logo more vertical presence than standard nav text. The approved launch navigation includes `Reference` immediately before `Kontakt`; `Reference` points to the collaboration process section, not to reference or case-study content. Active links use `--ds-color-secondary`, bold weight, a subtle underline, and `aria-current="page"` while their target section is current. Header social links may render as real brand-colored SVG icons when real social profile URLs are supplied. On desktop, align the social cluster to the far right with a subtle left divider, matching the approved Stitch reference structure. Mobile navigation should open as a mobile offcanvas panel from the right, with a slightly larger centered logo in a balanced three-column header and an accessible hamburger trigger on the right; the supplied social links may repeat inside the offcanvas below the anchor navigation. Place the fixed offcanvas layer outside the sticky glass header so it starts at the viewport top. Social icons must only render when real URLs exist.
 
 ## Contact Modules
 
@@ -70,7 +72,7 @@ Footer uses a muted warm surface, brand title or logo, short positioning copy, m
 
 ## Images and Media
 
-Use real, verified assets only for production. Hero and human imagery should use organic blob crops or large rounded frames, white borders, and warm shadows. The approved homepage hero image uses the organic crop treatment from `public/assets/wave-marketing-hero-collaboration.png` on desktop and wider layouts. On mobile, the hero image may be omitted visually without replacing it with a decorative gradient; keep the hero on the standard page surface and rely on the larger headline, copy, and CTA group for emphasis. Media cards use object-cover cropping, large internal padding when framed, and rounded corners. If real imagery is unavailable, prefer abstract wave shapes or reserved placeholders over stock-looking fake team images.
+Use real, verified assets only for production. Hero and human imagery should use organic blob crops or large rounded frames, white borders, and warm shadows. The approved homepage hero image uses the organic crop treatment from `public/assets/wave-marketing-hero-collaboration.png` on desktop and wider layouts. On mobile, the hero image may be omitted visually without replacing it with a decorative gradient; keep the hero on the standard page surface, use moderate top hero padding so the page opens with some breathing room but not an empty band, and rely on the larger headline, copy, and CTA group for emphasis. Media cards use object-cover cropping, large internal padding when framed, and rounded corners. If real imagery is unavailable, prefer abstract wave shapes or reserved placeholders over stock-looking fake team images.
 
 ## Decorative Elements
 

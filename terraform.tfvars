@@ -39,9 +39,20 @@ cloudflare_pages_prod_access_allowed_emails = [
   "honza.pisarik@autentickamedia.cz",
   "jana.skalnikova@wavemarketing.cz",
 ]
-cloudflare_pages_build_command              = "npm ci && npm run build"
-cloudflare_pages_build_output_directory     = "dist"
-cloudflare_pages_root_directory             = null
+cloudflare_pages_build_command          = "npm ci && npm run build"
+cloudflare_pages_build_output_directory = "dist"
+cloudflare_pages_root_directory         = null
+cloudflare_canonical_redirect_enabled   = true
+cloudflare_extra_dns_records = {
+  apex_redirect_source = {
+    name    = "wavemarketing.cz"
+    type    = "CNAME"
+    content = "www-wavemarketing-cz.pages.dev"
+    ttl     = 1
+    proxied = true
+    comment = "Terraform-managed apex route so Cloudflare can redirect to the canonical www host."
+  }
+}
 cloudflare_pages_redirect_pages_dev_enabled = true
 cloudflare_pages_redirect_ruleset_enabled   = false
 

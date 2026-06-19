@@ -321,20 +321,22 @@ const socialIconPaths = {
   @media (max-width: 720px) {
     .site-header__inner {
       align-items: center;
-      display: flex;
+      display: grid;
+      grid-template-columns: 44px 1fr 44px;
       height: auto;
-      justify-content: space-between;
       max-height: none;
-      min-height: auto;
-      padding-block: var(--ds-space-2);
+      min-height: 64px;
+      padding-block: var(--ds-space-1);
     }
 
     .site-header__logo img {
-      height: 48px;
+      height: 56px;
     }
 
     .site-header__logo--mobile {
       display: inline-flex;
+      grid-column: 2;
+      justify-self: center;
     }
 
     .site-header__desktop-nav {
@@ -343,6 +345,8 @@ const socialIconPaths = {
 
     .site-header__mobile-nav {
       display: inline-flex;
+      grid-column: 3;
+      justify-self: end;
     }
   }
 </style>

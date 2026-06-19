@@ -61,7 +61,7 @@ The implementation should define or generate these component/widget contracts fr
 - Variant: `centered-logo-split-nav` on desktop, `mobile-offcanvas-menu` on mobile.
 - Design contract: `Navigation / Header` from the design system.
 - Required behavior: anchor navigation to `#uvod`, `#sluzby`, `#spoluprace`, and `#kontakt`, with active section tracking that highlights the matching desktop and mobile/offcanvas navigation item during scroll and hash navigation.
-- Layout rule: desktop splits approved navigation around a balanced 72px-tall centered logo, then shows Header social links as real brand-colored SVG icons in a separate far-right cluster with a subtle left divider, matching the approved Stitch reference structure. Mobile keeps a compact 48px-tall logo plus an accessible hamburger trigger for the right-side offcanvas menu; the same real social links render inside the offcanvas panel below the anchor navigation. Render the offcanvas layer outside the sticky header shell so fixed positioning starts at the viewport top instead of the header top.
+- Layout rule: desktop splits approved navigation around a balanced 72px-tall centered logo, then shows Header social links as real brand-colored SVG icons in a separate far-right cluster with a subtle left divider, matching the approved Stitch reference structure. Mobile uses a balanced three-column header with a centered 56px-tall logo, an empty left column, and an accessible hamburger trigger on the right for the right-side offcanvas menu; the same real social links render inside the offcanvas panel below the anchor navigation. Render the offcanvas layer outside the sticky header shell so fixed positioning starts at the viewport top instead of the header top.
 - Launch exclusions: no reference/case-study content and no placeholder social icons.
 
 ### 2. Hero
@@ -73,7 +73,7 @@ The implementation should define or generate these component/widget contracts fr
 - Design contracts: `Typography`, `Buttons`, `Images and Media`, `Decorative Elements`.
 - Content slots: eyebrow, H1, lead paragraph, primary CTA, secondary CTA, approved floating growth popup.
 - CTA behavior: primary links to `#kontakt`; the second hero button links to `#sluzby` and uses the tertiary white/surface button variant.
-- Visual slot rule: on desktop and wider layouts, use the approved local hero image asset inside an organic wave-like frame with the approved floating growth popup (`Růst tržeb`, `+124%`) positioned over the image edge. On mobile, omit the image visually, omit the popup with it, do not add a decorative replacement gradient, and make the hero headline larger than the default mobile heading scale. Do not use remote Stitch-hosted image URLs in production.
+- Visual slot rule: on desktop and wider layouts, use the approved local hero image asset inside an organic wave-like frame with the approved floating growth popup (`Růst tržeb`, `+124%`) positioned over the image edge. On mobile, omit the image visually, omit the popup with it, do not add a decorative replacement gradient, use moderate hero top padding so the opening content starts sooner below the header while keeping some breathing room, and make the hero headline larger than the default mobile heading scale. Do not use remote Stitch-hosted image URLs in production.
 
 ### 3. Wave Divider After Hero
 

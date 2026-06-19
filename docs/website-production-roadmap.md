@@ -165,6 +165,8 @@ Header social links are approved for launch using the supplied Facebook, Instagr
 - Mobile hero refinement: remove the mobile-only decorative gradient background, keep the desktop hero visual omitted on mobile, and increase the mobile hero headline so the opening message keeps enough weight without the background treatment.
 - Header behavior refinement: add active section tracking for the one-page navigation so desktop and mobile/offcanvas links reflect the current scroll section with the active-link treatment and `aria-current="page"`.
 - Intro visual refinement: adapt the supplied shader as a panel-scoped WebGL canvas enhancement for desktop `Kdo jsme`, with a local SVG/CSS fallback, WAVE palette colors, cleanup for resize and animation work, and reduced-motion/mobile safeguards. Do not add React, shadcn, Tailwind, `/components/ui`, Unsplash assets, lucide icons, full-page fixed backgrounds, remote imagery, fake proof, or new dependencies.
+- Mobile header/hero density refinement: use a balanced three-column mobile header so the logo is optically centered, increase the mobile logo to 56px tall, keep moderate hero top padding, and apply global mobile section spacing so stacked sections no longer feel separated by empty bands.
+- 2026-06-19: The hero lead may emphasize only the first `marketing` word as an inline shopping-tag label. Approved styling: teal face, balanced rounded corners, slight rotation, thin warm brown underside, and a small brown-bordered tag hole with clear spacing before the word.
 
 ## Open Inputs Before Implementation
 

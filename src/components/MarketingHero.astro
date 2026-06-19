@@ -3,6 +3,9 @@ import { siteContent } from '../data/site';
 
 const heroHeadingEmphasis = 'správnou vlnu';
 const [heroHeadingPrefix, heroHeadingSuffix = ''] = siteContent.hero.heading.split(heroHeadingEmphasis);
+const heroLeadEmphasis = 'marketing';
+const [heroLeadPrefix, ...heroLeadParts] = siteContent.hero.lead.split(heroLeadEmphasis);
+const heroLeadSuffix = heroLeadParts.join(heroLeadEmphasis);
 ---
 
 <section class="hero section" id="uvod">
@@ -12,7 +15,9 @@ const [heroHeadingPrefix, heroHeadingSuffix = ''] = siteContent.hero.heading.spl
       <h1>
         {heroHeadingPrefix}<span class="hero__heading-emphasis">{heroHeadingEmphasis}</span>{heroHeadingSuffix}
       </h1>
-      <p class="lead">{siteContent.hero.lead}</p>
+      <p class="lead">
+        {heroLeadPrefix}<span class="hero__lead-tag">{heroLeadEmphasis}</span>{heroLeadSuffix}
+      </p>
       <div class="hero__actions">
         <a class="button button-primary" href={siteContent.hero.primaryCta.href}>{siteContent.hero.primaryCta.label}</a>
         <a class="button button-tertiary" href={siteContent.hero.secondaryCta.href}>{siteContent.hero.secondaryCta.label}</a>
@@ -76,6 +81,38 @@ const [heroHeadingPrefix, heroHeadingSuffix = ''] = siteContent.hero.heading.spl
     color: var(--ds-color-text-muted);
     margin: 0 0 var(--ds-space-8);
     max-width: 720px;
+  }
+
+  .hero__lead-tag {
+    background: var(--ds-color-primary);
+    border: 2px solid var(--ds-color-surface-raised);
+    border-radius: var(--ds-radius-md);
+    box-shadow: 0 3px 0 var(--ds-color-secondary), 0 10px 18px rgba(0, 59, 61, 0.16);
+    color: var(--ds-color-surface-raised);
+    display: inline-block;
+    font-family: var(--ds-font-body);
+    font-size: 0.76em;
+    font-weight: var(--ds-font-weight-bold);
+    letter-spacing: 0.055em;
+    margin: 0 0.16em;
+    padding: 0.04em 0.64em 0.08em 34px;
+    position: relative;
+    text-transform: uppercase;
+    transform: rotate(-4deg) translateY(-0.08em);
+    white-space: nowrap;
+  }
+
+  .hero__lead-tag::before {
+    background: var(--ds-color-surface-raised);
+    border: 2px solid var(--ds-color-secondary);
+    border-radius: var(--ds-radius-full);
+    content: "";
+    height: 12px;
+    left: 10px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 12px;
   }
 
   .hero__actions {
@@ -166,6 +203,7 @@ const [heroHeadingPrefix, heroHeadingSuffix = ''] = siteContent.hero.heading.spl
 
   @media (max-width: 900px) {
     .hero {
+      padding-top: var(--ds-space-12);
       padding-bottom: var(--ds-space-20);
     }
 
