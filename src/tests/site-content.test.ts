@@ -1,5 +1,5 @@
 import { createHash } from "node:crypto";
-import { existsSync, readFileSync, readdirSync } from "node:fs";
+import { existsSync, readFileSync } from "node:fs";
 import { join } from "node:path";
 import { describe, expect, it } from "vitest";
 import { siteContent } from "../data/site";
@@ -478,14 +478,12 @@ describe("siteContent", () => {
       join(process.cwd(), "docs/site-content/page-map.md"),
       "utf8",
     );
-    const superpowersReadme = readFileSync(
-      join(process.cwd(), "docs/superpowers/README.md"),
-      "utf8",
-    );
 
     expect(roadmap).toContain("## Decision Log");
     expect(roadmap).toContain("central decision log");
-    expect(roadmap).toContain("Historical workflow artifacts");
+    expect(roadmap).toContain(
+      "No side-spec or implementation-plan directory is active",
+    );
     expect(roadmap).toContain("centered vertical timeline");
     expect(roadmap).toContain("metric-free split editorial wave panel");
     expect(roadmap).toContain("panel-scoped WebGL shader");
@@ -506,17 +504,25 @@ describe("siteContent", () => {
     expect(pageMap).toContain("Component: `process-steps`");
     expect(pageMap).toContain("Component: `intro-statement`");
     expect(pageMap).toContain("Visual slot rule:");
+  });
 
-    expect(superpowersReadme).toContain("not an active source of truth");
-    expect(superpowersReadme).toContain(
-      "Use `docs/website-production-roadmap.md` for durable decisions",
-    );
-    expect(superpowersReadme).toContain(
-      "Use `docs/design-system/wave-marketing/` for reusable visual and component rules",
-    );
-    expect(superpowersReadme).toContain(
-      "Use `docs/site-content/` for content and page/component mapping",
-    );
+  it("does not keep historical side specs in docs/superpowers", () => {
+    const sideSpecDir = join(process.cwd(), "docs/superpowers");
+    const forbiddenSideSpecPath = ["docs", "superpowers"].join("/");
+    const activeDocs = [
+      "AGENTS.md",
+      "docs/website-production-roadmap.md",
+      "docs/design-system/wave-marketing/USAGE.md",
+      "docs/site-content/site.md",
+      "docs/site-content/page-map.md",
+    ];
+
+    expect(existsSync(sideSpecDir)).toBe(false);
+
+    for (const docPath of activeDocs) {
+      const content = readFileSync(join(process.cwd(), docPath), "utf8");
+      expect(content).not.toContain(forbiddenSideSpecPath);
+    }
   });
 
   it("uses docs/site-content as the active content source-of-truth directory", () => {
@@ -546,7 +552,6 @@ describe("siteContent", () => {
       "docs/design-system/wave-marketing/USAGE.md",
       "docs/site-content/site.md",
       "docs/site-content/page-map.md",
-      "docs/superpowers/README.md",
     ];
     const staleWebsitePath = ["docs", "website", ""].join("/");
 
@@ -555,11 +560,6 @@ describe("siteContent", () => {
       expect(content).toContain("docs/site-content");
       expect(content).not.toContain(staleWebsitePath);
     }
-
-    const historicalPlans = readdirSync(
-      join(process.cwd(), "docs/superpowers/plans"),
-    );
-    expect(historicalPlans.length).toBeGreaterThan(0);
   });
 
   it("uses tighter global section spacing on mobile while keeping desktop breathing room", () => {

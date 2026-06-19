@@ -153,9 +153,9 @@ Header social links are approved for launch using the supplied Facebook, Instagr
 
 ## Decision Log
 
-This section is the central decision log for durable production decisions. Historical workflow artifacts under `docs/superpowers/` may explain how a decision was reached, but the active source of truth is this decision log plus the relevant canonical document: `docs/design-system/wave-marketing/` for reusable visual/component rules, `docs/site-content/page-map.md` for page-specific component responsibilities, and `docs/site-content/sections/*.md` for content.
+This section is the central decision log for durable production decisions. No side-spec or implementation-plan directory is active; the active source of truth is this decision log plus the relevant canonical document: `docs/design-system/wave-marketing/` for reusable visual/component rules, `docs/site-content/page-map.md` for page-specific component responsibilities, and `docs/site-content/sections/*.md` for content.
 
-Historical workflow artifacts should not be used as active requirements unless their decisions are also represented in the canonical docs listed above.
+Do not add side specs or temporary implementation plans as durable requirements. If a decision matters after implementation, record it here and in the relevant canonical design-system or site-content file.
 
 - Lead and intro paragraphs should use a shared `lead` typography pattern: larger than standard body copy, `--ds-font-weight-light` (`300`), 20px expressed as `1.25rem`, and relaxed leading. Standard body copy remains `--ds-font-weight-regular` (`400`), while UI labels/buttons should use semibold/medium tokens instead of hard-coded heavy weights where possible.
 - Button variants are named intentionally: primary is the warm brown filled CTA, secondary is the deep teal filled CTA, and tertiary is the white/surface CTA. The hero's second button uses the tertiary variant; Jana's contact phone CTA uses the secondary deep teal variant with label `Zavolejte Janě`.
@@ -180,12 +180,10 @@ Historical workflow artifacts should not be used as active requirements unless t
 - Additional social-link placements, if socials should appear outside the header/offcanvas.
 - Hosting/deployment target for `www.wavemarketing.cz`.
 
-## Implementation Plan
+## Implementation Notes
 
 - Selected static build stack: Astro static site.
-- Plan path: `docs/superpowers/plans/2026-06-12-wave-marketing-static-site.md`.
-- Plan scope: build the one-page static website from the three-layer docs and extracted assets.
-- Before implementation continues, create a root `AGENTS.md` file so future agents get the project-specific rules without rediscovering them.
+- No separate implementation-plan directory is active. Build and refinement work should follow this roadmap, `AGENTS.md`, `docs/site-content/`, and `docs/design-system/wave-marketing/`.
 
 ## Testing Approach Note
 
@@ -258,7 +256,7 @@ The implementation plan should divide the website build into clear work phases i
 - Extracted `public/assets/wave-marketing-logo.png` and `public/assets/jana-skalnikova-photo.png`.
 - Verified both extracted files are non-empty PNG assets.
 - Selected Astro as the static build stack.
-- Created implementation plan `docs/superpowers/plans/2026-06-12-wave-marketing-static-site.md`.
+- Used an implementation plan during the initial build; active requirements now live only in the canonical source-of-truth docs.
 
 ### 2026-06-13
 

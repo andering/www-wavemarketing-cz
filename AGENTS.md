@@ -8,7 +8,7 @@ This repository contains the static production website for `www.wavemarketing.cz
 - Visual source: `docs/design-system/wave-marketing/`.
 - Section/component mapping: `docs/site-content/page-map.md`.
 - Production roadmap and decisions: `docs/website-production-roadmap.md`.
-- Implementation plan: `docs/superpowers/plans/2026-06-12-wave-marketing-static-site.md`.
+- There is no separate active side-spec or implementation-plan directory; keep durable requirements in the source-of-truth files above.
 
 When these sources conflict, follow the rules in `docs/website-production-roadmap.md`. If the conflict is ambiguous, ask before deciding.
 
