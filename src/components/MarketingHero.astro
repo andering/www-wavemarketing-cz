@@ -1,4 +1,6 @@
 ---
+import { Picture } from "astro:assets";
+import heroImage from "../assets/wave-marketing-hero-collaboration.png";
 import { siteContent } from '../data/site';
 
 const heroHeadingEmphasis = 'správnou vlnu';
@@ -25,8 +27,12 @@ const heroLeadSuffix = heroLeadParts.join(heroLeadEmphasis);
     </div>
     <div class="hero__visual">
       <div class="hero__visual-frame">
-        <img
-          src={siteContent.assets.heroImage}
+        <Picture
+          src={heroImage}
+          formats={["avif", "webp"]}
+          fallbackFormat="webp"
+          widths={[480, 768, 1024, 1400, 1864]}
+          sizes="(max-width: 900px) 0px, min(45vw, 620px)"
           alt="Creative marketing team collaboration"
           loading="eager"
           fetchpriority="high"
@@ -95,24 +101,10 @@ const heroLeadSuffix = heroLeadParts.join(heroLeadEmphasis);
     font-weight: var(--ds-font-weight-bold);
     letter-spacing: 0.055em;
     margin: 0 0.16em;
-    padding: 0.04em 0.64em 0.08em 34px;
-    position: relative;
+    padding: 0.04em 0.64em 0.08em;
     text-transform: uppercase;
     transform: rotate(-4deg) translateY(-0.08em);
     white-space: nowrap;
-  }
-
-  .hero__lead-tag::before {
-    background: var(--ds-color-surface-raised);
-    border: 2px solid var(--ds-color-secondary);
-    border-radius: var(--ds-radius-full);
-    content: "";
-    height: 12px;
-    left: 10px;
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 12px;
   }
 
   .hero__actions {
@@ -128,8 +120,14 @@ const heroLeadSuffix = heroLeadParts.join(heroLeadEmphasis);
   }
 
   .hero__visual-frame {
+    --hero-visual-placeholder: linear-gradient(
+      135deg,
+      var(--ds-color-accent),
+      var(--ds-color-surface-muted)
+    );
+
     aspect-ratio: 1;
-    background: var(--ds-color-surface-raised);
+    background: var(--hero-visual-placeholder);
     border: 8px solid var(--ds-color-surface-raised);
     border-radius: var(--ds-radius-organic);
     box-shadow: var(--ds-shadow-warm);

@@ -24,18 +24,18 @@ Derived from `client_brief.md`, section `Úvod` and `Hero sekce`.
 
 ### Primary CTA
 
-- Label: `Jdeme chytit společnou vlnu`
+- Label: `Domluvte si konzultaci`
 - Destination: contact section.
 
 ### Secondary CTA
 
-- Label: `Jaké vlny chytáme`
+- Label: `Podívejte se na služby`
 - Destination: services section.
 - Button variant: tertiary white/surface button.
 
 ### Visual Asset
 
-- Asset: `public/assets/wave-marketing-hero-collaboration.png`
+- Asset: `src/assets/wave-marketing-hero-collaboration.png`
 - Alt text: `Creative marketing team collaboration`
 - Source note: approved by the user from Stitch project `5807734643959771855`, screen/node `13738335041884507219`.
 
@@ -50,7 +50,7 @@ Derived from `client_brief.md`, section `Úvod` and `Hero sekce`.
 
 - Keep the hero focused on trust, human approach, and fit.
 - Do not add fake metrics, fake proof, or fake client claims beyond the explicitly approved hero popup metric above.
-- Use the approved local hero image asset. Do not reference Stitch-hosted or other remote image URLs in production.
+- Use the approved local hero image asset through Astro's build-time image pipeline. Do not reference Stitch-hosted or other remote image URLs in production.
 
 ## Notes For Page Mapping
 

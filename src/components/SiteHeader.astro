@@ -1,9 +1,13 @@
 ---
 import { siteContent } from '../data/site';
 
-const referenceIndex = siteContent.navigation.findIndex((item) => item.label === 'Reference');
-const leftNavigation = siteContent.navigation.slice(0, referenceIndex);
-const rightNavigation = siteContent.navigation.slice(referenceIndex);
+type Props = {
+  hrefPrefix?: string;
+};
+
+const { hrefPrefix = '' } = Astro.props;
+const resolveNavigationHref = (href: string) => `${hrefPrefix}${href}`;
+const headerCtaLabel = 'Zavoláme vám';
 const socialIconPaths = {
   Facebook: 'M22.675 0h-21.35C.593 0 0 .593 0 1.325v21.351C0 23.407.593 24 1.325 24H12.82v-9.294H9.692v-3.622h3.128V8.413c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463.099 2.795.143v3.24l-1.918.001c-1.504 0-1.795.715-1.795 1.763v2.313h3.587l-.467 3.622h-3.12V24h6.116C23.407 24 24 23.407 24 22.675V1.325C24 .593 23.407 0 22.675 0z',
   Instagram: 'M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12s.014 3.668.072 4.948c.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24s3.668-.014 4.948-.072c4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948s-.014-3.667-.072-4.947c-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838A6.162 6.162 0 1 0 12 18.163 6.162 6.162 0 0 0 12 5.838zm0 10.162a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.88 1.44 1.44 0 0 0 0-2.88z',
@@ -14,56 +18,18 @@ const socialIconPaths = {
 <input class="site-header__menu-toggle" id="site-header-menu-toggle" type="checkbox" aria-label="Otevřít hlavní navigaci" />
 <header class="site-header">
   <div class="container site-header__inner">
-    <nav class="site-header__desktop-nav" aria-label="Hlavní navigace">
-      <div class="site-header__nav-group site-header__nav-group--left">
-        {leftNavigation.map((item) => (
-          <a href={item.href} data-nav-link={item.href}>{item.label}</a>
-        ))}
-      </div>
-      <a class="site-header__logo site-header__logo-wrap" href="#uvod" aria-label="WAVE Marketing úvod">
-        <img src={siteContent.assets.logo} alt="WAVE Marketing logo" width="180" height="120" />
-      </a>
-      <div class="site-header__nav-group site-header__nav-group--right">
-        {rightNavigation.map((item) => (
-          <a href={item.href} data-nav-link={item.href}>{item.label}</a>
-        ))}
-        <div class="site-header__socials" aria-label="Sociální sítě">
-          {siteContent.socialLinks.map((item) => (
-            <a href={item.href} target="_blank" rel="noreferrer" aria-label={item.label} style={`--social-color: ${item.brandColor}`}>
-              <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-                <path d={socialIconPaths[item.label]}></path>
-              </svg>
-            </a>
-          ))}
-        </div>
-      </div>
-    </nav>
-    <a class="site-header__logo site-header__logo--mobile" href="#uvod" aria-label="WAVE Marketing úvod">
+    <a class="site-header__logo" href={resolveNavigationHref('#uvod')} aria-label="WAVE Marketing úvod">
       <img src={siteContent.assets.logo} alt="WAVE Marketing logo" width="180" height="120" />
     </a>
-    <label class="site-header__mobile-nav" for="site-header-menu-toggle" role="button" aria-label="Otevřít hlavní navigaci">
-      <span class="site-header__hamburger" aria-hidden="true">
-        <span></span>
-        <span></span>
-        <span></span>
-      </span>
-      <span class="site-header__mobile-nav-text">Menu</span>
-    </label>
-  </div>
-</header>
-<div class="site-header__offcanvas">
-  <label class="site-header__offcanvas-backdrop" for="site-header-menu-toggle" aria-label="Zavřít hlavní navigaci"></label>
-  <div class="site-header__offcanvas-panel" role="dialog" aria-label="Mobilní navigace">
-    <div class="site-header__offcanvas-heading">
-      <strong>Menu</strong>
-      <label class="site-header__offcanvas-close" for="site-header-menu-toggle" role="button">Zavřít</label>
-    </div>
-    <nav aria-label="Mobilní navigace">
+    <nav class="site-header__desktop-nav" aria-label="Hlavní navigace">
       {siteContent.navigation.map((item) => (
-        <a href={item.href} data-nav-link={item.href}>{item.label}</a>
+        <a href={resolveNavigationHref(item.href)} data-nav-link={item.href}>{item.label}</a>
       ))}
     </nav>
-    <div class="site-header__offcanvas-socials" aria-label="Sociální sítě">
+    <a class="button button-primary site-header__cta" href={resolveNavigationHref('#kontakt')}>
+      {headerCtaLabel}
+    </a>
+    <div class="site-header__socials" aria-label="Sociální sítě">
       {siteContent.socialLinks.map((item) => (
         <a href={item.href} target="_blank" rel="noreferrer" aria-label={item.label} style={`--social-color: ${item.brandColor}`}>
           <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
@@ -72,6 +38,48 @@ const socialIconPaths = {
         </a>
       ))}
     </div>
+    <div class="site-header__mobile-actions">
+      <a class="button button-primary site-header__mobile-cta" href={resolveNavigationHref('#kontakt')}>
+        {headerCtaLabel}
+      </a>
+      <span class="site-header__mobile-divider" aria-hidden="true"></span>
+      <label class="site-header__mobile-nav" for="site-header-menu-toggle" role="button" aria-label="Otevřít hlavní navigaci">
+        <span class="site-header__hamburger" aria-hidden="true">
+          <span></span>
+          <span></span>
+          <span></span>
+        </span>
+        <span class="site-header__mobile-nav-text">Menu</span>
+      </label>
+    </div>
+  </div>
+</header>
+<div class="site-header__offcanvas">
+  <label class="site-header__offcanvas-backdrop" for="site-header-menu-toggle" aria-label="Zavřít hlavní navigaci"></label>
+  <div class="site-header__offcanvas-panel" role="dialog" aria-label="Mobilní navigace">
+    <div class="site-header__offcanvas-heading">
+      <span class="site-header__offcanvas-logo" aria-hidden="true">
+        <img src={siteContent.assets.logo} alt="" width="180" height="120" />
+      </span>
+      <div class="site-header__offcanvas-actions">
+        <div class="site-header__offcanvas-socials" aria-label="Sociální sítě">
+          {siteContent.socialLinks.map((item) => (
+            <a href={item.href} target="_blank" rel="noreferrer" aria-label={item.label} style={`--social-color: ${item.brandColor}`}>
+              <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                <path d={socialIconPaths[item.label]}></path>
+              </svg>
+            </a>
+          ))}
+        </div>
+        <span class="site-header__offcanvas-divider" aria-hidden="true"></span>
+        <label class="site-header__offcanvas-close" for="site-header-menu-toggle" role="button" aria-label="Zavřít hlavní navigaci">&times;</label>
+      </div>
+    </div>
+    <nav aria-label="Mobilní navigace">
+      {siteContent.navigation.map((item) => (
+        <a href={resolveNavigationHref(item.href)} data-nav-link={item.href}>{item.label}</a>
+      ))}
+    </nav>
   </div>
 </div>
 
@@ -99,8 +107,10 @@ const socialIconPaths = {
   .site-header__inner {
     align-items: center;
     display: grid;
-    height: 100px;
-    max-height: 100px;
+    gap: var(--ds-space-8);
+    grid-template-columns: auto 1fr auto auto;
+    height: 80px;
+    max-height: 80px;
     padding-block: 0;
   }
 
@@ -110,31 +120,11 @@ const socialIconPaths = {
     width: auto;
   }
 
-  .site-header__logo--mobile {
-    display: none;
-  }
-
   .site-header__desktop-nav {
-    align-items: center;
-    display: grid;
-    gap: var(--ds-space-10);
-    grid-template-columns: 1fr auto 1fr;
-    position: relative;
-    justify-self: stretch;
-  }
-
-  .site-header__nav-group {
     align-items: center;
     display: flex;
     gap: var(--ds-space-6);
-  }
-
-  .site-header__nav-group--left {
-    justify-content: flex-end;
-  }
-
-  .site-header__nav-group--right {
-    justify-content: flex-start;
+    justify-content: center;
   }
 
   .site-header__desktop-nav a,
@@ -151,11 +141,51 @@ const socialIconPaths = {
     gap: var(--ds-space-2);
   }
 
+  .site-header__mobile-actions {
+    align-items: center;
+    display: none;
+    gap: var(--ds-space-3);
+  }
+
+  .site-header__mobile-divider {
+    align-self: stretch;
+    border-left: var(--ds-border-width) solid var(--ds-color-border);
+    min-height: 34px;
+  }
+
   .site-header__socials {
     border-left: var(--ds-border-width) solid var(--ds-color-border);
     padding-left: var(--ds-space-6);
-    position: absolute;
-    right: 0;
+  }
+
+  .site-header__cta {
+    justify-self: end;
+    min-height: 44px;
+    padding: var(--ds-space-3) var(--ds-space-5);
+    white-space: nowrap;
+  }
+
+  .site-header__cta,
+  .site-header__mobile-cta {
+    transform: translateY(0);
+  }
+
+  .site-header__offcanvas-logo {
+    align-items: center;
+    display: inline-flex;
+  }
+
+  .site-header__mobile-cta {
+    font-size: var(--ds-text-sm);
+    min-height: 38px;
+    padding: var(--ds-space-2) var(--ds-space-3);
+    white-space: nowrap;
+  }
+
+  .site-header__offcanvas-logo img {
+    height: 58px;
+    object-fit: contain;
+    width: auto;
   }
 
   .site-header__socials a,
@@ -199,8 +229,6 @@ const socialIconPaths = {
 
   .site-header__mobile-nav {
     align-items: center;
-    border: var(--ds-border-width) solid var(--ds-color-border);
-    border-radius: var(--ds-radius-full);
     color: var(--ds-color-primary);
     cursor: pointer;
     display: none;
@@ -265,7 +293,7 @@ const socialIconPaths = {
     height: 100dvh;
     inset: 0 0 0 auto;
     max-width: min(360px, 86vw);
-    padding: var(--ds-space-8);
+    padding: 0 var(--ds-space-8) var(--ds-space-8);
     position: fixed;
     transform: translateX(100%);
     transition: transform var(--ds-duration-normal) var(--ds-ease-standard);
@@ -277,31 +305,39 @@ const socialIconPaths = {
     border-bottom: var(--ds-border-width) solid var(--ds-color-border);
     display: flex;
     justify-content: space-between;
-    padding-bottom: var(--ds-space-6);
+    height: 80px;
+    padding-bottom: 0;
   }
 
-  .site-header__offcanvas-panel strong {
-    color: var(--ds-color-primary);
-    font-family: var(--ds-font-heading);
-    font-size: var(--ds-text-2xl);
+  .site-header__offcanvas-actions {
+    align-items: center;
+    display: flex;
+    gap: var(--ds-space-3);
+  }
+
+  .site-header__offcanvas-divider {
+    align-self: stretch;
+    border-left: var(--ds-border-width) solid var(--ds-color-border);
+    min-height: 34px;
   }
 
   .site-header__offcanvas-close {
+    align-items: center;
     color: var(--ds-color-text-muted);
     cursor: pointer;
-    font-size: var(--ds-text-sm);
+    display: inline-flex;
+    font-size: var(--ds-text-3xl);
     font-weight: var(--ds-font-weight-medium);
+    height: 44px;
+    justify-content: center;
+    line-height: 1;
+    width: 44px;
   }
 
   .site-header__offcanvas-panel nav {
     align-content: start;
     display: grid;
     gap: var(--ds-space-4);
-  }
-
-  .site-header__offcanvas-socials {
-    border-top: var(--ds-border-width) solid var(--ds-color-border);
-    padding-top: var(--ds-space-6);
   }
 
   .site-header__menu-toggle:checked ~ .site-header__offcanvas {
@@ -322,31 +358,51 @@ const socialIconPaths = {
     .site-header__inner {
       align-items: center;
       display: grid;
-      grid-template-columns: 44px 1fr 44px;
+      gap: var(--ds-space-2);
+      grid-template-columns: 1fr auto;
       height: auto;
       max-height: none;
-      min-height: 64px;
-      padding-block: var(--ds-space-1);
+      min-height: 80px;
+      padding-block: 0;
     }
 
-    .site-header__logo img {
-      height: 56px;
-    }
-
-    .site-header__logo--mobile {
-      display: inline-flex;
-      grid-column: 2;
-      justify-self: center;
+    .site-header__logo {
+      justify-self: start;
     }
 
     .site-header__desktop-nav {
       display: none;
     }
 
+    .site-header__cta {
+      display: none;
+    }
+
+    .site-header__socials {
+      display: none;
+    }
+
+    .site-header__mobile-actions {
+      display: flex;
+      justify-self: end;
+    }
+
     .site-header__mobile-nav {
       display: inline-flex;
-      grid-column: 3;
-      justify-self: end;
+    }
+  }
+
+  @media (max-width: 420px) {
+    .site-header__mobile-cta {
+      font-size: 0.75rem;
+      min-height: 36px;
+      padding-inline: var(--ds-space-2);
+    }
+
+    .site-header__mobile-nav {
+      min-height: 38px;
+      min-width: 38px;
+      padding: var(--ds-space-2);
     }
   }
 </style>

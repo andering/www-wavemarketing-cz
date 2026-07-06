@@ -95,7 +95,7 @@ Specs are the source of truth. Tests must not become a second requirements layer
 - Tests may be absent while the canonical specs are being refined.
 - When tests exist, they should validate one of two things only: spec completeness or implementation conformance.
 - Spec-completeness tests should check whether the source-of-truth documents contain the minimum required structure to implement from: sections, anchors, asset gates, component mappings, launch exclusions, and no placeholders.
-- Implementation-conformance tests should check whether the Astro site follows approved specs: required sections exist, approved content data is used, local assets exist, forbidden launch content is absent, contact form remains omitted, and no placeholder or remote Stitch URLs enter production.
+- Implementation-conformance tests should check whether the Astro site follows approved specs: required sections exist, approved content data is used, local assets exist, forbidden launch content is absent, the contact form stays limited to the approved backend-backed minimal version, and no placeholder or remote Stitch URLs enter production.
 - Tests should not define visual taste, exact CSS, class names, animation declarations, grid measurements, or component internals.
 - Visual finish, responsive polish, spacing feel, image treatment, and animation details should be verified mostly through browser review and `npm run build`.
 

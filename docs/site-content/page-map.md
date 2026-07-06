@@ -14,10 +14,10 @@ This file is the glue layer between content specs and the WAVE Marketing design 
 
 ## Global Page Contract
 
-- Page type: one-page static homepage.
+- Page type: one-page Czech homepage plus one supporting privacy/cookies legal-information page, one thank-you page, and one Cloudflare Pages Function endpoint for contact submissions.
 - Language: Czech.
 - Canonical target: `www.wavemarketing.cz`.
-- Primary conversion: phone or email contact.
+- Primary conversion: phone, email, or the simplified backend-backed contact form.
 - Content source: section markdown files under `docs/site-content/sections/`.
 - Visual/component source: `docs/design-system/DESIGN.md`, `tokens.css`, and `kitchensink.html`.
 - Normal implementation must not copy Stitch placeholder content, fake references, fake metrics, or hosted generated images.
@@ -32,16 +32,19 @@ The implementation should define or generate these component/widget contracts fr
 - `service-list`: vertical benefit-led service rows with icon wells and optional service anchors.
 - `process-steps`: numbered collaboration process rows or cards.
 - `wave-divider`: SVG or CSS wave divider between major page zones.
-- `contact-card-grid`: direct contact tiles for person, phone, email, meeting availability, and company facts.
+- `contact-card-grid`: direct contact tiles for person, phone, email, meeting availability, simplified contact form, and company facts.
 - `site-footer`: muted footer with brand copy, anchor links, company facts, and optional legal links only when supplied.
+- `cookie-consent`: global consent UI using `vanilla-cookieconsent`, WAVE-styled bottom bar, preferences drawer/modal, GTM Consent Mode integration, and a footer reopen control.
 
 ## Asset Gates
 
-- `logo`: resolved at `public/assets/wave-marketing-logo.png`; used by `site-header` and optionally `site-footer`.
-- `jana-contact-photo`: resolved at `public/assets/jana-skalnikova-photo.png`; used by `contact-card-grid`.
-- `hero-visual`: resolved at `public/assets/wave-marketing-hero-collaboration.png`; used by `marketing-hero` inside an organic image frame.
-- `process-solution-proposal-visual`: resolved at `public/assets/wave-marketing-process-solution-proposal.jpg`; used by step 3 of `process-steps`.
+- `logo`: resolved at `public/assets/wave-marketing-logo.svg`; used by `site-header` and optionally `site-footer`.
+- `logo-icons`: icon derivatives resolved at `public/favicon.ico`, `public/assets/wave-marketing-icon-32.png`, `public/assets/wave-marketing-apple-touch-icon.png`, and `public/assets/wave-marketing-icon-192.png`; used only for favicon and app-icon compatibility.
+- `jana-contact-photo`: resolved at `src/assets/jana-skalnikova-photo.png`; used by `contact-card-grid` through Astro's image pipeline.
+- `hero-visual`: resolved at `src/assets/wave-marketing-hero-collaboration.png`; used by `marketing-hero` inside an organic image frame through Astro's responsive image pipeline.
+- `process-solution-proposal-visual`: resolved at `src/assets/wave-marketing-process-solution-proposal.jpg`; used by step 3 of `process-steps` through Astro's responsive image pipeline.
 - `social-links`: resolved for header use with supplied Facebook, Instagram, and LinkedIn URLs; no placeholder social URLs are allowed.
+- CDN delivery layer: after hosting is chosen, configure cache/compression and optional CDN image features, but do not depend on CDN image resizing as the only optimization for the approved raster assets.
 
 ## Navigation Map
 
@@ -51,6 +54,7 @@ The implementation should define or generate these component/widget contracts fr
 - Header nav item `Kontakt` points to `#kontakt`.
 - Do not render a reference/case-study section at launch.
 - Header social links use the supplied Facebook, Instagram, and LinkedIn URLs.
+- The supporting privacy/cookies page is not part of the header navigation.
 
 ## Section Map
 
@@ -59,10 +63,10 @@ The implementation should define or generate these component/widget contracts fr
 - Anchor role: persistent page chrome.
 - Content source: `site.md` navigation rules and required logo asset.
 - Component: `site-header`.
-- Variant: `centered-logo-split-nav` on desktop, `mobile-offcanvas-menu` on mobile.
+- Variant: `left-logo-centered-nav` on desktop, `left-logo-mobile-cta-menu` on mobile.
 - Design contract: `Navigation / Header` from the design system.
 - Required behavior: anchor navigation to `#uvod`, `#sluzby`, `#spoluprace`, and `#kontakt`, with active section tracking that highlights the matching desktop and mobile/offcanvas navigation item during scroll and hash navigation.
-- Layout rule: desktop splits approved navigation around a balanced 72px-tall centered logo, then shows Header social links as real brand-colored SVG icons in a separate far-right cluster with a subtle left divider, matching the approved Stitch reference structure. Mobile uses a balanced three-column header with a centered 56px-tall logo, an empty left column, and an accessible hamburger trigger on the right for the right-side offcanvas menu; the same real social links render inside the offcanvas panel below the anchor navigation. Render the offcanvas layer outside the sticky header shell so fixed positioning starts at the viewport top instead of the header top.
+- Layout rule: desktop uses a standard left-aligned logo, the approved navigation links centered in the header, then a visible contact CTA button labeled `Zavoláme vám` linking to `#kontakt`, then Header social links as real brand-colored SVG icons in a separate far-right cluster with a subtle left divider. Desktop and mobile header content use the same 80px vertical rhythm before the 1px header border, with logo, links, CTA, divider, and hamburger vertically centered inside that 80px area. Mobile uses the left logo vertically centered, keeps the compact visible contact CTA labeled `Zavoláme vám`, adds a subtle vertical divider, and keeps an accessible plain hamburger trigger without a circular outline on the right; do not render social links directly in the visible mobile header. The offcanvas top heading repeats the logo in place of the `Menu` text and uses a right-aligned action cluster with the social icons immediately left of the accessible icon-only cross close action, separated from the close action by the same subtle vertical divider pattern used in the mobile header; do not render the contact CTA inside the offcanvas and do not repeat social icons below the offcanvas navigation. Render the offcanvas layer outside the sticky header shell so fixed positioning starts at the viewport top instead of the header top, and keep the offcanvas top heading content vertically centered in the same 80px rhythm.
 - Launch exclusions: no reference/case-study content and no placeholder social icons.
 
 ### 2. Hero
@@ -90,9 +94,10 @@ The implementation should define or generate these component/widget contracts fr
 - Content source: `sections/services-overview.md`.
 - Component: `service-list`.
 - Variant: `icon-row-list`.
-- Design contracts: `Cards`, `Shape and Iconography System`, `Typography`, `Buttons` if service links are rendered.
-- Content slots: section heading, intro copy, four service items.
-- Service items: marketing strategy, social media management, PPC, content creation.
+- Design contracts: `Cards`, `Shape and Iconography System`, `Typography`, `Shopping Tag Labels`, `Buttons` if service links are rendered.
+- Content slots: section heading, intro copy, services lead, six service items with orientační starting-price tags, closing copy, and pricing note.
+- Service items: social media management, PPC campaigns, website and e-shop creation/editing, photo and video services, tailored marketing strategy, graphic services and visual creation.
+- Price tag rule: render each service starting price in the bottom-right corner of its service row using the approved shopping-tag label treatment derived from the hero `marketing` inline tag; on mobile the tag may remain below the text and right-aligned within the row to preserve readability. Price labels use only the starting amount, for example `od 5 000 Kč`, without upper range or `/ měsíc` wording.
 - Launch rule: do not add services from Stitch that are not present in the content spec.
 
 ### 5. Cooperation Process
@@ -112,11 +117,27 @@ The implementation should define or generate these component/widget contracts fr
 - Content source: `sections/contact.md`.
 - Component: `contact-card-grid`.
 - Variant: `compact-direct-contact-module`.
-- Design contracts: `Cards`, `Buttons`, `Images and Media`, `Forms` only for future extension.
-- Content slots: section heading, intro copy, Jana contact tile, role, `+420` phone display under role, secondary deep-teal phone CTA labeled `Zavolejte Janě`, email CTA with address below `Napište nám`, meeting availability, company details.
-- Layout rule: render a 4-column by 2-row desktop contact bento using `--ds-radius-2xl`: Jana spans columns 1-2 and rows 1-2, email spans columns 3-4 row 1, availability spans columns 3-4 row 2, and muted company facts sit below; stack on mobile.
-- Launch rule: no form, no placeholder socials, no fake availability claims beyond approved copy.
-- Asset rule: render `public/assets/jana-skalnikova-photo.png` for the Jana contact tile.
+- Design contracts: `Cards`, `Buttons`, `Images and Media`, `Forms`.
+- Content slots: section heading, intro copy, Jana contact tile, role, `+420` phone display under role, secondary deep-teal phone CTA labeled `Zavolejte Janě`, email CTA with address below `Napište nám`, meeting availability, simplified contact form, company details.
+- Layout rule: render a direct-contact bento using `--ds-radius-2xl`: Jana remains the most prominent card, email and availability remain immediately visible, the simplified form renders as a secondary card with one textarea, one consent checkbox, Turnstile slot, submit button, and clear status/error copy, and muted company facts sit below; stack on mobile.
+- Launch rule: no full questionnaire, no placeholder socials, no fake availability claims beyond approved copy.
+- Asset rule: render `src/assets/jana-skalnikova-photo.png` through Astro's image pipeline for the Jana contact tile.
+
+### 6a. Contact Submission Endpoint
+
+- Route: `/api/contact`.
+- Component/script: Cloudflare Pages Function.
+- Content source: `sections/contact.md` and `site.md` contact form backend requirements.
+- Required behavior: accept only POST submissions, parse form data server-side, validate the single contact message field and consent checkbox, verify Cloudflare Turnstile server-side, send notification email through Resend using environment secrets, and redirect successful submissions to `/dekujeme/`.
+- Security rule: do not expose Resend API keys, Turnstile secret keys, or email credentials to browser code.
+
+### 6b. Thank-You Page
+
+- Route: `/dekujeme/`.
+- Content source: `sections/contact.md`.
+- Component/page: compact branded static page.
+- Design contract: `Typography`, `Buttons`, `Cards`, and the shared page shell.
+- Required behavior: show the approved thank-you heading and body copy, preserve the warm personal tone, and provide a return link to `/`.
 
 ### 7. Intro
 
@@ -136,16 +157,38 @@ The implementation should define or generate these component/widget contracts fr
 - Component: `site-footer`.
 - Variant: `muted-brand-footer`.
 - Design contract: `Footer`.
-- Content slots: brand label, footer copy, footer navigation, company facts, copyright.
-- Launch rule: footer may mirror the approved navigation, but must not add a reference/case-study section, social links, or placeholder legal links.
+- Content slots: brand label, footer copy, footer navigation, company facts, cookie settings control, copyright.
+- Launch rule: footer may mirror the approved navigation, include a `Nastavení cookies` control that reopens the consent preferences UI, and link to the approved privacy/cookies page. It must not add a reference/case-study section, social links, or placeholder legal links.
+
+### 9. Cookie Consent
+
+- Anchor role: global page chrome, no navigation item.
+- Content source: `site.md` cookie consent copy requirements.
+- Component/script: `cookie-consent`.
+- Variant: `bottom-bar-with-preferences-drawer`.
+- Design contract: `Cookie Consent` from the design system.
+- Required behavior: initialize optional consent as denied before GTM loads; load GTM container `GTM-WMJVN6WZ`; manage GA4 through GTM, not direct GA4 page code; update consent when users accept all, reject non-essential cookies, or save category preferences.
+- Category model: `necessary` is enabled and read-only; `analytics` gates GA4/analytics tags through GTM; `marketing` is prepared for future ad pixels or remarketing tools through GTM.
+- Footer integration: the footer `Nastavení cookies` control reopens the preferences UI without adding a placeholder privacy/GDPR link.
+
+### 10. Privacy And Cookies Page
+
+- Route: `/ochrana-osobnich-udaju-a-cookies/`.
+- Content source: `privacy-cookies.md`.
+- Component/page: legal information page.
+- Design contract: `Typography`, `Layout System`, `Cards` only if content blocks need quiet grouping, and `Footer` for return/legal navigation.
+- Required behavior: render a standalone static page in Czech with the approved draft legal-information copy, company facts, cookie categories, cookie table, and instructions for reopening cookie settings.
+- Navigation rule: do not add this page to the main header nav; link it from the footer as `Ochrana osobních údajů a cookies`.
+- Review rule: the page copy requires client or legal review before being treated as final legal advice.
 
 ## Page-Level Exclusions
 
 - Do not render references, case studies, client logos, testimonials, or fake metrics. The only approved metric-style content is the hero floating growth popup recorded in `sections/hero.md`.
-- Do not render a contact form.
+- Do not render the full client questionnaire or any contact form without the approved Cloudflare Pages Function, Turnstile, and Resend backend path.
 - Do not render social links without final URLs.
-- Do not render placeholder legal links.
+- Do not render placeholder legal links; the approved privacy/cookies footer link is allowed because it has a real route and content source.
 - Do not use Stitch-hosted imagery as production assets.
+- Do not render direct GA4 tracking code outside GTM.
 
 ## Implementation Notes For Future Agents
 

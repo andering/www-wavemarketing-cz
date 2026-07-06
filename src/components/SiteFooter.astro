@@ -1,5 +1,12 @@
 ---
 import { siteContent } from '../data/site';
+
+type Props = {
+  hrefPrefix?: string;
+};
+
+const { hrefPrefix = '' } = Astro.props;
+const resolveNavigationHref = (href: string) => `${hrefPrefix}${href}`;
 ---
 
 <footer class="site-footer">
@@ -14,8 +21,10 @@ import { siteContent } from '../data/site';
         {siteContent.contact.company.map((fact) => <li>{fact}</li>)}
       </ul>
     </section>
-    <nav aria-label="Patička">
-      {siteContent.navigation.map((item) => <a href={item.href}>{item.label}</a>)}
+    <nav aria-label="Patička" class="site-footer__links">
+      {siteContent.navigation.map((item) => <a href={resolveNavigationHref(item.href)}>{item.label}</a>)}
+      {siteContent.footer.legalLinks.map((item) => <a href={item.href}>{item.label}</a>)}
+      <button type="button" data-cookie-preferences>{siteContent.footer.cookieSettingsLabel}</button>
     </nav>
   </div>
   <div class="container site-footer__bottom">{siteContent.footer.copyright}</div>
@@ -64,19 +73,35 @@ import { siteContent } from '../data/site';
     margin-top: var(--ds-space-2);
   }
 
-  .site-footer nav {
+  .site-footer__links {
+    align-items: flex-start;
     display: flex;
     flex-direction: column;
     gap: var(--ds-space-3);
   }
 
-  .site-footer a {
+  .site-footer a,
+  .site-footer button {
+    background: transparent;
+    border: 0;
     color: var(--ds-color-text-muted);
+    cursor: pointer;
+    font: inherit;
+    padding: 0;
+    text-align: left;
     text-decoration: none;
   }
 
-  .site-footer a:hover {
+  .site-footer a:hover,
+  .site-footer button:hover {
     color: var(--ds-color-secondary);
+  }
+
+  .site-footer a:focus-visible,
+  .site-footer button:focus-visible {
+    border-radius: var(--ds-radius-sm);
+    outline: 3px solid var(--ds-color-focus);
+    outline-offset: 3px;
   }
 
   .site-footer__bottom {

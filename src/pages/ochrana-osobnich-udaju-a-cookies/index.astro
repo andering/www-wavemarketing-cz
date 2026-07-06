@@ -1,0 +1,196 @@
+---
+import SiteHeader from '../../components/SiteHeader.astro';
+import SiteFooter from '../../components/SiteFooter.astro';
+import CookieConsent from '../../components/CookieConsent.astro';
+import { siteContent } from '../../data/site';
+import '../../styles/design-system.css';
+
+type LegalPageSection = {
+  heading: string;
+  paragraphs?: readonly string[];
+  list?: readonly string[];
+  subsections?: readonly {
+    heading: string;
+    paragraphs: readonly string[];
+  }[];
+};
+
+type CookieTableRow = {
+  name: string;
+  category: string;
+  provider: string;
+  purpose: string;
+  duration: string;
+};
+
+const pageTitle = siteContent.legalPage.title;
+const pageDescription = siteContent.legalPage.description;
+const pageSections: readonly LegalPageSection[] = siteContent.legalPage.sections;
+const cookieTable: readonly CookieTableRow[] = siteContent.legalPage.cookieTable;
+---
+
+<!doctype html>
+<html lang={siteContent.meta.language}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{pageTitle} | WAVE marketing s.r.o.</title>
+    <meta name="description" content={pageDescription} />
+    {siteContent.assets.icons.map((icon) => <link {...icon} />)}
+  </head>
+  <body>
+    <SiteHeader hrefPrefix="/" />
+    <main class="legal-page">
+      <article class="container legal-page__content" aria-labelledby="legal-page-title">
+        <p class="legal-page__eyebrow">Soukromí a cookies</p>
+        <h1 id="legal-page-title">{pageTitle}</h1>
+        {pageSections.map((section) => (
+          <section class="legal-page__section">
+            <h2>{section.heading}</h2>
+            {section.paragraphs?.map((paragraph) => <p>{paragraph}</p>)}
+            {section.list && (
+              <ul>
+                {section.list.map((item) => <li>{item}</li>)}
+              </ul>
+            )}
+            {section.subsections?.map((subsection) => (
+              <section class="legal-page__subsection">
+                <h3>{subsection.heading}</h3>
+                {subsection.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
+              </section>
+            ))}
+          </section>
+        ))}
+
+        <section class="legal-page__section">
+          <h2>Přehled cookies</h2>
+          <div class="legal-page__table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Název</th>
+                  <th>Kategorie</th>
+                  <th>Poskytovatel</th>
+                  <th>Účel</th>
+                  <th>Doba uložení</th>
+                </tr>
+              </thead>
+              <tbody>
+                {cookieTable.map((cookie) => (
+                  <tr>
+                    <td><code>{cookie.name}</code></td>
+                    <td>{cookie.category}</td>
+                    <td>{cookie.provider}</td>
+                    <td>{cookie.purpose}</td>
+                    <td>{cookie.duration}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </section>
+      </article>
+    </main>
+    <SiteFooter hrefPrefix="/" />
+    <CookieConsent />
+  </body>
+</html>
+
+<style>
+  .legal-page {
+    background: var(--ds-color-background);
+  }
+
+  .legal-page__content {
+    max-width: 920px;
+    padding-block: var(--ds-space-16);
+  }
+
+  .legal-page__eyebrow {
+    color: var(--ds-color-secondary);
+    font-size: var(--ds-text-sm);
+    font-weight: var(--ds-font-weight-semibold);
+    letter-spacing: var(--ds-tracking-widest);
+    margin: 0 0 var(--ds-space-3);
+    text-transform: uppercase;
+  }
+
+  .legal-page h1,
+  .legal-page h2,
+  .legal-page h3 {
+    color: var(--ds-color-primary);
+    font-family: var(--ds-font-heading);
+    line-height: var(--ds-leading-tight);
+  }
+
+  .legal-page h1 {
+    font-size: clamp(2.5rem, 6vw, 4.75rem);
+    letter-spacing: var(--ds-tracking-tight);
+    margin: 0 0 var(--ds-space-6);
+  }
+
+  .legal-page h2 {
+    font-size: var(--ds-text-3xl);
+    margin: 0 0 var(--ds-space-4);
+  }
+
+  .legal-page h3 {
+    font-size: var(--ds-text-xl);
+    margin: var(--ds-space-6) 0 var(--ds-space-3);
+  }
+
+  .legal-page p,
+  .legal-page li {
+    color: var(--ds-color-text-muted);
+    line-height: var(--ds-leading-relaxed);
+  }
+
+  .legal-page__section + .legal-page__section {
+    margin-top: var(--ds-space-10);
+  }
+
+  .legal-page ul {
+    margin-block: var(--ds-space-4) 0;
+    padding-left: var(--ds-space-6);
+  }
+
+  .legal-page li + li {
+    margin-top: var(--ds-space-2);
+  }
+
+  .legal-page__table-wrap {
+    border: var(--ds-border-width) solid var(--ds-color-border);
+    border-radius: var(--ds-radius-xl);
+    overflow-x: auto;
+  }
+
+  .legal-page table {
+    border-collapse: collapse;
+    min-width: 760px;
+    width: 100%;
+  }
+
+  .legal-page th,
+  .legal-page td {
+    border-bottom: var(--ds-border-width) solid var(--ds-color-border);
+    padding: var(--ds-space-4);
+    text-align: left;
+    vertical-align: top;
+  }
+
+  .legal-page th {
+    background: var(--ds-color-surface-muted);
+    color: var(--ds-color-primary);
+    font-weight: var(--ds-font-weight-semibold);
+  }
+
+  .legal-page tr:last-child td {
+    border-bottom: 0;
+  }
+
+  @media (max-width: 720px) {
+    .legal-page__content {
+      padding-block: var(--ds-space-12);
+    }
+  }
+</style>

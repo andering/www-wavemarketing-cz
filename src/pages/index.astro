@@ -7,8 +7,22 @@ import ServiceList from '../components/ServiceList.astro';
 import ProcessSteps from '../components/ProcessSteps.astro';
 import ContactCardGrid from '../components/ContactCardGrid.astro';
 import SiteFooter from '../components/SiteFooter.astro';
+import CookieConsent from '../components/CookieConsent.astro';
+import { getImage } from "astro:assets";
+import heroImage from "../assets/wave-marketing-hero-collaboration.png";
 import { siteContent } from '../data/site';
 import '../styles/design-system.css';
+
+const heroImageWidths = [480, 768, 1024, 1400, 1864];
+const heroImageSizes = "(max-width: 900px) 0px, min(45vw, 620px)";
+const heroAvifImages = await Promise.all(
+  heroImageWidths.map((width) =>
+    getImage({ src: heroImage, format: "avif", width }),
+  ),
+);
+const heroAvifSrcSet = heroAvifImages
+  .map((image, index) => `${image.src} ${heroImageWidths[index]}w`)
+  .join(", ");
 ---
 
 <!doctype html>
@@ -18,6 +32,17 @@ import '../styles/design-system.css';
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{siteContent.meta.title}</title>
     <meta name="description" content={siteContent.meta.description} />
+    <link
+      rel="preload"
+      as="image"
+      type="image/avif"
+      href={heroAvifImages[0].src}
+      imagesrcset={heroAvifSrcSet}
+      imagesizes={heroImageSizes}
+      media="(min-width: 901px)"
+      fetchpriority="high"
+    />
+    {siteContent.assets.icons.map((icon) => <link {...icon} />)}
   </head>
   <body>
     <SiteHeader />
@@ -30,5 +55,6 @@ import '../styles/design-system.css';
       <IntroStatement />
     </main>
     <SiteFooter />
+    <CookieConsent />
   </body>
 </html>

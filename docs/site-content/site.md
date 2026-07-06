@@ -12,11 +12,12 @@ This file defines the content architecture for the launch version of canonical `
 
 ## Launch Scope
 
-- Website type: one-page static website.
+- Website type: one-page Czech homepage plus one supporting privacy/cookies legal-information page and a Cloudflare Pages Function endpoint for the contact form.
 - Language: Czech.
 - Audience: businesses looking for a human, reliable marketing partner.
-- Primary conversion: direct contact by phone or email.
+- Primary conversion: direct contact by phone, email, or the simplified backend-backed contact form.
 - Secondary conversion: visitor reads services and understands the collaboration approach.
+- Cookie consent: launch includes Czech consent UI for GTM-managed analytics and future marketing scripts. Consent copy must stay concise, human, and non-legalistic while accurately describing the categories.
 
 ## Launch Navigation
 
@@ -32,28 +33,47 @@ The launch site contains these content sections. Render order, anchors, navigati
 1. `sections/hero.md`: headline, positioning, and primary CTAs.
 2. `sections/services-overview.md`: services and their benefit-led descriptions.
 3. `sections/cooperation-process.md`: collaboration steps.
-4. `sections/contact.md`: direct contact information and final CTA.
+4. `sections/contact.md`: direct contact information, simplified contact form, and final CTA.
 5. `sections/intro.md`: short human explanation of who WAVE Marketing is, rendered as the final main content section.
 6. `sections/footer.md`: footer copy, navigation, and company facts.
+7. Cookie consent UI: global page chrome, not a content section; it provides the launch consent banner, preferences settings, and a footer control to reopen settings.
+8. `privacy-cookies.md`: supporting legal-information page for privacy and cookies.
 
 ## Omitted At Launch
 
 - References, case studies, client logos, fake metrics, and fake testimonials are omitted; the `Reference` navigation label does not introduce reference content. The only approved metric-style content is the hero popup `Růst tržeb` `+124%` recorded in `sections/hero.md`.
-- Contact form is omitted.
+- Contact form is approved only in the simplified launch form described in `sections/contact.md`; do not use the full client questionnaire.
 - Supplied social profile URLs are approved for launch header links: Facebook `https://www.facebook.com/wavemarketingsro`, Instagram `https://www.instagram.com/wave.marketing.cz/`, and LinkedIn `https://www.linkedin.com/company/wave-marketing-s-r-o/`.
-- Production images are limited to verified approved assets under `public/assets/`.
+- Production images are limited to verified approved assets. Transformable raster images live under `src/assets/` for Astro build-time optimization; assets that intentionally bypass processing may remain under `public/assets/`.
 
 ## Resolved Production Assets
 
-- Real WAVE Marketing logo asset: `public/assets/wave-marketing-logo.png`.
-- Real Jana/contact photo asset: `public/assets/jana-skalnikova-photo.png`.
-- Approved hero collaboration image: `public/assets/wave-marketing-hero-collaboration.png`.
-- Approved process solution proposal image: `public/assets/wave-marketing-process-solution-proposal.jpg`.
+- Real WAVE Marketing logo asset: `public/assets/wave-marketing-logo.svg`.
+- Real WAVE Marketing logo icon assets for favicon/app-icon compatibility: `public/favicon.ico`, `public/assets/wave-marketing-icon-32.png`, `public/assets/wave-marketing-apple-touch-icon.png`, and `public/assets/wave-marketing-icon-192.png`.
+- Real Jana/contact photo asset: `src/assets/jana-skalnikova-photo.png`.
+- Approved hero collaboration image: `src/assets/wave-marketing-hero-collaboration.png`.
+- Approved process solution proposal image: `src/assets/wave-marketing-process-solution-proposal.jpg`.
+
+## Supporting Legal Page
+
+- Privacy/cookies route: `/ochrana-osobnich-udaju-a-cookies/`.
+- Content source: `privacy-cookies.md`.
+- Footer link label: `Ochrana osobních údajů a cookies`.
+- The page copy is draft legal-information content and requires client or legal review before being treated as final legal advice.
 
 ## Optional Inputs Before Implementation
 
-- Preferred privacy/GDPR page content if legal footer links are required.
 - Hosting/deployment target.
+
+## Cookie Consent Copy Requirements
+
+- First banner title: `Používáme cookies`.
+- First banner summary should explain that cookies help measure website traffic and improve marketing.
+- First banner actions: `Přijmout vše`, `Jen nezbytné`, and `Nastavit cookies`.
+- Preferences modal title: `Nastavení cookies`.
+- Preferences actions: `Přijmout vše`, `Jen nezbytné`, and `Uložit nastavení`.
+- Categories: `Nezbytné cookies`, `Analytické cookies`, and `Marketingové cookies`.
+- Do not render a fake privacy/GDPR legal link in the banner or modal. Add a legal link only when a real target URL or page content is supplied.
 
 ## Content Tone
 
@@ -69,4 +89,13 @@ Use Czech copy that feels warm, clear, human, reliable, and professional. Avoid 
 
 - Add references only when real client approvals, logos, case studies, numbers, and testimonials exist.
 - Extend social links beyond the header only if those placements are explicitly requested.
-- Add a contact form only after a form handling service or backend decision exists.
+- Extend the contact form only after a new backend, CRM, or field-scope decision exists.
+
+## Contact Form Backend Requirements
+
+- Form endpoint: Cloudflare Pages Function at `/api/contact`.
+- Email delivery: Resend, using a secret API key stored in Cloudflare environment variables.
+- Bot protection: Cloudflare Turnstile; submissions must be rejected when Turnstile verification fails.
+- Do not send email directly from browser-side JavaScript and do not expose credentials in frontend code.
+- Successful submissions redirect to `/dekujeme/`.
+- Failed submissions should return a clear, non-technical Czech error response and preserve privacy by not echoing sensitive submission data into URLs.

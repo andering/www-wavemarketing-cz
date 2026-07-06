@@ -1,4 +1,6 @@
 ---
+import { Picture } from "astro:assets";
+import processSolutionProposalImage from "../assets/wave-marketing-process-solution-proposal.jpg";
 import { siteContent } from '../data/site';
 ---
 
@@ -30,7 +32,17 @@ import { siteContent } from '../data/site';
             )}
             {step.support.type === 'image' && (
               <div class="process-step__support process-step__visual">
-                <img class="process-step__visual-image" src={siteContent.assets.processSolutionProposalImage} alt={step.support.alt} loading="lazy" decoding="async" />
+                <Picture
+                  class="process-step__visual-image"
+                  src={processSolutionProposalImage}
+                  formats={["avif", "webp"]}
+                  fallbackFormat="webp"
+                  widths={[360, 640, 900, 1200, 1536]}
+                  sizes="(max-width: 760px) calc(100vw - 6rem), 620px"
+                  alt={step.support.alt}
+                  loading="lazy"
+                  decoding="async"
+                />
               </div>
             )}
             {step.support.type === 'cta' && (

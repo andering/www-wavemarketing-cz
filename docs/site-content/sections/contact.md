@@ -2,7 +2,7 @@
 
 ## Purpose
 
-Make the final contact step friendly, direct, and low-friction.
+Make the final contact step friendly, direct, and low-friction, while allowing visitors to submit a minimal backend-backed inquiry without completing a long questionnaire.
 
 ## Source
 
@@ -10,7 +10,7 @@ Derived from `client_brief.md`, section `Kontakt`, with launch decisions recorde
 
 ## Section Heading
 
-`Pojďme na stejnou vlnu.`
+`Kontaktujte nás`
 
 ## Intro Copy
 
@@ -23,13 +23,36 @@ Derived from `client_brief.md`, section `Kontakt`, with launch decisions recorde
 - Phone CTA label: `Zavolejte Janě`
 - Phone number display: `+420 605 461 440`
 - Phone link target: `tel:+420605461440`
-- Photo: `public/assets/jana-skalnikova-photo.png`.
+- Photo: `src/assets/jana-skalnikova-photo.png`, rendered through Astro's build-time image pipeline.
 
 ## Email
 
 - Label: `Napište nám`
 - Email display: `jana.skalnikova@wavemarketing.cz`
 - Email link target: `mailto:jana.skalnikova@wavemarketing.cz`
+
+## Simplified Contact Form
+
+- Form heading: `Nechte nám na sebe kontakt`
+- Helper copy: `Stačí nám napsat e-mail, telefon nebo pár slov k tomu, co řešíte. Ozveme se vám co nejdříve.`
+- Field label: `Jak se vám můžeme ozvat?`
+- Field type: one required textarea that accepts an email address, phone number, or short message.
+- Field placeholder: `Například: jana@firma.cz, +420 123 456 789 nebo krátce, s čím potřebujete pomoct.`
+- Consent label: `Souhlasím se zpracováním osobních údajů pro účely odpovědi na poptávku.`
+- Submit label: `Odeslat nezávaznou poptávku`
+- Success redirect: `/dekujeme/`
+- Backend: submit to `/api/contact`, implemented as a Cloudflare Pages Function.
+- Email delivery: Resend notification email to the approved WAVE recipient address.
+- Bot protection: Cloudflare Turnstile token is required and verified server-side before email delivery.
+- Do not include the client's full six-field questionnaire for launch.
+
+## Thank-You Page Copy
+
+- Route: `/dekujeme/`
+- Heading: `Díky za zprávu!`
+- Body: `Jdeme si udělat kávu, přečíst si vaše zadání a co nejdříve se vám ozveme s dalšími kroky.`
+- Return link label: `Zpět na úvod`
+- Return link target: `/`
 
 ## Meeting Availability
 
@@ -45,7 +68,7 @@ Derived from `client_brief.md`, section `Kontakt`, with launch decisions recorde
 
 ## Omitted At Launch
 
-- Contact form is omitted.
+- The full client-proposed questionnaire is omitted.
 - Social profile links are omitted from the contact module for launch; supplied social URLs are rendered in the header/offcanvas only.
 - No placeholder social links may be rendered.
 
@@ -53,15 +76,16 @@ Derived from `client_brief.md`, section `Kontakt`, with launch decisions recorde
 
 - Keep the tone personal and concrete.
 - Prioritize phone and email actions.
+- Keep the form visibly secondary to direct phone and email contact, not a replacement for them.
 - Use the secondary deep-teal button variant for Jana's phone CTA; keep the phone number visible separately from the shortened CTA label.
 - Place the `+420` phone display directly below `CEO & Strategist` in Jana's card.
 - Place `jana.skalnikova@wavemarketing.cz` below `Napište nám`, not beside it.
-- Do not show a form unless a form handling decision exists.
+- Do not add fields beyond the approved textarea and consent checkbox without a new content/backend decision.
 - Do not show social icons in the contact module unless that placement is explicitly requested.
 
 ## Notes For Page Mapping
 
-- This content maps to a compact direct-contact module inspired by the approved Stitch layout.
-- Desktop layout should use a 4-column by 2-row contact bento: Jana/person card spans the left half and both rows, email occupies the top-right half, availability occupies the bottom-right half, and muted company facts sit below.
+- This content maps to a compact direct-contact module inspired by the approved Stitch layout, extended with one minimal form card.
+- Desktop layout should keep a direct-contact bento: Jana/person card spans the left side, email and availability stay prominent, the simplified form occupies a clear secondary card below or beside the direct contact cards depending on responsive space, and muted company facts sit below.
 - Contact bento card corners should use `--ds-radius-2xl`, not the larger `--ds-radius-3xl` bubble radius.
 - Visual treatment must come from the design system, not this file.

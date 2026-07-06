@@ -27,15 +27,18 @@ Create a simple, static, production-ready site where design and content are gene
 
 ## Cross-Cutting Launch Decisions
 
-- Launch format is a one-page static Czech site with sections, not separate static pages.
+- Launch format is a primarily one-page Czech site with static content sections, one supporting legal-information page for privacy and cookies, and a Cloudflare Pages Function endpoint for the approved contact form.
 - The canonical target is `www.wavemarketing.cz`.
-- Primary conversion is direct phone or email contact.
-- No contact form for launch.
+- Primary conversion is low-friction contact by phone, email, or the approved simplified contact form.
+- The previous no-form launch decision is superseded by the approved backend-backed form decision: the contact form must stay minimal, submit to a Cloudflare Pages Function, verify Cloudflare Turnstile before processing, send notification email through Resend, and redirect to a short Czech thank-you page after successful submission. Do not use frontend-only email sending or expose email/API credentials in browser code.
 - References, case studies, client logos, testimonials, fake metrics, and placeholder links are omitted for launch.
 - The `Reference` nav item is a navigation label only: it links to `Jak probíhá spolupráce` (`#spoluprace`) and does not authorize reference content.
 - Social profile icons/links use the supplied Facebook, Instagram, and LinkedIn URLs in header/offcanvas rendering. Additional placements need explicit approval in the docs.
-- Only verified real assets under `public/assets/` may be used in production unless a new asset gate is resolved.
+- Only verified real assets may be used in production. Transformable raster assets should use Astro's build-time image pipeline from `src/assets/`; assets that intentionally bypass processing may remain under `public/assets/`.
+- Image CDN features are a delivery optimization layer after hosting is chosen, not the primary source optimization layer. The static build should ship optimized responsive image outputs before relying on CDN image resizing or Polish-style features.
 - The production model has three layers: design system, section/content specs, and widget/component mapping.
+- Cookie consent for launch uses the `vanilla-cookieconsent` library with a custom WAVE-styled bottom bar and preferences drawer/modal. Optional tracking consent defaults to denied; GTM container `GTM-WMJVN6WZ` is the only tracking container loaded from site code, with GA4 and future tools managed through GTM. Consent categories are `necessary`, `analytics`, and `marketing`; `necessary` is always enabled and read-only. Do not add direct GA4 page code outside GTM.
+- Launch includes a real legal-information page at `/ochrana-osobnich-udaju-a-cookies/`. The footer may link to it with label `Ochrana osobních údajů a cookies`; this is no longer a placeholder legal link. The draft copy is stored in `docs/site-content/privacy-cookies.md` and requires client or legal review before being treated as final legal advice.
 
 ## Domain Ownership
 

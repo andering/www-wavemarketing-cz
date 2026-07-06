@@ -19,11 +19,11 @@ When these sources conflict, follow the source-of-truth rules in `docs/decisions
 
 - Do not invent production content.
 - Do not add references, case studies, client logos, testimonials, fake metrics, or a `Reference` nav item unless the docs are explicitly updated first.
-- Do not add a contact form for launch.
+- Do not add unapproved contact forms or the full client questionnaire for launch; the approved contact form is the minimal backend-backed form documented in the canonical specs.
 - Do not add new social-link placements or placeholder `#` links unless final URLs and placements are approved in the docs.
 - Do not use Stitch-hosted images as production assets unless the user confirms they are real client assets.
-- Use only approved production assets under `public/assets/` unless a new asset gate is resolved.
-- Keep the site one static Czech homepage unless `docs/decisions.md` and the relevant content specs are changed first.
+- Use only approved production assets. Transformable raster assets should live under `src/assets/` for Astro image processing unless a source-of-truth asset gate says otherwise; assets that intentionally bypass processing may remain under `public/assets/`.
+- Keep the launch scope to the approved Czech homepage, supporting privacy/cookies page, thank-you page, and contact API endpoint unless `docs/decisions.md` and the relevant content specs are changed first.
 
 ## Docs-First Workflow
 
@@ -65,7 +65,9 @@ Use these phases when planning or reviewing remaining work:
 ## Current Launch Constraints
 
 - Canonical target: `www.wavemarketing.cz`.
-- Approved production assets: `public/assets/wave-marketing-logo.png`, `public/assets/jana-skalnikova-photo.png`, `public/assets/wave-marketing-hero-collaboration.png`, and `public/assets/wave-marketing-process-solution-proposal.jpg`.
-- Primary conversion: direct phone or email contact.
+- Approved production assets: `public/assets/wave-marketing-logo.svg`, logo icon derivatives in `public/` and `public/assets/`, `src/assets/jana-skalnikova-photo.png`, `src/assets/wave-marketing-hero-collaboration.png`, and `src/assets/wave-marketing-process-solution-proposal.jpg`.
+- Primary conversion: low-friction contact by phone, email, or the approved simplified contact form.
+- Contact form: approved only as a minimal backend-backed form using Cloudflare Pages Functions, Cloudflare Turnstile, and Resend email delivery.
+- Cookie consent: approved using `vanilla-cookieconsent`, GTM container `GTM-WMJVN6WZ`, and denied-by-default optional categories.
 - Open input: additional social-link placements, if socials should appear outside the header/offcanvas.
 - Open input: hosting/deployment target.

@@ -14,6 +14,7 @@ This file is a chronological audit trail. It is not the first place to look for 
 - Decided to hide references for launch.
 - Decided on a one-page launch site.
 - Decided not to include a contact form for launch.
+- 2026-07-05: Superseded the earlier no-form launch decision after client input. Approved a minimal backend-backed contact form using Cloudflare Pages Functions, Cloudflare Turnstile, and Resend, with the full six-field questionnaire omitted.
 - Decided to omit/disable social links until real URLs exist.
 - Decided only verified real production assets may be used.
 - Decided logo and Jana/contact photo must be supplied before implementation.
@@ -51,3 +52,15 @@ This file is a chronological audit trail. It is not the first place to look for 
 - Reverted the `Kdo jsme` motion direction from actual wave drift back to the previous subtle breathing animation after the drift version did not work as intended.
 - Reverted the shader-inspired `Kdo jsme` flow-line concept back to the previous local ribbon-wave breathing visual after review.
 - Approved trying the supplied shader as real WebGL for `Kdo jsme`, scoped to the desktop visual panel with a local static fallback and without adopting the pasted React/shadcn/Tailwind integration instructions.
+
+## 2026-07-05
+
+- Identified follow-up workflow areas that still need to be documented or implemented before launch readiness: SEO workflow, cookie bar workflow, form delivery workflow using Resend, Cloudflare Pages Function handling for form submission, image postprocessing, and CDN-based image delivery.
+- Clarified that the Cloudflare script-like form handler is a Cloudflare Pages Function, not Terraform. Terraform may still be considered later only if infrastructure provisioning needs to be automated.
+- Implemented the image postprocessing part by moving approved transformable raster assets into `src/assets/` and rendering them through Astro's build-time image pipeline. CDN image delivery remains a hosting/deployment follow-up.
+- Added SEO schema and Google rich snippets as a follow-up skill/workflow area to define before launch readiness.
+
+## 2026-07-06
+
+- Approved the new logo source set from `/app/logo.zip` for production use.
+- Switched the rendered site logo source of truth to `public/assets/wave-marketing-logo.svg` and recorded ICO/PNG logo icon derivatives for favicon/app-icon compatibility.

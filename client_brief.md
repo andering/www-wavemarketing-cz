@@ -14,7 +14,7 @@
 
 - - **Hlavní nadpis (Naše motto):** _Přivedeme váš business na tu správnou vlnu_
     - **Podnadpis:** Děláme marketing lidsky. Jsme WAVE marketing s.r.o., skvělá parta lidí, kteří milují svoji práci a věříme, že nejlepší výsledky vznikají tehdy, když se na vás dokážeme dokonale naladit. S péčí, velkou dávkou lidskosti a spolehlivostí.
-    - **Call-to-Action (Tlačítko):** _Jdeme chytit společnou vlnu (Odkaz na Kontakt)_ nebo _Jaké vlny chytáme (Odkaz na Služby)._
+    - **Call-to-Action (Tlačítko):** _Domluvte si konzultaci (Odkaz na Kontakt)_ nebo _Podívejte se na služby (Odkaz na Služby)._
 - **Kdo jsme (Představení přístupu):** Jsme partneři, kteří naslouchají, chápou váš byznys a pečují o něj jako o vlastní.
 - **Rozcestník služeb:** Tři až čtyři vizuálně hezké bloky s ikonkami (např. _Strategie, Sociální sítě, PPC kampaně, Foto/video_ ) s krátkým popiskem a tlačítkem „Více o službách".
 - **Závěrečná výzva k akci (Footer teaser):** _Hledáte agenturu, se kterou si sednete lidsky i profesně? Napište nám._
@@ -29,13 +29,18 @@
 
 Tato podstránka nesmí být jen suchým výčtem. Každá služba by měla být popsána jazykem užitku pro klienta a s důrazem na to, _jak_ k práci přistupujeme.
 
-- **Hlavní nadpis (H1):** _S čím vám pomůžeme rozvlnit vody internetu?_
-- **Úvodní text:** Než spustíme první kampaň, ptáme se, posloucháme a analyzujeme. Chceme pochopit vaši vizi a dokonale váš navnímat. Teprve pak vybíráme nástroje, které dávají smysl.
+- **Hlavní nadpis (H1):** _Naše služby_
+- **Úvodní text:** Víme, že za každou značkou stojí reální lidé a reálné příběhy. Proto děláme marketing lidsky, srozumitelně a bez složitého technického žargonu. Naším cílem je propojit vás s vašimi zákazníky na základě transparentnosti a empatie.
+- **Rozcestník:** Podívejte se, s čím vším vám můžeme pomoci:
 - **Detailní přehled služeb:**
-  - **Marketingová strategie:** Pomůžeme vám najít váš směr. Zjistíme, kdo jsou vaši zákazníci, a nastavíme dlouhodobý plán, který bude mít ten správný směr.
-  - **Správa sociálních sítí:** Budujeme komunity. Komunikujeme za vás lidsky, autenticky a tak, aby to vaše sledující bavilo.
-  - **Výkonnostní marketing (PPC):** Tvoříme kampaně, které nejen přivádí návštěvníky, ale hlavně prodávají. Peníze nepálíme, ale chytře investujeme.
-  - **Tvorba obsahu (Copywriting & Grafika):** Píšeme texty a tvoříme vizuály, které mají duši a přesně vystihnou tonalitu vaší značky.
+  - **Správa sociálních sítí:** Sociální sítě již dávno nejsou jen o přidávání příspěvků, ale o budování komunity a naslouchání. Tvoříme obsah, který má duši a odráží skutečnou tvář vašeho podnikání. Postaráme se o kompletní komunikaci tak, abyste si se svými sledujícími vytvořili pevný a osobní vztah. Orientační cena: od 5 000 Kč.
+  - **PPC kampaně (Výkonnostní marketing):** Zajistíme, aby vás vaši zákazníci našli přesně ve chvíli, kdy vás potřebují. Výsledky měříme přesně a komunikujeme je s vámi naprosto transparentně. Žádné schovávání se za složitá čísla nebo nesrozumitelné výrazy - jen chytré a efektivní investice do vašeho růstu. Orientační cena: od 3 000 Kč.
+  - **Tvorba a úprava webových stránek & e-shopů:** Váš web je vaším digitálním domovem. Vytvoříme pro vás nové webové stránky nebo e-shop od nuly, případně vdechneme nový život těm stávajícím. Důraz klademe na čistý, přehledný design a hlavně na to, aby se u vás návštěvníci cítili dobře a snadno našli to, co hledají. Orientační cena: od 15 000 Kč.
+  - **Foto a video služby:** Vizuální stránka je prvním krokem k navázání kontaktu. Ať už potřebujete profesionální fotografie produktů, zachycení atmosféry vašich služeb nebo tvorbu poutavých videí, postaráme se o produkci, která bude přirozená, estetická a autentická. Orientační cena: od 5 000 Kč.
+  - **Marketingová strategie na míru:** Než se pustíme do práce, chceme do hloubky pochopit, kdo jste a kam směřujete. Připravíme pro vás promyšlenou strategii, která dává smysl a je ušitá přesně na míru vašim možnostem a cílům. Vše s maximální empatií vůči vaší cílové skupině. Orientační cena: od 8 000 Kč.
+  - **Grafické služby a tvorba vizuálů:** Grafika od nás není jen hezký obrázek, ale nástroj, který komunikuje za vás. Navrhneme vám čisté, moderní a vkusné vizuály - od loga přes propagační materiály až po sjednocení celé vaší značky. Orientační cena: od 3 000 Kč.
+- **Závěrečná výzva:** Chcete to probrat osobně? Každá skvělá spolupráce začíná u kávy (nebo čaje) a dobrého rozhovoru. Napište nám a pojďme se bavit o tom, jak můžeme vašemu projektu pomoci růst.
+- **Cenová poznámka:** Ceny jsou individuální dle specifikací a požadavků každého klienta. Rádi vám vše naceníme na míru.
 - **Jak probíhá spolupráce (Timeline/Kroky):**
   - **První káva a seznámení:** Zjistíme, jestli jsme na stejné vlně.
   - **Ponoření se do hloubky:** Poznáme váš byznys od A do Z.
@@ -56,7 +61,7 @@ Tato podstránka nesmí být jen suchým výčtem. Každá služba by měla být
 
 Závěrečný krok musí být maximálně příjemný, bez bariér a s přátelským tónem.
 
-- **Hlavní nadpis (H1):** _Pojďme na stejnou vlnu._
+- **Hlavní nadpis (H1):** _Kontaktujte nás_
 - **Úvodní text:** Máte nápad, hledáte marketingového parťáka, nebo se jen chcete poradit u dobré kávy? Ozvěte se nám. Odpovídáme rychle a rádi.
 - **Kontaktní údaje:**
   - **Zavolejte nám:** \[ 605461440 \] s fotkou ( níže) a jménem konkrétního člověka ( zatím já), který telefon zvedne (např. _Zavolejte Janě, naší CEO a domluvte se na kafe_ - obrovsky to zvyšuje pocit lidskosti).

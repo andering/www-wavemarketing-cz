@@ -22,6 +22,12 @@ Derived from `client_brief.md`, site decisions, and launch omissions.
 - `Naše služby`
 - `Kontakt`
 
+## Cookie Settings Control
+
+`Nastavení cookies`
+
+This control reopens the cookie preferences UI. It is an interactive control, not a placeholder legal link.
+
 ## Company Facts
 
 - `WAVE marketing s.r.o.`
@@ -32,7 +38,11 @@ Derived from `client_brief.md`, site decisions, and launch omissions.
 
 ## Legal Links
 
-Legal links are optional for launch and require supplied target pages or documents. Do not render `GDPR`, `Obchodní podmínky`, or similar links as placeholders.
+Approved launch legal link:
+
+- `Ochrana osobních údajů a cookies` -> `/ochrana-osobnich-udaju-a-cookies/`
+
+Do not render `GDPR`, `Obchodní podmínky`, or similar additional links as placeholders.
 
 ## Copyright
 
@@ -43,7 +53,8 @@ Legal links are optional for launch and require supplied target pages or documen
 - Keep footer concise.
 - Do not include references link at launch.
 - Do not include social links in the footer unless that placement is explicitly requested; supplied social URLs are rendered in the header/offcanvas for launch.
-- Do not include placeholder legal links.
+- Do not include placeholder legal links beyond the approved privacy/cookies page link.
+- Include the approved `Nastavení cookies` control so visitors can reopen consent preferences.
 
 ## Notes For Page Mapping
 

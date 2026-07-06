@@ -1,5 +1,9 @@
 ---
+import { Image } from "astro:assets";
+import janaPhoto from "../assets/jana-skalnikova-photo.png";
 import { siteContent } from '../data/site';
+
+const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY;
 ---
 
 <section class="contact section" id="kontakt" aria-labelledby="contact-heading">
@@ -12,7 +16,7 @@ import { siteContent } from '../data/site';
       <article class="contact__person-card">
         <div class="contact__person-head">
           <div class="contact__avatar-wrap">
-            <img src={siteContent.assets.janaPhoto} alt="Jana Skalníková" width="180" height="180" />
+            <Image src={janaPhoto} alt="Jana Skalníková" width={180} height={180} />
             <span class="contact__status-dot" aria-hidden="true"></span>
           </div>
           <div class="contact__person-meta">
@@ -43,12 +47,50 @@ import { siteContent } from '../data/site';
           <p class="contact__meeting">{siteContent.contact.meeting}</p>
         </div>
       </article>
+      <article class="contact__form-card" aria-labelledby="contact-form-heading">
+        <div class="contact__form-intro">
+          <h3 id="contact-form-heading">{siteContent.contact.form.heading}</h3>
+          <p>{siteContent.contact.form.helper}</p>
+        </div>
+        <form class="contact__form" method="post" action={siteContent.contact.form.action}>
+          <div class="contact__field">
+            <label for="contact-message">{siteContent.contact.form.label}</label>
+            <textarea
+              id="contact-message"
+              name="contactMessage"
+              rows="5"
+              placeholder={siteContent.contact.form.placeholder}
+              required
+            ></textarea>
+          </div>
+          <label class="contact__consent" for="privacy-consent">
+            <input id="privacy-consent" type="checkbox" name="privacyConsent" required />
+            <span>{siteContent.contact.form.consent}</span>
+          </label>
+          {
+            turnstileSiteKey ? (
+              <div
+                class="cf-turnstile contact__turnstile"
+                data-sitekey={turnstileSiteKey}
+                data-response-field-name="cf-turnstile-response"
+              ></div>
+            ) : (
+              <input type="hidden" name="cf-turnstile-response" value="local-development" />
+            )
+          }
+          <button class="button button-primary contact__submit" type="submit">
+            {siteContent.contact.form.submit}
+          </button>
+        </form>
+      </article>
       <div class="contact__facts-strip" aria-label="Fakturační údaje">
         {siteContent.contact.company.map((item) => <span>{item}</span>)}
       </div>
     </div>
   </div>
 </section>
+
+{turnstileSiteKey && <script is:inline src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>}
 
 <style>
   .contact {
@@ -78,7 +120,8 @@ import { siteContent } from '../data/site';
   }
 
   .contact__person-card,
-  .contact__quick-actions {
+  .contact__quick-actions,
+  .contact__form-card {
     background: color-mix(in srgb, var(--ds-color-surface-raised) 70%, transparent);
     border: var(--ds-border-width) solid color-mix(in srgb, var(--ds-color-surface-raised) 80%, transparent);
     border-radius: var(--ds-radius-2xl);
@@ -205,6 +248,81 @@ import { siteContent } from '../data/site';
     margin: 0;
   }
 
+  .contact__form-card {
+    display: grid;
+    gap: var(--ds-space-5);
+    grid-column: 1 / 5;
+  }
+
+  .contact__form-intro h3 {
+    font-family: var(--ds-font-heading);
+    font-size: var(--ds-text-2xl);
+    margin: 0 0 var(--ds-space-2);
+  }
+
+  .contact__form-intro p {
+    color: var(--ds-color-text-muted);
+    margin: 0;
+  }
+
+  .contact__form {
+    display: grid;
+    gap: var(--ds-space-4);
+  }
+
+  .contact__field {
+    display: grid;
+    gap: var(--ds-space-2);
+  }
+
+  .contact__field label {
+    color: var(--ds-color-primary);
+    font-size: var(--ds-text-sm);
+    font-weight: var(--ds-font-weight-semibold);
+  }
+
+  .contact__field textarea {
+    background: var(--ds-color-surface-raised);
+    border: var(--ds-border-width) solid var(--ds-color-border);
+    border-radius: var(--ds-radius-xl);
+    color: var(--ds-color-text);
+    font: inherit;
+    min-height: 144px;
+    padding: var(--ds-space-4);
+    resize: vertical;
+  }
+
+  .contact__field textarea:focus-visible,
+  .contact__consent input:focus-visible {
+    border-color: var(--ds-color-focus);
+    outline: 3px solid color-mix(in srgb, var(--ds-color-focus) 32%, transparent);
+    outline-offset: 2px;
+  }
+
+  .contact__consent {
+    align-items: flex-start;
+    color: var(--ds-color-text-muted);
+    display: flex;
+    gap: var(--ds-space-3);
+    font-size: var(--ds-text-sm);
+  }
+
+  .contact__consent input {
+    accent-color: var(--ds-color-primary);
+    flex: 0 0 auto;
+    height: 20px;
+    margin-top: 0.15em;
+    width: 20px;
+  }
+
+  .contact__turnstile {
+    min-height: 65px;
+  }
+
+  .contact__submit {
+    justify-self: start;
+  }
+
   .contact__facts-strip {
     display: flex;
     flex-wrap: wrap;
@@ -230,6 +348,7 @@ import { siteContent } from '../data/site';
     .contact__person-card,
     .contact__email-card,
     .contact__availability-card,
+    .contact__form-card,
     .contact__facts-strip {
       grid-column: 1;
       grid-row: auto;
