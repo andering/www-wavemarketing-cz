@@ -1,4 +1,4 @@
-import { readFileSync } from "node:fs";
+import { existsSync, readFileSync } from "node:fs";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { afterEach, describe, expect, it, vi } from "vitest";
@@ -41,17 +41,9 @@ describe("approved contact form content", () => {
         "Souhlasím se zpracováním osobních údajů pro účely odpovědi na poptávku.",
       submit: "Odeslat nezávaznou poptávku",
       action: "/api/contact",
-      successRedirect: "/dekujeme/",
-    });
-  });
-
-  it("stores the approved thank-you page copy", () => {
-    expect(siteContent.thankYou).toEqual({
-      href: "/dekujeme/",
-      title: "Díky za zprávu!",
-      body: "Jdeme si udělat kávu, přečíst si vaše zadání a co nejdříve se vám ozveme s dalšími kroky.",
-      returnLabel: "Zpět na úvod",
-      returnHref: "/",
+      successTitle: "Díky za zprávu!",
+      successBody:
+        "Jdeme si udělat kávu, přečíst si vaše zadání a co nejdříve se vám ozveme s dalšími kroky.",
     });
   });
 
@@ -71,17 +63,40 @@ describe("contact form implementation wiring", () => {
     expect(source).toContain('name="privacyConsent"');
     expect(source).toContain('name="cf-turnstile-response"');
     expect(source).toContain("PUBLIC_TURNSTILE_SITE_KEY");
+    expect(source).toContain("data-contact-form-card");
+    expect(source).toContain("data-contact-default");
+    expect(source).toContain("data-contact-form");
+    expect(source).toContain("data-contact-success");
+    expect(source).toContain("data-contact-error");
+    expect(source).toContain("fetch(contactForm.action");
+    expect(source).toContain("contactDefault.hidden = true");
+    expect(source).toContain('class="contact__success-heading"');
+    expect(
+      source.indexOf('class="contact__success-icon material-symbols-outlined"'),
+    ).toBeGreaterThan(source.indexOf('class="contact__success-heading"'));
+    expect(
+      source.indexOf('class="contact__success-icon material-symbols-outlined"'),
+    ).toBeLessThan(
+      source.indexOf("<h3>{siteContent.contact.form.successTitle}</h3>"),
+    );
+    expect(source).toContain(
+      'class="contact__success-icon material-symbols-outlined"',
+    );
+    expect(source).toContain("background: rgba(0, 59, 61, 0.06)");
+    expect(source).toContain("color: var(--ds-color-primary)");
     expect(source).toContain(
       "https://challenges.cloudflare.com/turnstile/v0/api.js",
     );
   });
 
-  it("creates the approved thank-you page", () => {
-    const source = readSource("src/pages/dekujeme/index.astro");
+  it("keeps contact quick-action icon rows left-aligned on mobile", () => {
+    const source = readSource("src/components/ContactCardGrid.astro");
 
-    expect(source).toContain("siteContent.thankYou.title");
-    expect(source).toContain("siteContent.thankYou.body");
-    expect(source).toContain("siteContent.thankYou.returnLabel");
+    expect(source).toContain(".contact__quick-actions,");
+    expect(source).toContain(".contact__quick-actions a {");
+    expect(source).toContain("align-items: flex-start");
+    expect(source).toContain("text-align: left");
+    expect(source).toContain("justify-items: start");
   });
 
   it("creates a Cloudflare Pages Function endpoint", () => {
@@ -91,8 +106,15 @@ describe("contact form implementation wiring", () => {
     expect(source).toContain("parseContactSubmission");
     expect(source).toContain("verifyTurnstile");
     expect(source).toContain("sendContactEmail");
-    expect(source).toContain("Response.redirect");
-    expect(source).toContain("/dekujeme/");
+    expect(source).not.toContain("Response.redirect");
+    expect(source).not.toContain("/dekujeme/");
+    expect(source).toContain("buildJsonResponse");
+  });
+
+  it("does not keep a standalone thank-you fallback page", () => {
+    expect(
+      existsSync(resolve(repositoryRoot, "src/pages/dekujeme/index.astro")),
+    ).toBe(false);
   });
 });
 
@@ -249,7 +271,7 @@ describe("contact form server helpers", () => {
 });
 
 describe("contact form Pages Function endpoint", () => {
-  it("verifies Turnstile, sends email, and redirects successful submissions", async () => {
+  it("verifies Turnstile, sends email, and returns a JSON success response", async () => {
     const { onRequestPost } = await import("../../functions/api/contact");
     const formData = new FormData();
 
@@ -295,9 +317,10 @@ describe("contact form Pages Function endpoint", () => {
         to: ["jana.skalnikova@wavemarketing.cz"],
       }),
     );
-    expect(response.status).toBe(303);
-    expect(response.headers.get("Location")).toBe(
-      "https://www.wavemarketing.cz/dekujeme/",
+    await expect(response.json()).resolves.toEqual({ ok: true });
+    expect(response.status).toBe(200);
+    expect(response.headers.get("Content-Type")).toBe(
+      "application/json;charset=utf-8",
     );
   });
 
@@ -317,10 +340,14 @@ describe("contact form Pages Function endpoint", () => {
       env: {},
     });
 
-    await expect(response.text()).resolves.toBe(
-      "Napište nám prosím, jak se vám můžeme ozvat.",
-    );
+    await expect(response.json()).resolves.toEqual({
+      ok: false,
+      message: "Napište nám prosím, jak se vám můžeme ozvat.",
+    });
     expect(response.status).toBe(400);
+    expect(response.headers.get("Content-Type")).toBe(
+      "application/json;charset=utf-8",
+    );
     expect(fetch).not.toHaveBeenCalled();
     expect(mocks.resendSend).not.toHaveBeenCalled();
   });

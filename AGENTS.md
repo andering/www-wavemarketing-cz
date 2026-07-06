@@ -23,7 +23,7 @@ When these sources conflict, follow the source-of-truth rules in `docs/decisions
 - Do not add new social-link placements or placeholder `#` links unless final URLs and placements are approved in the docs.
 - Do not use Stitch-hosted images as production assets unless the user confirms they are real client assets.
 - Use only approved production assets. Transformable raster assets should live under `src/assets/` for Astro image processing unless a source-of-truth asset gate says otherwise; assets that intentionally bypass processing may remain under `public/assets/`.
-- Keep the launch scope to the approved Czech homepage, supporting privacy/cookies page, thank-you page, and contact API endpoint unless `docs/decisions.md` and the relevant content specs are changed first.
+- Keep the launch scope to the approved Czech homepage, supporting privacy/cookies page, inline contact thank-you state, and contact API endpoint unless `docs/decisions.md` and the relevant content specs are changed first.
 
 ## Docs-First Workflow
 
@@ -67,7 +67,7 @@ Use these phases when planning or reviewing remaining work:
 - Canonical target: `www.wavemarketing.cz`.
 - Approved production assets: `public/assets/wave-marketing-logo.svg`, logo icon derivatives in `public/` and `public/assets/`, `src/assets/jana-skalnikova-photo.png`, `src/assets/wave-marketing-hero-collaboration.png`, and `src/assets/wave-marketing-process-solution-proposal.jpg`.
 - Primary conversion: low-friction contact by phone, email, or the approved simplified contact form.
-- Contact form: approved only as a minimal backend-backed form using Cloudflare Pages Functions, Cloudflare Turnstile, and Resend email delivery.
+- Contact form: approved only as a minimal backend-backed form using Cloudflare Pages Functions, Cloudflare Turnstile, Resend email delivery, and inline thank-you replacement after successful submission.
 - Cookie consent: approved using `vanilla-cookieconsent`, GTM container `GTM-WMJVN6WZ`, and denied-by-default optional categories.
 - Open input: additional social-link placements, if socials should appear outside the header/offcanvas.
 - Open input: hosting/deployment target.

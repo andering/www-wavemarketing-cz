@@ -197,7 +197,9 @@ export const siteContent = {
         "Souhlasím se zpracováním osobních údajů pro účely odpovědi na poptávku.",
       submit: "Odeslat nezávaznou poptávku",
       action: "/api/contact",
-      successRedirect: "/dekujeme/",
+      successTitle: "Díky za zprávu!",
+      successBody:
+        "Jdeme si udělat kávu, přečíst si vaše zadání a co nejdříve se vám ozveme s dalšími kroky.",
     },
     meeting:
       "Dojedeme za vámi kamkoli, případně se rádi přizpůsobíme online meetingu.",
@@ -335,13 +337,6 @@ export const siteContent = {
         duration: "až 2 roky",
       },
     ],
-  },
-  thankYou: {
-    href: "/dekujeme/",
-    title: "Díky za zprávu!",
-    body: "Jdeme si udělat kávu, přečíst si vaše zadání a co nejdříve se vám ozveme s dalšími kroky.",
-    returnLabel: "Zpět na úvod",
-    returnHref: "/",
   },
   cookieConsent: {
     gtmId: "GTM-WMJVN6WZ",

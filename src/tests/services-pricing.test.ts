@@ -64,4 +64,18 @@ describe("services pricing source-of-truth", () => {
     expect(priceTagIndex).toBeGreaterThan(headingEnd);
     expect(source).toContain("justify-content: flex-end");
   });
+
+  it("places each service icon inline at the start of the service title row", () => {
+    const source = readSource("src/components/ServiceList.astro");
+    const headingStart = source.indexOf('class="service-row__heading"');
+    const headingEnd = source.indexOf("</div>", headingStart);
+    const iconIndex = source.indexOf('class="service-row__icon"');
+    const titleIndex = source.indexOf("<h3>{service.title}</h3>");
+
+    expect(headingStart).toBeGreaterThan(-1);
+    expect(iconIndex).toBeGreaterThan(headingStart);
+    expect(iconIndex).toBeLessThan(titleIndex);
+    expect(iconIndex).toBeLessThan(headingEnd);
+    expect(source).not.toContain("grid-template-columns: auto 1fr");
+  });
 });

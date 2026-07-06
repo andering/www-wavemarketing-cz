@@ -17,7 +17,7 @@ The Astro static site has been implemented from the documentation stack and extr
 - Canonical target: `www.wavemarketing.cz`.
 - Primary conversion: low-friction contact by phone, email, or the approved simplified contact form.
 - Site format: one Czech homepage plus one supporting privacy/cookies legal-information page and a Cloudflare Pages Function for contact form submissions.
-- Contact form: approved for launch only as a minimal backend-backed form using Cloudflare Pages Functions, Cloudflare Turnstile, and Resend email delivery.
+- Contact form: approved for launch only as a minimal backend-backed form using Cloudflare Pages Functions, Cloudflare Turnstile, Resend email delivery, and inline thank-you replacement after successful submission.
 - References, case studies, client logos, testimonials, fake metrics, and placeholder links: omitted for launch.
 - Cookie consent: approved for launch using `vanilla-cookieconsent`, GTM container `GTM-WMJVN6WZ`, and denied-by-default optional categories.
 

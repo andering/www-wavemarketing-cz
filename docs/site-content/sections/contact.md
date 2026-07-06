@@ -40,19 +40,18 @@ Derived from `client_brief.md`, section `Kontakt`, with launch decisions recorde
 - Field placeholder: `Například: jana@firma.cz, +420 123 456 789 nebo krátce, s čím potřebujete pomoct.`
 - Consent label: `Souhlasím se zpracováním osobních údajů pro účely odpovědi na poptávku.`
 - Submit label: `Odeslat nezávaznou poptávku`
-- Success redirect: `/dekujeme/`
+- Success behavior: replace the full form-card content inline with the approved thank-you message after the backend accepts the submission. The original form heading, helper copy, fields, consent, Turnstile slot, and submit button must all be hidden.
 - Backend: submit to `/api/contact`, implemented as a Cloudflare Pages Function.
 - Email delivery: Resend notification email to the approved WAVE recipient address.
 - Bot protection: Cloudflare Turnstile token is required and verified server-side before email delivery.
 - Do not include the client's full six-field questionnaire for launch.
 
-## Thank-You Page Copy
+## Inline Thank-You Copy
 
-- Route: `/dekujeme/`
 - Heading: `Díky za zprávu!`
 - Body: `Jdeme si udělat kávu, přečíst si vaše zadání a co nejdříve se vám ozveme s dalšími kroky.`
-- Return link label: `Zpět na úvod`
-- Return link target: `/`
+- Icon: checkmark icon in the same circular primary-color icon-well treatment used by service rows in `Naše služby`.
+- Do not use a popup, redirect, or standalone thank-you fallback page for successful contact form submissions.
 
 ## Meeting Availability
 

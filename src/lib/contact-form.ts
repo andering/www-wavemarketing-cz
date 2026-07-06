@@ -175,11 +175,14 @@ export const sendContactEmail = async (
   return { ok: true, id: data?.id };
 };
 
-export const buildErrorResponse = (message: string, status: number) =>
-  new Response(message, {
+export const buildJsonResponse = (
+  body: { ok: true } | { ok: false; message: string },
+  status = 200,
+) =>
+  new Response(JSON.stringify(body), {
     status,
     headers: {
-      "Content-Type": "text/plain;charset=utf-8",
+      "Content-Type": "application/json;charset=utf-8",
       "Cache-Control": "no-store",
     },
   });

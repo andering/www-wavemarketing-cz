@@ -12,9 +12,9 @@ import { siteContent } from '../data/site';
     <div class="services__list">
       {siteContent.services.items.map((service) => (
         <article class="service-row">
-          <div class="service-row__icon" aria-hidden="true"><span class="material-symbols-outlined">{service.icon}</span></div>
           <div>
             <div class="service-row__heading">
+              <div class="service-row__icon" aria-hidden="true"><span class="material-symbols-outlined">{service.icon}</span></div>
               <h3>{service.title}</h3>
             </div>
             <p>{service.text}</p>
@@ -69,12 +69,8 @@ import { siteContent } from '../data/site';
   }
 
   .service-row {
-    align-items: flex-start;
     border-bottom: var(--ds-border-width) solid var(--ds-color-border);
     border-radius: var(--ds-radius-lg);
-    display: grid;
-    gap: var(--ds-space-6);
-    grid-template-columns: auto 1fr;
     padding: var(--ds-space-6);
   }
 
@@ -103,6 +99,7 @@ import { siteContent } from '../data/site';
   .service-row__heading {
     align-items: center;
     display: flex;
+    gap: var(--ds-space-4);
     margin-bottom: var(--ds-space-3);
   }
 
@@ -154,10 +151,6 @@ import { siteContent } from '../data/site';
   @media (max-width: 640px) {
     .services__header {
       margin-bottom: var(--ds-space-8);
-    }
-
-    .service-row {
-      grid-template-columns: 1fr;
     }
 
     .service-row__price-slot {

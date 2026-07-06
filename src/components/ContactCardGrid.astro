@@ -47,41 +47,51 @@ const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY;
           <p class="contact__meeting">{siteContent.contact.meeting}</p>
         </div>
       </article>
-      <article class="contact__form-card" aria-labelledby="contact-form-heading">
-        <div class="contact__form-intro">
-          <h3 id="contact-form-heading">{siteContent.contact.form.heading}</h3>
-          <p>{siteContent.contact.form.helper}</p>
-        </div>
-        <form class="contact__form" method="post" action={siteContent.contact.form.action}>
-          <div class="contact__field">
-            <label for="contact-message">{siteContent.contact.form.label}</label>
-            <textarea
-              id="contact-message"
-              name="contactMessage"
-              rows="5"
-              placeholder={siteContent.contact.form.placeholder}
-              required
-            ></textarea>
+      <article class="contact__form-card" aria-labelledby="contact-form-heading" data-contact-form-card>
+        <div class="contact__form-default" data-contact-default>
+          <div class="contact__form-intro">
+            <h3 id="contact-form-heading">{siteContent.contact.form.heading}</h3>
+            <p>{siteContent.contact.form.helper}</p>
           </div>
-          <label class="contact__consent" for="privacy-consent">
-            <input id="privacy-consent" type="checkbox" name="privacyConsent" required />
-            <span>{siteContent.contact.form.consent}</span>
-          </label>
-          {
-            turnstileSiteKey ? (
-              <div
-                class="cf-turnstile contact__turnstile"
-                data-sitekey={turnstileSiteKey}
-                data-response-field-name="cf-turnstile-response"
-              ></div>
-            ) : (
-              <input type="hidden" name="cf-turnstile-response" value="local-development" />
-            )
-          }
-          <button class="button button-primary contact__submit" type="submit">
-            {siteContent.contact.form.submit}
-          </button>
-        </form>
+          <form class="contact__form" method="post" action={siteContent.contact.form.action} data-contact-form>
+            <div class="contact__field">
+              <label for="contact-message">{siteContent.contact.form.label}</label>
+              <textarea
+                id="contact-message"
+                name="contactMessage"
+                rows="5"
+                placeholder={siteContent.contact.form.placeholder}
+                required
+              ></textarea>
+            </div>
+            <label class="contact__consent" for="privacy-consent">
+              <input id="privacy-consent" type="checkbox" name="privacyConsent" required />
+              <span>{siteContent.contact.form.consent}</span>
+            </label>
+            {
+              turnstileSiteKey ? (
+                <div
+                  class="cf-turnstile contact__turnstile"
+                  data-sitekey={turnstileSiteKey}
+                  data-response-field-name="cf-turnstile-response"
+                ></div>
+              ) : (
+                <input type="hidden" name="cf-turnstile-response" value="local-development" />
+              )
+            }
+            <button class="button button-primary contact__submit" type="submit">
+              {siteContent.contact.form.submit}
+            </button>
+            <p class="contact__form-error" role="alert" hidden data-contact-error></p>
+          </form>
+        </div>
+        <div class="contact__form-success" hidden tabindex="-1" data-contact-success>
+          <div class="contact__success-heading">
+            <span class="contact__success-icon material-symbols-outlined" aria-hidden="true">check_circle</span>
+            <h3>{siteContent.contact.form.successTitle}</h3>
+          </div>
+          <p>{siteContent.contact.form.successBody}</p>
+        </div>
       </article>
       <div class="contact__facts-strip" aria-label="Fakturační údaje">
         {siteContent.contact.company.map((item) => <span>{item}</span>)}
@@ -91,6 +101,69 @@ const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY;
 </section>
 
 {turnstileSiteKey && <script is:inline src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>}
+
+<script is:inline>
+  const contactFormCard = document.querySelector("[data-contact-form-card]");
+  const contactDefault = contactFormCard?.querySelector("[data-contact-default]");
+  const contactForm = contactFormCard?.querySelector("[data-contact-form]");
+  const contactSuccess = contactFormCard?.querySelector("[data-contact-success]");
+  const contactError = contactFormCard?.querySelector("[data-contact-error]");
+
+  contactForm?.addEventListener("submit", async (event) => {
+    event.preventDefault();
+
+    const submitButton = contactForm.querySelector('button[type="submit"]');
+    const originalButtonText = submitButton?.textContent;
+
+    if (contactError) {
+      contactError.hidden = true;
+      contactError.textContent = "";
+    }
+
+    if (submitButton) {
+      submitButton.disabled = true;
+      submitButton.textContent = "Odesíláme...";
+    }
+
+    try {
+      const response = await fetch(contactForm.action, {
+        body: new FormData(contactForm),
+        headers: { Accept: "application/json" },
+        method: "POST",
+      });
+      const payload = await response.json().catch(() => null);
+
+      if (!response.ok || !payload?.ok) {
+        throw new Error(
+          payload?.message ||
+            "Formulář se nepodařilo odeslat. Zkuste to prosím znovu nebo nám napište e-mailem.",
+        );
+      }
+
+      contactDefault.hidden = true;
+
+      if (contactSuccess) {
+        contactSuccess.hidden = false;
+        contactSuccess.focus({ preventScroll: true });
+        contactSuccess.scrollIntoView({ block: "nearest", behavior: "smooth" });
+      }
+    } catch (error) {
+      if (contactError) {
+        contactError.textContent = error instanceof Error
+          ? error.message
+          : "Formulář se nepodařilo odeslat. Zkuste to prosím znovu nebo nám napište e-mailem.";
+        contactError.hidden = false;
+      }
+
+      window.turnstile?.reset?.();
+    } finally {
+      if (!contactDefault.hidden && submitButton) {
+        submitButton.disabled = false;
+        submitButton.textContent = originalButtonText || "Odeslat nezávaznou poptávku";
+      }
+    }
+  });
+</script>
 
 <style>
   .contact {
@@ -265,9 +338,17 @@ const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY;
     margin: 0;
   }
 
+  .contact__form-default,
   .contact__form {
     display: grid;
     gap: var(--ds-space-4);
+  }
+
+  .contact__form-default[hidden],
+  .contact__form[hidden],
+  .contact__form-success[hidden],
+  .contact__form-error[hidden] {
+    display: none;
   }
 
   .contact__field {
@@ -323,6 +404,61 @@ const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY;
     justify-self: start;
   }
 
+  .contact__submit:disabled {
+    cursor: wait;
+    opacity: 0.72;
+  }
+
+  .contact__form-error {
+    background: color-mix(in srgb, var(--ds-color-error, #b42318) 10%, var(--ds-color-surface-raised));
+    border: var(--ds-border-width) solid color-mix(in srgb, var(--ds-color-error, #b42318) 28%, transparent);
+    border-radius: var(--ds-radius-lg);
+    color: var(--ds-color-error, #b42318);
+    margin: 0;
+    padding: var(--ds-space-3) var(--ds-space-4);
+  }
+
+  .contact__form-success {
+    align-content: center;
+    display: grid;
+    gap: var(--ds-space-3);
+    justify-items: start;
+    min-height: 260px;
+  }
+
+  .contact__form-success:focus {
+    outline: none;
+  }
+
+  .contact__success-heading {
+    align-items: center;
+    display: flex;
+    gap: var(--ds-space-4);
+  }
+
+  .contact__form-success .contact__success-icon {
+    align-items: center;
+    background: rgba(0, 59, 61, 0.06);
+    border-radius: var(--ds-radius-full);
+    color: var(--ds-color-primary);
+    display: inline-flex;
+    height: 52px;
+    justify-content: center;
+    width: 52px;
+  }
+
+  .contact__form-success h3 {
+    font-family: var(--ds-font-heading);
+    font-size: var(--ds-text-2xl);
+    margin: 0;
+  }
+
+  .contact__form-success p {
+    color: var(--ds-color-text-muted);
+    margin: 0;
+    max-width: 44rem;
+  }
+
   .contact__facts-strip {
     display: flex;
     flex-wrap: wrap;
@@ -354,16 +490,20 @@ const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY;
       grid-row: auto;
     }
 
-    .contact__person-head,
-    .contact__quick-actions,
-    .contact__quick-actions a {
+    .contact__person-head {
       align-items: center;
       flex-direction: column;
       text-align: center;
     }
 
+    .contact__quick-actions,
+    .contact__quick-actions a {
+      align-items: flex-start;
+      text-align: left;
+    }
+
     .contact__action-copy {
-      justify-items: center;
+      justify-items: start;
     }
   }
 </style>

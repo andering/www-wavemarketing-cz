@@ -1,5 +1,5 @@
 import {
-  buildErrorResponse,
+  buildJsonResponse,
   parseContactSubmission,
   sendContactEmail,
   verifyTurnstile,
@@ -33,7 +33,10 @@ export async function onRequestPost({ request, env }: PagesFunctionContext) {
     const parsed = parseContactSubmission(formData);
 
     if (!parsed.ok) {
-      return buildErrorResponse(parsed.message, parsed.status);
+      return buildJsonResponse(
+        { ok: false, message: parsed.message },
+        parsed.status,
+      );
     }
 
     const turnstile = await verifyTurnstile(
@@ -43,24 +46,31 @@ export async function onRequestPost({ request, env }: PagesFunctionContext) {
     );
 
     if (!turnstile.ok) {
-      return buildErrorResponse(turnstile.message, turnstile.status);
+      return buildJsonResponse(
+        { ok: false, message: turnstile.message },
+        turnstile.status,
+      );
     }
 
     const email = await sendContactEmail(env, parsed.value);
 
     if (!email.ok) {
-      return buildErrorResponse(email.message, email.status);
+      return buildJsonResponse(
+        { ok: false, message: email.message },
+        email.status,
+      );
     }
 
-    return Response.redirect(
-      new URL("/dekujeme/", request.url).toString(),
-      303,
-    );
+    return buildJsonResponse({ ok: true });
   } catch (error) {
     console.error("Contact form submission failed", error);
 
-    return buildErrorResponse(
-      "Formulář se nepodařilo odeslat. Zkuste to prosím znovu nebo nám napište e-mailem.",
+    return buildJsonResponse(
+      {
+        ok: false,
+        message:
+          "Formulář se nepodařilo odeslat. Zkuste to prosím znovu nebo nám napište e-mailem.",
+      },
       500,
     );
   }

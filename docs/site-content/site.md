@@ -97,5 +97,5 @@ Use Czech copy that feels warm, clear, human, reliable, and professional. Avoid 
 - Email delivery: Resend, using a secret API key stored in Cloudflare environment variables.
 - Bot protection: Cloudflare Turnstile; submissions must be rejected when Turnstile verification fails.
 - Do not send email directly from browser-side JavaScript and do not expose credentials in frontend code.
-- Successful submissions redirect to `/dekujeme/`.
-- Failed submissions should return a clear, non-technical Czech error response and preserve privacy by not echoing sensitive submission data into URLs.
+- Successful submissions return a JSON success response and replace the form card inline with the approved Czech thank-you message.
+- Failed submissions should return a clear, non-technical Czech JSON error response and preserve privacy by not echoing sensitive submission data into URLs.

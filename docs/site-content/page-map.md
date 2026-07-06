@@ -14,7 +14,7 @@ This file is the glue layer between content specs and the WAVE Marketing design 
 
 ## Global Page Contract
 
-- Page type: one-page Czech homepage plus one supporting privacy/cookies legal-information page, one thank-you page, and one Cloudflare Pages Function endpoint for contact submissions.
+- Page type: one-page Czech homepage plus one supporting privacy/cookies legal-information page and one Cloudflare Pages Function endpoint for contact submissions.
 - Language: Czech.
 - Canonical target: `www.wavemarketing.cz`.
 - Primary conversion: phone, email, or the simplified backend-backed contact form.
@@ -97,6 +97,7 @@ The implementation should define or generate these component/widget contracts fr
 - Design contracts: `Cards`, `Shape and Iconography System`, `Typography`, `Shopping Tag Labels`, `Buttons` if service links are rendered.
 - Content slots: section heading, intro copy, services lead, six service items with orientační starting-price tags, closing copy, and pricing note.
 - Service items: social media management, PPC campaigns, website and e-shop creation/editing, photo and video services, tailored marketing strategy, graphic services and visual creation.
+- Layout rule: render each service icon inside the service heading row immediately before the service title, so the icon starts the title line on desktop and mobile instead of sitting on a standalone line.
 - Price tag rule: render each service starting price in the bottom-right corner of its service row using the approved shopping-tag label treatment derived from the hero `marketing` inline tag; on mobile the tag may remain below the text and right-aligned within the row to preserve readability. Price labels use only the starting amount, for example `od 5 000 Kč`, without upper range or `/ měsíc` wording.
 - Launch rule: do not add services from Stitch that are not present in the content spec.
 
@@ -119,7 +120,7 @@ The implementation should define or generate these component/widget contracts fr
 - Variant: `compact-direct-contact-module`.
 - Design contracts: `Cards`, `Buttons`, `Images and Media`, `Forms`.
 - Content slots: section heading, intro copy, Jana contact tile, role, `+420` phone display under role, secondary deep-teal phone CTA labeled `Zavolejte Janě`, email CTA with address below `Napište nám`, meeting availability, simplified contact form, company details.
-- Layout rule: render a direct-contact bento using `--ds-radius-2xl`: Jana remains the most prominent card, email and availability remain immediately visible, the simplified form renders as a secondary card with one textarea, one consent checkbox, Turnstile slot, submit button, and clear status/error copy, and muted company facts sit below; stack on mobile.
+- Layout rule: render a direct-contact bento using `--ds-radius-2xl`: Jana remains the most prominent card, email and availability remain immediately visible, their circular icon wells remain left of the copy and left-aligned on mobile, the simplified form renders as a secondary card with one textarea, one consent checkbox, Turnstile slot, submit button, and clear status/error copy, and muted company facts sit below; stack on mobile.
 - Launch rule: no full questionnaire, no placeholder socials, no fake availability claims beyond approved copy.
 - Asset rule: render `src/assets/jana-skalnikova-photo.png` through Astro's image pipeline for the Jana contact tile.
 
@@ -128,16 +129,15 @@ The implementation should define or generate these component/widget contracts fr
 - Route: `/api/contact`.
 - Component/script: Cloudflare Pages Function.
 - Content source: `sections/contact.md` and `site.md` contact form backend requirements.
-- Required behavior: accept only POST submissions, parse form data server-side, validate the single contact message field and consent checkbox, verify Cloudflare Turnstile server-side, send notification email through Resend using environment secrets, and redirect successful submissions to `/dekujeme/`.
+- Required behavior: accept only POST submissions, parse form data server-side, validate the single contact message field and consent checkbox, verify Cloudflare Turnstile server-side, send notification email through Resend using environment secrets, and return a JSON success response for inline UI replacement.
 - Security rule: do not expose Resend API keys, Turnstile secret keys, or email credentials to browser code.
 
-### 6b. Thank-You Page
+### 6b. Inline Thank-You State
 
-- Route: `/dekujeme/`.
 - Content source: `sections/contact.md`.
-- Component/page: compact branded static page.
-- Design contract: `Typography`, `Buttons`, `Cards`, and the shared page shell.
-- Required behavior: show the approved thank-you heading and body copy, preserve the warm personal tone, and provide a return link to `/`.
+- Component/page: contact form card state inside `contact-card-grid`.
+- Design contract: `Typography`, `Cards`, and `Forms`.
+- Required behavior: after a successful JavaScript submission, hide the entire default form-card content, including the `Nechte nám na sebe kontakt` heading and helper copy, and show the approved thank-you state in the same card area. The success state uses the same circular primary-color icon-well treatment as service-row icons in `Naše služby`, placed inline at the start of the thank-you title row rather than on a standalone line. Do not use a popup, redirect, or standalone thank-you fallback page.
 
 ### 7. Intro
 

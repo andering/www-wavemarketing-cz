@@ -98,7 +98,7 @@ The visual panel should keep a transparent background so the wave motif sits dir
 
 ## Shape and Iconography System
 
-Icons are simple, filled or outlined, and placed inside circular or rounded icon wells. Use primary color for default icons and secondary color for warm emphasis. Keep icon sizes consistent within a component. Shape language should favor soft circles, pills, rounded cards, and organic crops.
+Icons are simple, filled or outlined, and placed inside circular or rounded icon wells. Use primary color for default icons and secondary color for warm emphasis. Keep icon sizes consistent within a component. Shape language should favor soft circles, pills, rounded cards, and organic crops. Service-row and contact-form success icons belong inline at the start of their title row, not as a standalone line above the title. Contact-form success confirmations should reuse the service-row circular icon-well language: a subtle primary-tint circular background, primary icon color, and the same approximate icon-well scale. On mobile, contact quick-action icon wells should stay left of the copy and left-aligned like desktop, not centered above the text.
 
 ## Motion System
 
