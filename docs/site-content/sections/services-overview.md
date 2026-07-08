@@ -26,25 +26,25 @@ Derived from `client_brief.md`, section `Naše služby`.
 
 `Sociální sítě již dávno nejsou jen o přidávání příspěvků, ale o budování komunity a naslouchání. Tvoříme obsah, který má duši a odráží skutečnou tvář vašeho podnikání. Postaráme se o kompletní komunikaci tak, abyste si se svými sledujícími vytvořili pevný a osobní vztah.`
 
-- Orientační cena: `od 5 000 Kč`
+- Orientační cena: `od 20 000 Kč`
 
 ### PPC kampaně (Výkonnostní marketing)
 
 `Zajistíme, aby vás vaši zákazníci našli přesně ve chvíli, kdy vás potřebují. Výsledky měříme přesně a komunikujeme je s vámi naprosto transparentně. Žádné schovávání se za složitá čísla nebo nesrozumitelné výrazy - jen chytré a efektivní investice do vašeho růstu.`
 
-- Orientační cena: `od 3 000 Kč`
+- Orientační cena: `od 15 000 Kč`
 
 ### Tvorba a úprava webových stránek & e-shopů
 
 `Váš web je vaším digitálním domovem. Vytvoříme pro vás nové webové stránky nebo e-shop od nuly, případně vdechneme nový život těm stávajícím. Důraz klademe na čistý, přehledný design a hlavně na to, aby se u vás návštěvníci cítili dobře a snadno našli to, co hledají.`
 
-- Orientační cena: `od 15 000 Kč`
+- Orientační cena: `od 40 000 Kč`
 
 ### Foto a video služby
 
 `Vizuální stránka je prvním krokem k navázání kontaktu. Ať už potřebujete profesionální fotografie produktů, zachycení atmosféry vašich služeb nebo tvorbu poutavých videí, postaráme se o produkci, která bude přirozená, estetická a autentická.`
 
-- Orientační cena: `od 5 000 Kč`
+- Orientační cena: `od 8 000 Kč`
 
 ### Marketingová strategie na míru
 
@@ -64,7 +64,7 @@ Derived from `client_brief.md`, section `Naše služby`.
 
 ## Pricing Note
 
-`Ceny jsou individuální dle specifikací a požadavků každého klienta. Rádi vám vše naceníme na míru.`
+`Ceny jsou individuální dle specifikací a požadavků každého klienta. Rádi vám vše naceníme na míru. Ceny jsou uvedeny bez DPH.`
 
 ## Content Requirements
 

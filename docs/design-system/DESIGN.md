@@ -28,7 +28,7 @@ Hero lead copy may use a single inline shopping-tag emphasis for a strategically
 
 ## Shopping Tag Labels
 
-Shopping-tag labels reuse the approved hero `marketing` inline tag language for small factual highlights such as service starting prices. Use deep teal background, off-white uppercase text, a thin raised off-white border, and a warm brown underside/shadow. Do not render a leading circular hole on shopping-tag labels. Service price tags belong at the bottom-right of each service row/card, separated from the service heading and body copy. Tags may be slightly rotated on desktop for a tactile feel, but keep rotation subtle and remove or reduce it on tight mobile layouts. Price tags must remain readable, factual, use only `od ... Kč` starting-price wording without upper ranges or `/ měsíc`, and be paired with the section-level individual-pricing note; they must not imply a guaranteed final quote.
+Shopping-tag labels reuse the approved hero `marketing` inline tag language for small factual highlights such as service starting prices. Use deep teal background, off-white uppercase text, a thin raised off-white border, and a warm brown underside/shadow. Do not render a leading circular hole on shopping-tag labels. Service price tags belong at the bottom-right of each service row/card, separated from the service heading and body copy. Tags may be slightly rotated on desktop for a tactile feel, but keep rotation subtle and remove or reduce it on tight mobile layouts. Price tags must remain readable, factual, use only approved starting-price wording without upper ranges or monthly wording, and be paired with the section-level individual-pricing note; they must not imply a guaranteed final quote.
 
 ## Layout System
 

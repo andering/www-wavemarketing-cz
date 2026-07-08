@@ -42,7 +42,7 @@ The implementation should define or generate these component/widget contracts fr
 - `logo-icons`: icon derivatives resolved at `public/favicon.ico`, `public/assets/wave-marketing-icon-32.png`, `public/assets/wave-marketing-apple-touch-icon.png`, and `public/assets/wave-marketing-icon-192.png`; used only for favicon and app-icon compatibility.
 - `jana-contact-photo`: resolved at `src/assets/jana-skalnikova-photo.png`; used by `contact-card-grid` through Astro's image pipeline.
 - `hero-visual`: resolved at `src/assets/wave-marketing-hero-collaboration.png`; used by `marketing-hero` inside an organic image frame through Astro's responsive image pipeline.
-- `process-solution-proposal-visual`: resolved at `src/assets/wave-marketing-process-solution-proposal.jpg`; used by step 3 of `process-steps` through Astro's responsive image pipeline.
+- `process-solution-proposal-visual`: resolved at `src/assets/wave-marketing-process-solution-proposal.png`; used by step 3 of `process-steps` through Astro's responsive image pipeline.
 - `social-links`: resolved for header use with supplied Facebook, Instagram, and LinkedIn URLs; no placeholder social URLs are allowed.
 - CDN delivery layer: after hosting is chosen, configure cache/compression and optional CDN image features, but do not depend on CDN image resizing as the only optimization for the approved raster assets.
 
@@ -98,7 +98,7 @@ The implementation should define or generate these component/widget contracts fr
 - Content slots: section heading, intro copy, services lead, six service items with orientační starting-price tags, closing copy, and pricing note.
 - Service items: social media management, PPC campaigns, website and e-shop creation/editing, photo and video services, tailored marketing strategy, graphic services and visual creation.
 - Layout rule: render each service icon inside the service heading row immediately before the service title, so the icon starts the title line on desktop and mobile instead of sitting on a standalone line.
-- Price tag rule: render each service starting price in the bottom-right corner of its service row using the approved shopping-tag label treatment derived from the hero `marketing` inline tag; on mobile the tag may remain below the text and right-aligned within the row to preserve readability. Price labels use only the starting amount, for example `od 5 000 Kč`, without upper range or `/ měsíc` wording.
+- Price tag rule: render each service starting price in the bottom-right corner of its service row using the approved shopping-tag label treatment derived from the hero `marketing` inline tag; on mobile the tag may remain below the text and right-aligned within the row to preserve readability. Price labels use only the approved starting amount, for example `od 15 000 Kč`, without upper ranges or monthly wording.
 - Launch rule: do not add services from Stitch that are not present in the content spec.
 
 ### 5. Cooperation Process

@@ -52,7 +52,7 @@ The launch site contains these content sections. Render order, anchors, navigati
 - Real WAVE Marketing logo icon assets for favicon/app-icon compatibility: `public/favicon.ico`, `public/assets/wave-marketing-icon-32.png`, `public/assets/wave-marketing-apple-touch-icon.png`, and `public/assets/wave-marketing-icon-192.png`.
 - Real Jana/contact photo asset: `src/assets/jana-skalnikova-photo.png`.
 - Approved hero collaboration image: `src/assets/wave-marketing-hero-collaboration.png`.
-- Approved process solution proposal image: `src/assets/wave-marketing-process-solution-proposal.jpg`.
+- Approved process solution proposal image: `src/assets/wave-marketing-process-solution-proposal.png`.
 
 ## Supporting Legal Page
 

@@ -17,17 +17,17 @@ describe("services pricing source-of-truth", () => {
     expect(siteContent.services.items).toMatchObject([
       {
         title: "Správa sociálních sítí",
-        priceRange: "od 5 000 Kč",
+        priceRange: "od 20 000 Kč",
       },
       {
         title: "PPC kampaně (Výkonnostní marketing)",
-        priceRange: "od 3 000 Kč",
+        priceRange: "od 15 000 Kč",
       },
       {
         title: "Tvorba a úprava webových stránek & e-shopů",
-        priceRange: "od 15 000 Kč",
+        priceRange: "od 40 000 Kč",
       },
-      { title: "Foto a video služby", priceRange: "od 5 000 Kč" },
+      { title: "Foto a video služby", priceRange: "od 8 000 Kč" },
       {
         title: "Marketingová strategie na míru",
         priceRange: "od 8 000 Kč",
@@ -40,8 +40,14 @@ describe("services pricing source-of-truth", () => {
 
     siteContent.services.items.forEach((service) => {
       expect(service.priceRange).not.toContain(" do ");
-      expect(service.priceRange).not.toContain("/ měsíc");
+      expect(service.priceRange).not.toContain("měsíčně");
     });
+  });
+
+  it("includes the approved VAT note below service prices", () => {
+    expect(siteContent.services.pricingNote).toContain(
+      "Ceny jsou uvedeny bez DPH.",
+    );
   });
 
   it("renders service price ranges with the approved tag class", () => {

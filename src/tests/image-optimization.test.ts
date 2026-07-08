@@ -31,7 +31,7 @@ describe("approved image asset locations", () => {
       true,
     );
     expect(
-      exists("src/assets/wave-marketing-process-solution-proposal.jpg"),
+      exists("src/assets/wave-marketing-process-solution-proposal.png"),
     ).toBe(true);
     expect(exists("src/assets/jana-skalnikova-photo.png")).toBe(true);
 
@@ -39,7 +39,7 @@ describe("approved image asset locations", () => {
       false,
     );
     expect(
-      exists("public/assets/wave-marketing-process-solution-proposal.jpg"),
+      exists("public/assets/wave-marketing-process-solution-proposal.png"),
     ).toBe(false);
     expect(exists("public/assets/jana-skalnikova-photo.png")).toBe(false);
   });
@@ -88,7 +88,7 @@ describe("Astro image component usage", () => {
     const source = readSource("src/components/ProcessSteps.astro");
 
     expect(source).toContain('import { Picture } from "astro:assets"');
-    expect(source).toContain("wave-marketing-process-solution-proposal.jpg");
+    expect(source).toContain("wave-marketing-process-solution-proposal.png");
     expect(source).toContain("<Picture");
     expect(source).toContain('fallbackFormat="webp"');
     expect(source).toContain('loading="lazy"');

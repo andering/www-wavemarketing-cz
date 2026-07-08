@@ -36,12 +36,13 @@ The Astro static site has been implemented from the documentation stack and extr
 - Logo icon derivatives: `public/favicon.ico`, `public/assets/wave-marketing-icon-32.png`, `public/assets/wave-marketing-apple-touch-icon.png`, and `public/assets/wave-marketing-icon-192.png` for favicon and app-icon compatibility.
 - Jana/contact photo: `src/assets/jana-skalnikova-photo.png`, rendered through Astro's build-time image pipeline.
 - Hero collaboration image: `src/assets/wave-marketing-hero-collaboration.png`, rendered through Astro's build-time image pipeline.
-- Process solution proposal image: `src/assets/wave-marketing-process-solution-proposal.jpg`, rendered through Astro's build-time image pipeline.
+- Process solution proposal image: `src/assets/wave-marketing-process-solution-proposal.png`, rendered through Astro's build-time image pipeline.
 
 ## Asset Extraction Notes
 
 - The original launch logo and Jana/contact photo were extracted from the approved Stitch visual source after user confirmation that they are real client assets.
 - The rendered site logo now uses the verified vector asset from `/app/logo.zip`; ICO/PNG derivatives generated from that same logo source are used only where browser or platform icon compatibility benefits from raster assets.
+- The process solution proposal image was replaced with the user-supplied generated source `/app/Gemini_Generated_Image_bovyvrbovyvrbovy.png` and stored as `src/assets/wave-marketing-process-solution-proposal.png` for Astro optimization.
 - Other Stitch-hosted imagery remains excluded from production unless explicitly approved later.
 - Production code must reference the local hero asset, not the original Stitch-hosted URL.
 - Transformable raster images are stored in `src/assets/` so Astro can generate responsive AVIF/WebP outputs. CDN delivery may be layered on later, but the repository build should not depend on CDN image resizing for launch performance.

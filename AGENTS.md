@@ -65,7 +65,7 @@ Use these phases when planning or reviewing remaining work:
 ## Current Launch Constraints
 
 - Canonical target: `www.wavemarketing.cz`.
-- Approved production assets: `public/assets/wave-marketing-logo.svg`, logo icon derivatives in `public/` and `public/assets/`, `src/assets/jana-skalnikova-photo.png`, `src/assets/wave-marketing-hero-collaboration.png`, and `src/assets/wave-marketing-process-solution-proposal.jpg`.
+- Approved production assets: `public/assets/wave-marketing-logo.svg`, logo icon derivatives in `public/` and `public/assets/`, `src/assets/jana-skalnikova-photo.png`, `src/assets/wave-marketing-hero-collaboration.png`, and `src/assets/wave-marketing-process-solution-proposal.png`.
 - Primary conversion: low-friction contact by phone, email, or the approved simplified contact form.
 - Contact form: approved only as a minimal backend-backed form using Cloudflare Pages Functions, Cloudflare Turnstile, Resend email delivery, and inline thank-you replacement after successful submission.
 - Cookie consent: approved using `vanilla-cookieconsent`, GTM container `GTM-WMJVN6WZ`, and denied-by-default optional categories.

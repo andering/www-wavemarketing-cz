@@ -89,25 +89,25 @@ export const siteContent = {
     items: [
       {
         title: "Správa sociálních sítí",
-        priceRange: "od 5 000 Kč",
+        priceRange: "od 20 000 Kč",
         icon: "hub",
         text: "Sociální sítě již dávno nejsou jen o přidávání příspěvků, ale o budování komunity a naslouchání. Tvoříme obsah, který má duši a odráží skutečnou tvář vašeho podnikání. Postaráme se o kompletní komunikaci tak, abyste si se svými sledujícími vytvořili pevný a osobní vztah.",
       },
       {
         title: "PPC kampaně (Výkonnostní marketing)",
-        priceRange: "od 3 000 Kč",
+        priceRange: "od 15 000 Kč",
         icon: "ads_click",
         text: "Zajistíme, aby vás vaši zákazníci našli přesně ve chvíli, kdy vás potřebují. Výsledky měříme přesně a komunikujeme je s vámi naprosto transparentně. Žádné schovávání se za složitá čísla nebo nesrozumitelné výrazy - jen chytré a efektivní investice do vašeho růstu.",
       },
       {
         title: "Tvorba a úprava webových stránek & e-shopů",
-        priceRange: "od 15 000 Kč",
+        priceRange: "od 40 000 Kč",
         icon: "web",
         text: "Váš web je vaším digitálním domovem. Vytvoříme pro vás nové webové stránky nebo e-shop od nuly, případně vdechneme nový život těm stávajícím. Důraz klademe na čistý, přehledný design a hlavně na to, aby se u vás návštěvníci cítili dobře a snadno našli to, co hledají.",
       },
       {
         title: "Foto a video služby",
-        priceRange: "od 5 000 Kč",
+        priceRange: "od 8 000 Kč",
         icon: "photo_camera",
         text: "Vizuální stránka je prvním krokem k navázání kontaktu. Ať už potřebujete profesionální fotografie produktů, zachycení atmosféry vašich služeb nebo tvorbu poutavých videí, postaráme se o produkci, která bude přirozená, estetická a autentická.",
       },
@@ -127,7 +127,7 @@ export const siteContent = {
     closing:
       "Chcete to probrat osobně? Každá skvělá spolupráce začíná u kávy (nebo čaje) a dobrého rozhovoru. Napište nám a pojďme se bavit o tom, jak můžeme vašemu projektu pomoci růst.",
     pricingNote:
-      "Ceny jsou individuální dle specifikací a požadavků každého klienta. Rádi vám vše naceníme na míru.",
+      "Ceny jsou individuální dle specifikací a požadavků každého klienta. Rádi vám vše naceníme na míru. Ceny jsou uvedeny bez DPH.",
   },
   process: {
     heading: "Jak probíhá spolupráce",
