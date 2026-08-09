@@ -23,6 +23,28 @@ const heroAvifImages = await Promise.all(
 const heroAvifSrcSet = heroAvifImages
   .map((image, index) => `${image.src} ${heroImageWidths[index]}w`)
   .join(", ");
+const canonicalUrl = siteContent.meta.canonicalUrl;
+const socialHeroImage = await getImage({ src: heroImage, format: "webp", width: 1200 });
+const socialImageUrl = new URL(socialHeroImage.src, canonicalUrl).href;
+const socialImageAlt = `Tým ${siteContent.footer.brand} při společné práci`;
+const organizationJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: siteContent.contact.company[0],
+  url: canonicalUrl,
+  logo: new URL(siteContent.assets.logo, canonicalUrl).href,
+  telephone: siteContent.contact.person.phoneHref.replace("tel:", ""),
+  email: siteContent.contact.email.display,
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: siteContent.contact.company[3],
+  },
+  sameAs: siteContent.socialLinks.map((link) => link.href),
+};
+const organizationJsonLdContent = JSON.stringify(organizationJsonLd).replace(
+  /</g,
+  "\\u003c",
+);
 ---
 
 <!doctype html>
@@ -32,6 +54,19 @@ const heroAvifSrcSet = heroAvifImages
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{siteContent.meta.title}</title>
     <meta name="description" content={siteContent.meta.description} />
+    <link rel="canonical" href={canonicalUrl} />
+    <meta property="og:title" content={siteContent.meta.title} />
+    <meta property="og:description" content={siteContent.meta.description} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content={socialImageUrl} />
+    <meta property="og:image:alt" content={socialImageAlt} />
+    <meta name="twitter:title" content={siteContent.meta.title} />
+    <meta name="twitter:description" content={siteContent.meta.description} />
+    <meta name="twitter:url" content={canonicalUrl} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:image" content={socialImageUrl} />
+    <script is:inline type="application/ld+json" set:html={organizationJsonLdContent} />
     <link
       rel="preload"
       as="image"

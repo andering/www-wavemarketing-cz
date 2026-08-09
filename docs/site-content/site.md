@@ -84,6 +84,10 @@ Use Czech copy that feels warm, clear, human, reliable, and professional. Avoid 
 - Suggested title: `WAVE marketing s.r.o. | Přivedeme váš business na tu správnou vlnu`
 - Suggested meta description: `WAVE marketing s.r.o. pomáhá firmám se strategií, sociálními sítěmi, PPC kampaněmi a obsahem. Děláme marketing lidsky, spolehlivě a s péčí.`
 - H1 source: `Přivedeme váš business na tu správnou vlnu`
+- Canonical domain: `https://www.wavemarketing.cz`; each indexable page must include its canonical URL.
+- Social metadata: homepage and privacy/cookies page must provide Open Graph and Twitter title, description, URL, image, `og:type` of `website`, and truthful `og:image:alt` metadata. The homepage uses `twitter:card` of `summary_large_image` with the approved local hero image; the privacy/cookies page uses `twitter:card` of `summary` with the approved raster logo icon asset `public/assets/wave-marketing-icon-192.png`.
+- Crawling: publish a root `robots.txt` that permits indexing and names `https://www.wavemarketing.cz/sitemap.xml`; publish a root `sitemap.xml` listing the homepage and `/ochrana-osobnich-udaju-a-cookies/`.
+- Structured data: homepage must publish an `Organization` JSON-LD object using only the approved company name, canonical URL, logo, telephone number, email address, postal address, and social profile URLs.
 
 ## Future Scope
 

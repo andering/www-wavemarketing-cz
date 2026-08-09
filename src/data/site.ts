@@ -11,6 +11,7 @@ export const siteContent = {
     description:
       "WAVE marketing s.r.o. pomáhá firmám se strategií, sociálními sítěmi, PPC kampaněmi a obsahem. Děláme marketing lidsky, spolehlivě a s péčí.",
     language: "cs",
+    canonicalUrl: "https://www.wavemarketing.cz",
   },
   assets: {
     logo: "/assets/wave-marketing-logo.svg",
