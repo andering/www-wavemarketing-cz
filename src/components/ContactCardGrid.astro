@@ -141,6 +141,7 @@ const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY;
       }
 
       contactDefault.hidden = true;
+      window.dataLayer.push({ event: "contact_form_success" });
 
       if (contactSuccess) {
         contactSuccess.hidden = false;

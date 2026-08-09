@@ -86,6 +86,18 @@ describe("cookie consent implementation wiring", () => {
     );
   });
 
+  it("notifies GTM after updating consent", () => {
+    const source = readSource("src/scripts/cookie-consent.ts");
+    const consentUpdate = 'gtag("consent", "update"';
+    const consentEvent =
+      'window.dataLayer.push({ event: "cookie_consent_update" });';
+
+    expect(source).toContain(consentEvent);
+    expect(source.indexOf(consentUpdate)).toBeLessThan(
+      source.indexOf(consentEvent),
+    );
+  });
+
   it("renders the consent component on the homepage", () => {
     const source = readSource("src/pages/index.astro");
 

@@ -23,6 +23,7 @@ const updateGoogleConsent = () => {
     ad_user_data: marketingGranted ? "granted" : "denied",
     ad_personalization: marketingGranted ? "granted" : "denied",
   });
+  window.dataLayer.push({ event: "cookie_consent_update" });
 };
 
 const loadGoogleTagManager = (gtmId: string) => {

@@ -29,6 +29,12 @@ The Astro static site has been implemented from the documentation stack and extr
 - References, case studies, client logos, testimonials, fake metrics, and placeholder links: omitted for launch.
 - Cookie consent: approved for launch using `vanilla-cookieconsent`, GTM container `GTM-WMJVN6WZ`, and denied-by-default optional categories.
 
+## Analytics Configuration
+
+- GA4 property: `properties/542330532` (`wavemarketing.cz`) in account `accounts/398526472` (`prudic.cz`).
+- Web stream: `15118334044` for `https://www.wavemarketing.cz` with Measurement ID `G-V1DT4J144T`.
+- GTM container `GTM-WMJVN6WZ` version 2 is live with consent-gated GA4 page-view and `generate_lead` configuration. The corresponding site source is pending Cloudflare Pages deployment from this commit; GA4 must ingest `generate_lead` before it can be marked as a key event.
+
 ## Open Inputs
 
 - Additional social-link placements, if socials should appear outside the header/offcanvas.

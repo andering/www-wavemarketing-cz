@@ -139,6 +139,7 @@ The implementation should define or generate these component/widget contracts fr
 - Component/page: contact form card state inside `contact-card-grid`.
 - Design contract: `Typography`, `Cards`, and `Forms`.
 - Required behavior: after a successful JavaScript submission, hide the entire default form-card content, including the `Nechte nám na sebe kontakt` heading and helper copy, and show the approved thank-you state in the same card area. The success state uses the same circular primary-color icon-well treatment as service-row icons in `Naše služby`, placed inline at the start of the thank-you title row rather than on a standalone line. Do not use a popup, redirect, or standalone thank-you fallback page.
+- Analytics behavior: only after a successful API response, push `contact_form_success` to the data layer without the contact message, contact details, Turnstile token, or other personal data. GTM maps this event to GA4 `generate_lead`; no analytics event is sent until analytics consent is granted.
 
 ### 7. Intro
 
@@ -169,6 +170,7 @@ The implementation should define or generate these component/widget contracts fr
 - Variant: `bottom-bar-with-preferences-drawer`.
 - Design contract: `Cookie Consent` from the design system.
 - Required behavior: initialize optional consent as denied before GTM loads; load GTM container `GTM-WMJVN6WZ`; manage GA4 through GTM, not direct GA4 page code; update consent when users accept all, reject non-essential cookies, or save category preferences.
+- Analytics activation: after each consent update, push a non-personal-data `cookie_consent_update` data-layer event. GTM uses this event and granted `analytics` consent to load GA4 and send its initial page view; it must not send GA4 events when analytics consent is denied.
 - Category model: `necessary` is enabled and read-only; `analytics` gates GA4/analytics tags through GTM; `marketing` is prepared for future ad pixels or remarketing tools through GTM.
 - Footer integration: the footer `Nastavení cookies` control reopens the preferences UI without adding a placeholder privacy/GDPR link.
 

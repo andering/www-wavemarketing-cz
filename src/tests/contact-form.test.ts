@@ -70,6 +70,14 @@ describe("contact form implementation wiring", () => {
     expect(source).toContain("data-contact-error");
     expect(source).toContain("fetch(contactForm.action");
     expect(source).toContain("contactDefault.hidden = true");
+    expect(source).toContain(
+      'window.dataLayer.push({ event: "contact_form_success" });',
+    );
+    expect(
+      source.indexOf(
+        'window.dataLayer.push({ event: "contact_form_success" });',
+      ),
+    ).toBeGreaterThan(source.indexOf("contactDefault.hidden = true"));
     expect(source).toContain('class="contact__success-heading"');
     expect(
       source.indexOf('class="contact__success-icon material-symbols-outlined"'),
