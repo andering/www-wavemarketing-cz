@@ -6,7 +6,7 @@ This file defines the content architecture for the launch version of canonical `
 
 ## Source Of Truth
 
-- Content source: `client_brief.md`.
+- Content source: `docs/site-content/`.
 - Visual source: `docs/design-system/`.
 - Conflict rule: use this website content spec for what the page says and what content exists; use the design system for how it looks.
 

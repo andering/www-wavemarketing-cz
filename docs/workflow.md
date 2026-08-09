@@ -28,13 +28,14 @@ Responsibilities:
 
 ### Layer 2: Content And Section Specs
 
-Purpose: convert `client_brief.md` into structured content files without visual styling decisions.
+Purpose: define structured content files without visual styling decisions.
 
 Path:
 
 ```text
 docs/site-content/
   site.md
+  privacy-cookies.md
   sections/
     hero.md
     intro.md
@@ -76,7 +77,6 @@ Responsibilities:
 - For section ordering, navigation, anchors, or component responsibilities, update `docs/site-content/page-map.md` first.
 - After meaningful durable cross-cutting decisions, update `docs/decisions.md` and the relevant canonical file.
 - Update `docs/status.md` for current open inputs, resolved assets, or active phase changes.
-- Update `docs/history.md` only when a chronological audit trail is useful.
 
 ## Implementation Phases
 

@@ -6,7 +6,7 @@ Introduce WAVE Marketing immediately, state the motto, and move visitors toward 
 
 ## Source
 
-Derived from `client_brief.md`, section `Úvod` and `Hero sekce`.
+This file is the canonical approved content source for the hero section.
 
 ## Content
 

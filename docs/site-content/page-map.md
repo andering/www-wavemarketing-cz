@@ -8,6 +8,7 @@ This file is the glue layer between content specs and the WAVE Marketing design 
 
 - Design system: `../design-system/`
 - Site content spec: `site.md`
+- Privacy/cookies content spec: `privacy-cookies.md`
 - Section content specs: `sections/*.md`
 - Durable cross-cutting production decisions: `../decisions.md`
 - Process/status docs: `../workflow.md` and `../status.md`

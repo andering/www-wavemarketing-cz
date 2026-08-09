@@ -6,7 +6,7 @@ Show what WAVE Marketing helps with in benefit-led language, not as a dry servic
 
 ## Source
 
-Derived from `client_brief.md`, section `Naše služby`.
+This file is the canonical approved content source for the services overview section.
 
 ## Section Heading
 
@@ -26,7 +26,7 @@ Derived from `client_brief.md`, section `Naše služby`.
 
 `Sociální sítě již dávno nejsou jen o přidávání příspěvků, ale o budování komunity a naslouchání. Tvoříme obsah, který má duši a odráží skutečnou tvář vašeho podnikání. Postaráme se o kompletní komunikaci tak, abyste si se svými sledujícími vytvořili pevný a osobní vztah.`
 
-- Orientační cena: `od 20 000 Kč`
+- Orientační cena: `od 10 000 Kč`
 
 ### PPC kampaně (Výkonnostní marketing)
 

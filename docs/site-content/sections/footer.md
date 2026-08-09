@@ -6,7 +6,7 @@ Close the page with concise brand positioning, navigation, and factual company i
 
 ## Source
 
-Derived from `client_brief.md`, site decisions, and launch omissions.
+This file is the canonical approved content source for the footer; cross-cutting decisions and launch omissions are recorded in `docs/decisions.md`.
 
 ## Brand Label
 

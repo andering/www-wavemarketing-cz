@@ -6,7 +6,7 @@ Make the final contact step friendly, direct, and low-friction, while allowing v
 
 ## Source
 
-Derived from `client_brief.md`, section `Kontakt`, with launch decisions recorded in `docs/decisions.md`.
+This file is the canonical approved content source for the contact section; cross-cutting launch decisions are recorded in `docs/decisions.md`.
 
 ## Section Heading
 

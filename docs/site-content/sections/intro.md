@@ -6,7 +6,7 @@ Explain who WAVE Marketing is and frame the relationship as partnership, listeni
 
 ## Source
 
-Derived from `client_brief.md`, section `Kdo jsme (Představení přístupu)`.
+This file is the canonical approved content source for the intro section.
 
 ## Eyebrow
 

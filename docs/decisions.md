@@ -8,17 +8,17 @@ Create a simple, static, production-ready site where design and content are gene
 
 ## Confirmed Sources
 
-- Content source of truth: `client_brief.md` and `docs/site-content/`.
+- Content source of truth: `docs/site-content/`.
 - Visual source of truth: `docs/design-system/`.
 - Section/component mapping: `docs/site-content/page-map.md`.
 - Target site: canonical `www.wavemarketing.cz`.
 
 ## Source-Of-Truth Rules
 
-- Use `client_brief.md` and `docs/site-content/` for page structure, Czech copy, services, contact data, legal/company data, and content requirements.
+- Use `docs/site-content/` for Czech copy, services, contact data, legal/company data, and content requirements.
 - Use `docs/design-system/` for visual direction: colors, typography, layout feel, spacing, cards, buttons, header/footer style, imagery treatment, and interaction style.
 - Use `docs/site-content/page-map.md` for section order, anchors, navigation, component responsibilities, and section-specific variants.
-- Ignore visual notes from the brief when they conflict with the approved design system.
+- Ignore visual source material when it conflicts with the approved design system.
 - Ignore content from visual source material when it conflicts with the content specs.
 - If a conflict is ambiguous, ask before deciding.
 - Do not use fake production content from Stitch or other visual source material.
@@ -48,8 +48,13 @@ Create a simple, static, production-ready site where design and content are gene
 - Cross-cutting decisions that affect more than one domain belong in this file.
 - Current state, open inputs, and resolved assets belong in `docs/status.md`.
 - Process rules belong in `docs/workflow.md`.
-- Chronological audit notes belong in `docs/history.md`.
 
 ## Testing Decision
 
 - 2026-06-19: Tests were demoted from source-of-truth documents to optional validators. The current priority is to keep all important product, content, visual, and launch decisions in the canonical specs. Future tests should only check spec completeness or implementation conformance against those specs.
+
+## Documentation Consolidation
+
+- `docs/site-content/` is the sole canonical source for active site content.
+- Active requirements must live in this file, `docs/site-content/`, `docs/design-system/`, `docs/site-content/page-map.md`, `docs/status.md`, or `docs/workflow.md`, according to their ownership.
+- `AGENTS.md` is a compact entry point to the canonical documentation and a home only for agent-specific safeguards. It must not duplicate project workflow, implementation phases, technical stack, or current launch-state details from the owned documentation.

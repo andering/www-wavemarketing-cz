@@ -7,10 +7,18 @@ This file tracks current state, open inputs, and resolved assets for active work
 The three-layer documentation stack is in place and verified:
 
 - Layer 1 design system: `docs/design-system/`.
-- Layer 2 content specs: `docs/site-content/site.md` and `docs/site-content/sections/*.md`.
+- Layer 2 content specs: `docs/site-content/site.md`, `docs/site-content/sections/*.md`, and `docs/site-content/privacy-cookies.md`.
 - Layer 3 component mapping: `docs/site-content/page-map.md`.
 
 The Astro static site has been implemented from the documentation stack and extracted production assets. Current refinement work should update the canonical design-system and site specs first, then mirror those decisions in implementation.
+
+## Deployment
+
+- Cloudflare Pages project: `www-wavemarketing-cz`, connected directly to GitHub repository `andering/www-wavemarketing-cz` with `main` as its production branch. No repository GitHub Actions workflow is used for deployment.
+- Build configuration: `npm ci && npm run build`, publishing `dist/`. Cloudflare Pages Functions are enabled.
+- Custom domain: `www.wavemarketing.cz` is active and validated.
+- Latest successful production deployment: commit `1e81764d8f95643a80f8cee0c6f97382b2d28f06` on 2026-07-08.
+- Current public-access state: `www.wavemarketing.cz` is publicly reachable. The Cloudflare Access application was removed on 2026-08-09; run a live smoke test before treating the launch as complete.
 
 ## Current Launch Constraints
 
@@ -24,11 +32,10 @@ The Astro static site has been implemented from the documentation stack and extr
 ## Open Inputs
 
 - Additional social-link placements, if socials should appear outside the header/offcanvas.
-- Hosting/deployment target for `www.wavemarketing.cz`.
 - Client/legal review of `docs/site-content/privacy-cookies.md` before treating the privacy/cookies page as final legal copy.
 - Future non-GTM tracking tools, if any, must be added to the consent configuration and GTM setup before launch use.
-- Resend account/API key, verified sending domain/address, recipient email, and Cloudflare Turnstile site/secret keys for the contact form backend.
-- CDN image features and cache/compression policy after the hosting/deployment target is chosen.
+- Verify the production contact form with a live submission after public access is enabled. Pages secret values are intentionally unreadable through the API, so this must confirm the Resend and Turnstile configuration end to end.
+- CDN image features and cache/compression policy for the Cloudflare Pages production setup.
 
 ## Resolved Production Assets
 

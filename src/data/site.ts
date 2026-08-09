@@ -89,7 +89,7 @@ export const siteContent = {
     items: [
       {
         title: "Správa sociálních sítí",
-        priceRange: "od 20 000 Kč",
+        priceRange: "od 10 000 Kč",
         icon: "hub",
         text: "Sociální sítě již dávno nejsou jen o přidávání příspěvků, ale o budování komunity a naslouchání. Tvoříme obsah, který má duši a odráží skutečnou tvář vašeho podnikání. Postaráme se o kompletní komunikaci tak, abyste si se svými sledujícími vytvořili pevný a osobní vztah.",
       },

@@ -17,7 +17,7 @@ describe("services pricing source-of-truth", () => {
     expect(siteContent.services.items).toMatchObject([
       {
         title: "Správa sociálních sítí",
-        priceRange: "od 20 000 Kč",
+        priceRange: "od 10 000 Kč",
       },
       {
         title: "PPC kampaně (Výkonnostní marketing)",
