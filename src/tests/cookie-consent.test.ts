@@ -1,8 +1,14 @@
 import { readFileSync } from "node:fs";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
-import { describe, expect, it } from "vitest";
+import { afterEach, describe, expect, it, vi } from "vitest";
 import { siteContent } from "../data/site";
+
+vi.mock("vanilla-cookieconsent", () => ({
+  acceptedCategory: vi.fn(() => false),
+  run: vi.fn(),
+  showPreferences: vi.fn(),
+}));
 
 const repositoryRoot = resolve(
   dirname(fileURLToPath(import.meta.url)),
@@ -10,6 +16,12 @@ const repositoryRoot = resolve(
 );
 const readSource = (path: string) =>
   readFileSync(resolve(repositoryRoot, path), "utf8");
+
+afterEach(() => {
+  vi.clearAllMocks();
+  vi.resetModules();
+  vi.unstubAllGlobals();
+});
 
 describe("cookie consent source-of-truth", () => {
   it("uses approved concrete hero CTA labels", () => {
@@ -73,6 +85,14 @@ describe("cookie consent source-of-truth", () => {
 });
 
 describe("cookie consent implementation wiring", () => {
+  it("queues Google commands as Arguments objects", () => {
+    const source = readSource("src/scripts/cookie-consent.ts");
+
+    expect(source).toContain("function gtag(..._args: unknown[])");
+    expect(source).toContain("window.dataLayer.push(arguments);");
+    expect(source).not.toContain("window.dataLayer.push(args);");
+  });
+
   it("initializes denied consent before loading GTM", () => {
     const source = readSource("src/scripts/cookie-consent.ts");
 
@@ -84,6 +104,49 @@ describe("cookie consent implementation wiring", () => {
     expect(source).toContain(
       "loadGoogleTagManager(siteContent.cookieConsent.gtmId)",
     );
+  });
+
+  it("loads production GTM only on the canonical hostname", () => {
+    const source = readSource("src/scripts/cookie-consent.ts");
+    const hostnameGuard =
+      "if (window.location.hostname === CANONICAL_HOSTNAME)";
+
+    expect(source).toContain(
+      'const CANONICAL_HOSTNAME = "www.wavemarketing.cz";',
+    );
+    expect(source).toContain(hostnameGuard);
+    expect(source.indexOf(hostnameGuard)).toBeLessThan(
+      source.indexOf("loadGoogleTagManager(siteContent.cookieConsent.gtmId)"),
+    );
+  });
+
+  it("initializes denied consent without appending GTM on a preview hostname", async () => {
+    const append = vi.fn();
+    const createElement = vi.fn(() => ({ dataset: {} }));
+
+    vi.stubGlobal("window", {
+      location: { hostname: "preview.wavemarketing.example" },
+    });
+    vi.stubGlobal("document", {
+      createElement,
+      head: { append },
+      querySelector: vi.fn(() => null),
+      querySelectorAll: vi.fn(() => []),
+    });
+
+    await import("../scripts/cookie-consent");
+
+    const dataLayer = (window as Window).dataLayer;
+
+    expect(
+      dataLayer.map((entry) => Array.from(entry as ArrayLike<unknown>)),
+    ).toContainEqual([
+      "consent",
+      "default",
+      expect.objectContaining({ analytics_storage: "denied" }),
+    ]);
+    expect(createElement).not.toHaveBeenCalled();
+    expect(append).not.toHaveBeenCalled();
   });
 
   it("notifies GTM after updating consent", () => {

@@ -98,8 +98,13 @@ Use Czech copy that feels warm, clear, human, reliable, and professional. Avoid 
 ## Contact Form Backend Requirements
 
 - Form endpoint: Cloudflare Pages Function at `/api/contact`.
-- Email delivery: Resend, using a secret API key stored in Cloudflare environment variables.
+- Accepted production hostname: `www.wavemarketing.cz`; reject the public `pages.dev` aliases and other hosts at the Function boundary.
+- Accepted request media types: `multipart/form-data` and `application/x-www-form-urlencoded` only.
+- Maximum request body: 16 KiB, enforced while reading the body before form parsing and independently of the declared `Content-Length`.
+- Email delivery: Resend, using a secret API key stored in Cloudflare environment variables; the Resend API request must use a cancellable 10-second timeout.
 - Bot protection: Cloudflare Turnstile; submissions must be rejected when Turnstile verification fails.
+- Turnstile integration: render action `contact`; reject tokens longer than 2,048 characters; apply a 10-second Siteverify timeout; and require successful verification, hostname `www.wavemarketing.cz`, and action `contact` before email delivery.
+- Abuse control: Cloudflare rate-limits every `POST` request on canonical `www.wavemarketing.cz` to 2 requests per client IP per 10 seconds and blocks the client for 10 seconds when a third matching request exceeds that threshold. Matching the canonical host and method without a path predicate is intentional because the contact Function is the site's only approved `POST` surface and Pages can route non-canonical path spellings to it after path normalization. Application validation remains authoritative for aliases and requests that do not pass through the custom-domain zone.
 - Do not send email directly from browser-side JavaScript and do not expose credentials in frontend code.
 - Successful submissions return a JSON success response and replace the form card inline with the approved Czech thank-you message.
-- Failed submissions should return a clear, non-technical Czech JSON error response and preserve privacy by not echoing sensitive submission data into URLs.
+- Failed submissions should use the appropriate `4xx` or `5xx` status, return a clear non-technical Czech JSON error response, and preserve privacy by not echoing sensitive submission data into URLs or logs.

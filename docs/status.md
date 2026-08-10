@@ -10,14 +10,14 @@ The three-layer documentation stack is in place and verified:
 - Layer 2 content specs: `docs/site-content/site.md`, `docs/site-content/sections/*.md`, and `docs/site-content/privacy-cookies.md`.
 - Layer 3 component mapping: `docs/site-content/page-map.md`.
 
-The Astro static site has been implemented from the documentation stack and extracted production assets. Current refinement work should update the canonical design-system and site specs first, then mirror those decisions in implementation.
+The Astro static site has been implemented from the documentation stack and extracted production assets. Canonical docs describe approved production state and behavior; plans and task trackers are derived execution aids only. Current refinement work must update the owning canonical docs first, then mirror those decisions in implementation and live configuration.
 
 ## Deployment
 
 - Cloudflare Pages project: `www-wavemarketing-cz`, connected directly to GitHub repository `andering/www-wavemarketing-cz` with `main` as its production branch. No repository GitHub Actions workflow is used for deployment.
 - Build configuration: `npm ci && npm run build`, publishing `dist/`. Cloudflare Pages Functions are enabled.
 - Custom domain: `www.wavemarketing.cz` is active and validated.
-- Latest successful production deployment: commit `1e81764d8f95643a80f8cee0c6f97382b2d28f06` on 2026-07-08.
+- Latest successful production deployment: commit `cd5f6ed2c1ddc0d61167cce36e00291bc46ea89d` on 2026-08-09.
 - Current public-access state: `www.wavemarketing.cz` is publicly reachable. The Cloudflare Access application was removed on 2026-08-09; run a live smoke test before treating the launch as complete.
 
 ## Current Launch Constraints
@@ -33,7 +33,19 @@ The Astro static site has been implemented from the documentation stack and extr
 
 - GA4 property: `properties/542330532` (`wavemarketing.cz`) in account `accounts/398526472` (`prudic.cz`).
 - Web stream: `15118334044` for `https://www.wavemarketing.cz` with Measurement ID `G-V1DT4J144T`.
-- GTM container `GTM-WMJVN6WZ` version 2 is live with consent-gated GA4 page-view and `generate_lead` configuration. The corresponding site source is pending Cloudflare Pages deployment from this commit; GA4 must ingest `generate_lead` before it can be marked as a key event.
+- GTM container `GTM-WMJVN6WZ` version 2 and the corresponding site source are live. The production deployment at commit `cd5f6ed2c1ddc0d61167cce36e00291bc46ea89d` still queues consent commands in an incompatible JavaScript shape, so Google does not register denied consent and GA4 starts after either first-banner choice. The verified workspace candidate corrects the queue shape, but that correction is not live until the candidate is deployed.
+
+## Security Remediation State
+
+- A read-only source, dependency, browser, TLS, and Cloudflare configuration audit was completed on 2026-08-09.
+- Consent candidate: the workspace queues Google consent commands in the required argument shape and loads production GTM only on canonical `www.wavemarketing.cz`. Browser verification confirmed denied persistence, one GA start after a grant when GTM is enabled, and cookie clearing on revocation; a final preview-host check confirmed that even accepting analytics off the canonical hostname loads no GTM script, creates no GA cookies, and sends no analytics request. The deployed site retains the confirmed consent defect until this candidate is deployed, and canonical production activation requires a post-deployment check.
+- Contact candidate: the workspace enforces the canonical hostname and approved media types, streams a 16 KiB body limit before parsing, validates Turnstile token length/action/hostname, and applies cancellable 10-second Siteverify and Resend REST timeouts. The deployed Function remains the older implementation until this candidate is deployed.
+- Response headers: Cloudflare now serves one-year HSTS without subdomains/preload and injects `X-Content-Type-Options: nosniff`. The workspace candidate adds CSP, anti-framing protection, `Referrer-Policy`, `Permissions-Policy`, and equivalent Function headers; those repository-controlled headers are not live until deployment.
+- Cloudflare zone: Always Use HTTPS is on; HSTS is enabled with `max-age=31536000`, no `includeSubDomains`, no preload, and `nosniff`; Bot Fight Mode remains enabled. Rate-limit ruleset `480c458e0b2548e0a027c05acbc17dab` has one enabled rule, `b45c1c5077d1450f9fb1b91aeede3998`, that blocks a client after 2 `POST` requests to canonical `www.wavemarketing.cz` in 10 seconds for the plan-supported 10-second mitigation window. The host-wide `POST` match closes Cloudflare Pages path-normalization variants without affecting `GET` or static traffic.
+- Public deployment aliases: `www-wavemarketing-cz.pages.dev` and the production deployment URL still expose the older Pages Function outside the `wavemarketing.cz` zone rules. The workspace candidate rejects those hosts at the Function boundary, but that control is not effective until deployment.
+- Toolchain candidate: the workspace uses Astro `7.2.0`, Vitest `4.1.10`, `@astrojs/check` `0.9.10`, and TypeScript `5.9.3`; the unused Resend SDK dependency is removed. A clean `npm ci`, serialized `npm run build`, all 89 tests, `npm audit`, and `npm audit --omit=dev` passed on Node `22.23.2`; both audit scopes report zero vulnerabilities. Production continues to run the older commit until deployment.
+- Remaining configuration observation: the zone minimum TLS version is still `1.0`; raising it was not part of the approved remediation baseline and remains a separate hardening decision.
+- Approved target state is defined in `docs/decisions.md`, `docs/site-content/site.md`, and `docs/site-content/page-map.md`. This section remains the factual implementation and deployment snapshot until verification confirms that target state is live.
 
 ## Open Inputs
 

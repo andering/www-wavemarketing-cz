@@ -44,6 +44,7 @@ This file is the canonical approved content source for the contact section; cros
 - Backend: submit to `/api/contact`, implemented as a Cloudflare Pages Function.
 - Email delivery: Resend notification email to the approved WAVE recipient address.
 - Bot protection: Cloudflare Turnstile token is required and verified server-side before email delivery.
+- Security contract: follow the canonical hostname, media-type, 16 KiB body, Turnstile action/hostname/token/timeout, and Cloudflare rate-limit requirements in `docs/site-content/site.md`; no alternate host or endpoint may bypass them.
 - Do not include the client's full six-field questionnaire for launch.
 
 ## Inline Thank-You Copy

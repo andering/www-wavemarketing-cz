@@ -15,6 +15,7 @@ Create a simple, static, production-ready site where design and content are gene
 
 ## Source-Of-Truth Rules
 
+- Canonical documentation describes the approved current state, behavior, constraints, and ownership of the production site. It must say what is true or required, not act primarily as a roadmap or a record of implementation steps.
 - Use `docs/site-content/` for Czech copy, services, contact data, legal/company data, and content requirements.
 - Use `docs/design-system/` for visual direction: colors, typography, layout feel, spacing, cards, buttons, header/footer style, imagery treatment, and interaction style.
 - Use `docs/site-content/page-map.md` for section order, anchors, navigation, component responsibilities, and section-specific variants.
@@ -24,6 +25,8 @@ Create a simple, static, production-ready site where design and content are gene
 - Do not use fake production content from Stitch or other visual source material.
 - Do not use Stitch-hosted images as production assets unless explicitly confirmed as real client assets.
 - Do not add side specs or temporary implementation plans as durable requirements. If a decision matters after implementation, record it here and in the relevant canonical design-system or site-content file.
+- Plans, task trackers, and issue descriptions are non-authoritative execution aids. Every plan must be derived from the canonical docs, cite the requirements it implements, and stop for a docs update when it discovers a missing or changed product decision.
+- A completed implementation must leave canonical docs, `docs/status.md`, implementation, tests, and live configuration aligned. Passing tests or a completed plan never overrides a conflicting canonical requirement.
 
 ## Cross-Cutting Launch Decisions
 
@@ -39,6 +42,18 @@ Create a simple, static, production-ready site where design and content are gene
 - The production model has three layers: design system, section/content specs, and widget/component mapping.
 - Cookie consent for launch uses the `vanilla-cookieconsent` library with a custom WAVE-styled bottom bar and preferences drawer/modal. Optional tracking consent defaults to denied; GTM container `GTM-WMJVN6WZ` is the only tracking container loaded from site code, with GA4 and future tools managed through GTM. Consent categories are `necessary`, `analytics`, and `marketing`; `necessary` is always enabled and read-only. Do not add direct GA4 page code outside GTM. GA4 may send its initial page view only after `analytics` consent is granted. A successful contact-form API response may push the data-layer event `contact_form_success`, without form contents or other personal data; GTM maps it to GA4's `generate_lead` event, which becomes a GA4 key event after Analytics has received the event.
 - Launch includes a real legal-information page at `/ochrana-osobnich-udaju-a-cookies/`. The footer may link to it with label `Ochrana osobních údajů a cookies`; this is no longer a placeholder legal link. The draft copy is stored in `docs/site-content/privacy-cookies.md` and requires client or legal review before being treated as final legal advice.
+
+## Security And Privacy Baseline
+
+- Consent is opt-in. When `analytics` is denied, GA4 must not load, create analytics cookies, send page views or events, or resume those actions on a later page load. Granting consent may start analytics once; revoking it must stop analytics and clear the documented analytics cookies.
+- Google consent commands must use the queue shape required by the Google tag API. A data-layer event is not sufficient evidence that Google processed the preceding consent command; browser behavior is the acceptance criterion.
+- GTM and GA4 may load only on canonical `www.wavemarketing.cz`; local development, preview deployments, production deployment aliases, and the public `pages.dev` hostname must not send analytics into the production property.
+- `/api/contact` is available only on canonical `www.wavemarketing.cz`. It accepts approved form media types, rejects bodies larger than 16 KiB before form parsing, and does not rely only on `Content-Length` for enforcement.
+- Contact-form Turnstile tokens are limited to 2,048 characters. Siteverify and Resend outbound requests must use cancellable 10-second timeouts and clear their timers after completion. Siteverify must require `success`, hostname `www.wavemarketing.cz`, and action `contact` before Resend is called.
+- Cloudflare must rate-limit every `POST` request on canonical `www.wavemarketing.cz` to 2 requests per client IP per 10 seconds and block the client for 10 seconds when a third matching request exceeds that threshold. The host-wide method match is intentional because the contact Function is the site's only approved `POST` surface and Cloudflare Pages can route non-canonical path spellings to it after path normalization. The application-level hostname and body controls remain required because the public `pages.dev` alias is outside the custom-domain zone rule.
+- Production HTML and Function responses must use an explicit security-header baseline: CSP, anti-framing protection, `X-Content-Type-Options`, `Referrer-Policy`, and a restrictive `Permissions-Policy`. CSP may allow only the approved first-party, GTM, GA4, Google Fonts, Cloudflare Turnstile, and Cloudflare-injected resources needed by the current implementation.
+- HTTPS is mandatory. Cloudflare HSTS uses one year initially without `includeSubDomains` or preload until every required subdomain is inventoried and verified; Always Use HTTPS remains enabled at the zone.
+- Production and build dependencies must be maintained on supported versions without known reachable critical or high-severity advisories. Audit severity alone does not establish production exploitability, but accepted build-only advisories must be documented in `docs/status.md` until removed.
 
 ## Domain Ownership
 

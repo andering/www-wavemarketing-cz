@@ -1,6 +1,8 @@
 import * as CookieConsent from "vanilla-cookieconsent";
 import { siteContent } from "../data/site";
 
+const CANONICAL_HOSTNAME = "www.wavemarketing.cz";
+
 declare global {
   interface Window {
     dataLayer: unknown[];
@@ -9,9 +11,9 @@ declare global {
   }
 }
 
-const gtag = (...args: unknown[]) => {
-  window.dataLayer.push(args);
-};
+function gtag(..._args: unknown[]) {
+  window.dataLayer.push(arguments);
+}
 
 const updateGoogleConsent = () => {
   const analyticsGranted = CookieConsent.acceptedCategory("analytics");
@@ -55,7 +57,9 @@ gtag("consent", "default", {
   wait_for_update: 500,
 });
 
-loadGoogleTagManager(siteContent.cookieConsent.gtmId);
+if (window.location.hostname === CANONICAL_HOSTNAME) {
+  loadGoogleTagManager(siteContent.cookieConsent.gtmId);
+}
 
 CookieConsent.run({
   mode: "opt-in",

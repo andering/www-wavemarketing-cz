@@ -1,5 +1,3 @@
-import { Resend } from "resend";
-
 export type ContactFormEnv = {
   RESEND_API_KEY?: string;
   CONTACT_FORM_FROM?: string;
@@ -14,6 +12,16 @@ export type ContactSubmission = {
   submittedAt: string;
 };
 
+export const FUNCTION_SECURITY_HEADERS = {
+  "Content-Security-Policy":
+    "default-src 'none'; base-uri 'none'; frame-ancestors 'none'; form-action 'none'",
+  "Permissions-Policy":
+    "accelerometer=(), camera=(), geolocation=(), gyroscope=(), magnetometer=(), microphone=(), payment=(), usb=()",
+  "Referrer-Policy": "strict-origin-when-cross-origin",
+  "X-Content-Type-Options": "nosniff",
+  "X-Frame-Options": "DENY",
+} as const;
+
 type ParseResult =
   | { ok: true; value: ContactSubmission }
   | { ok: false; status: number; message: string };
@@ -23,18 +31,102 @@ type OperationResult =
 
 type TurnstileOutcome = {
   success?: boolean;
-  "error-codes"?: string[];
+  hostname?: string;
+  action?: string;
+  "error-codes"?: unknown;
 };
 
+class OutboundRequestTimeoutError extends Error {}
+
+const CANONICAL_HOSTNAME = "www.wavemarketing.cz";
+const TURNSTILE_ACTION = "contact";
+const MAX_TURNSTILE_TOKEN_LENGTH = 2048;
+const OUTBOUND_REQUEST_TIMEOUT_MS = 10_000;
+const RESEND_SEND_URL = "https://api.resend.com/emails";
 const TURNSTILE_VERIFY_URL =
   "https://challenges.cloudflare.com/turnstile/v0/siteverify";
 
 const TURNSTILE_FAILURE_MESSAGE =
   "Ověření formuláře se nezdařilo. Zkuste to prosím znovu.";
+const RESEND_FAILURE_MESSAGE =
+  "Zprávu se nepodařilo odeslat. Zkuste to prosím znovu nebo nám napište e-mailem.";
+const TURNSTILE_CONFIGURATION_ERROR_CODES = new Set([
+  "missing-input-secret",
+  "invalid-input-secret",
+]);
+const TURNSTILE_TOKEN_ERROR_CODES = new Set([
+  "missing-input-response",
+  "invalid-input-response",
+  "timeout-or-duplicate",
+]);
 
 const getFormValue = (formData: FormData, name: string) => {
   const value = formData.get(name);
   return typeof value === "string" ? value.trim() : "";
+};
+
+const isObject = (value: unknown): value is Record<string, unknown> =>
+  typeof value === "object" && value !== null && !Array.isArray(value);
+
+const isTurnstileOutcome = (value: unknown): value is TurnstileOutcome =>
+  isObject(value);
+
+const getTurnstileFailureStatus = (outcome: TurnstileOutcome) => {
+  const errorCodes = outcome["error-codes"];
+
+  if (errorCodes === undefined) {
+    return 502;
+  }
+
+  if (
+    !Array.isArray(errorCodes) ||
+    errorCodes.some((errorCode) => typeof errorCode !== "string")
+  ) {
+    return 502;
+  }
+
+  if (
+    errorCodes.some((errorCode) =>
+      TURNSTILE_CONFIGURATION_ERROR_CODES.has(errorCode),
+    )
+  ) {
+    return 500;
+  }
+
+  if (errorCodes.length === 0) {
+    return 502;
+  }
+
+  if (
+    errorCodes.every((errorCode) => TURNSTILE_TOKEN_ERROR_CODES.has(errorCode))
+  ) {
+    return 400;
+  }
+
+  return 502;
+};
+
+const runWithTimeout = async <T>(
+  operation: (signal: AbortSignal) => Promise<T>,
+): Promise<T> => {
+  const controller = new AbortController();
+  let timedOut = false;
+  const timeout = setTimeout(() => {
+    timedOut = true;
+    controller.abort();
+  }, OUTBOUND_REQUEST_TIMEOUT_MS);
+
+  try {
+    return await operation(controller.signal);
+  } catch (error) {
+    if (timedOut) {
+      throw new OutboundRequestTimeoutError();
+    }
+
+    throw error;
+  } finally {
+    clearTimeout(timeout);
+  }
 };
 
 export const parseContactSubmission = (formData: FormData): ParseResult => {
@@ -66,7 +158,7 @@ export const parseContactSubmission = (formData: FormData): ParseResult => {
     };
   }
 
-  if (!turnstileToken) {
+  if (!turnstileToken || turnstileToken.length > MAX_TURNSTILE_TOKEN_LENGTH) {
     return {
       ok: false,
       status: 400,
@@ -107,24 +199,52 @@ export const verifyTurnstile = async (
     body.set("remoteip", remoteIp);
   }
 
-  let response: Response;
-  let outcome: TurnstileOutcome;
+  let result: { response: Response; parsedOutcome: unknown };
 
   try {
-    response = await fetch(TURNSTILE_VERIFY_URL, {
-      body,
-      method: "POST",
+    result = await runWithTimeout(async (signal) => {
+      const response = await fetch(TURNSTILE_VERIFY_URL, {
+        body,
+        method: "POST",
+        signal,
+      });
+      const parsedOutcome: unknown = await response.json();
+
+      return { response, parsedOutcome };
     });
-    outcome = (await response.json()) as TurnstileOutcome;
-  } catch {
+  } catch (error) {
     return {
       ok: false,
-      status: 400,
+      status: error instanceof OutboundRequestTimeoutError ? 504 : 502,
       message: TURNSTILE_FAILURE_MESSAGE,
     };
   }
 
-  if (!response.ok || !outcome.success) {
+  const outcome = isTurnstileOutcome(result.parsedOutcome)
+    ? result.parsedOutcome
+    : null;
+
+  if (!result.response.ok || !outcome) {
+    return {
+      ok: false,
+      status: 502,
+      message: TURNSTILE_FAILURE_MESSAGE,
+    };
+  }
+
+  if (outcome.success !== true) {
+    return {
+      ok: false,
+      status:
+        outcome.success === false ? getTurnstileFailureStatus(outcome) : 502,
+      message: TURNSTILE_FAILURE_MESSAGE,
+    };
+  }
+
+  if (
+    outcome.hostname !== CANONICAL_HOSTNAME ||
+    outcome.action !== TURNSTILE_ACTION
+  ) {
     return {
       ok: false,
       status: 400,
@@ -148,8 +268,7 @@ export const sendContactEmail = async (
     };
   }
 
-  const resend = new Resend(env.RESEND_API_KEY);
-  const { data, error } = await resend.emails.send({
+  const email = {
     from: env.CONTACT_FORM_FROM,
     to: [env.CONTACT_FORM_TO],
     subject: "Nová poptávka z wavemarketing.cz",
@@ -161,18 +280,39 @@ export const sendContactEmail = async (
       "",
       `Odesláno: ${submission.submittedAt}`,
     ].join("\n"),
-  });
+  };
 
-  if (error) {
-    return {
-      ok: false,
-      status: 502,
-      message:
-        "Zprávu se nepodařilo odeslat. Zkuste to prosím znovu nebo nám napište e-mailem.",
-    };
+  let result: { response: Response; outcome: unknown };
+
+  try {
+    result = await runWithTimeout(async (signal) => {
+      const response = await fetch(RESEND_SEND_URL, {
+        body: JSON.stringify(email),
+        headers: {
+          Authorization: `Bearer ${env.RESEND_API_KEY}`,
+          "Content-Type": "application/json",
+        },
+        method: "POST",
+        signal,
+      });
+      const outcome: unknown = await response.json();
+
+      return { response, outcome };
+    });
+  } catch {
+    return { ok: false, status: 502, message: RESEND_FAILURE_MESSAGE };
   }
 
-  return { ok: true, id: data?.id };
+  if (
+    !result.response.ok ||
+    !isObject(result.outcome) ||
+    typeof result.outcome.id !== "string" ||
+    !result.outcome.id.trim()
+  ) {
+    return { ok: false, status: 502, message: RESEND_FAILURE_MESSAGE };
+  }
+
+  return { ok: true, id: result.outcome.id };
 };
 
 export const buildJsonResponse = (
@@ -182,6 +322,7 @@ export const buildJsonResponse = (
   new Response(JSON.stringify(body), {
     status,
     headers: {
+      ...FUNCTION_SECURITY_HEADERS,
       "Content-Type": "application/json;charset=utf-8",
       "Cache-Control": "no-store",
     },

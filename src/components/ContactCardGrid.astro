@@ -72,6 +72,7 @@ const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY;
               turnstileSiteKey ? (
                 <div
                   class="cf-turnstile contact__turnstile"
+                  data-action="contact"
                   data-sitekey={turnstileSiteKey}
                   data-response-field-name="cf-turnstile-response"
                 ></div>
@@ -102,17 +103,19 @@ const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY;
 
 {turnstileSiteKey && <script is:inline src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>}
 
-<script is:inline>
-  const contactFormCard = document.querySelector("[data-contact-form-card]");
-  const contactDefault = contactFormCard?.querySelector("[data-contact-default]");
-  const contactForm = contactFormCard?.querySelector("[data-contact-form]");
-  const contactSuccess = contactFormCard?.querySelector("[data-contact-success]");
-  const contactError = contactFormCard?.querySelector("[data-contact-error]");
+<script>
+  import { pushDataLayerEventSafely } from "../lib/data-layer";
+
+  const contactFormCard = document.querySelector<HTMLElement>("[data-contact-form-card]");
+  const contactDefault = contactFormCard?.querySelector<HTMLElement>("[data-contact-default]");
+  const contactForm = contactFormCard?.querySelector<HTMLFormElement>("[data-contact-form]");
+  const contactSuccess = contactFormCard?.querySelector<HTMLElement>("[data-contact-success]");
+  const contactError = contactFormCard?.querySelector<HTMLElement>("[data-contact-error]");
 
   contactForm?.addEventListener("submit", async (event) => {
     event.preventDefault();
 
-    const submitButton = contactForm.querySelector('button[type="submit"]');
+    const submitButton = contactForm.querySelector<HTMLButtonElement>('button[type="submit"]');
     const originalButtonText = submitButton?.textContent;
 
     if (contactError) {
@@ -140,8 +143,10 @@ const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY;
         );
       }
 
-      contactDefault.hidden = true;
-      window.dataLayer.push({ event: "contact_form_success" });
+      if (contactDefault) {
+        contactDefault.hidden = true;
+      }
+      pushDataLayerEventSafely(window.dataLayer, { event: "contact_form_success" });
 
       if (contactSuccess) {
         contactSuccess.hidden = false;
@@ -156,9 +161,11 @@ const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY;
         contactError.hidden = false;
       }
 
-      window.turnstile?.reset?.();
+      (
+        window as Window & { turnstile?: { reset?: () => void } }
+      ).turnstile?.reset?.();
     } finally {
-      if (!contactDefault.hidden && submitButton) {
+      if (contactDefault && !contactDefault.hidden && submitButton) {
         submitButton.disabled = false;
         submitButton.textContent = originalButtonText || "Odeslat nezávaznou poptávku";
       }

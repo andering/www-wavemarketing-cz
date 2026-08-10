@@ -169,8 +169,9 @@ The implementation should define or generate these component/widget contracts fr
 - Component/script: `cookie-consent`.
 - Variant: `bottom-bar-with-preferences-drawer`.
 - Design contract: `Cookie Consent` from the design system.
-- Required behavior: initialize optional consent as denied before GTM loads; load GTM container `GTM-WMJVN6WZ`; manage GA4 through GTM, not direct GA4 page code; update consent when users accept all, reject non-essential cookies, or save category preferences.
-- Analytics activation: after each consent update, push a non-personal-data `cookie_consent_update` data-layer event. GTM uses this event and granted `analytics` consent to load GA4 and send its initial page view; it must not send GA4 events when analytics consent is denied.
+- Required behavior: initialize optional consent as denied before GTM loads; use Google-compatible command queue entries rather than plain JavaScript arrays; load GTM container `GTM-WMJVN6WZ` only when `window.location.hostname` is canonical `www.wavemarketing.cz`; never load production analytics on local, preview, deployment-alias, or public `pages.dev` hosts; manage GA4 through GTM, not direct GA4 page code; update consent when users accept all, reject non-essential cookies, or save category preferences.
+- Analytics activation: after Google-compatible consent update is queued, push a non-personal-data `cookie_consent_update` data-layer event. GTM uses this event and granted `analytics` consent to load GA4 and send its initial page view. Denied analytics must produce no GA4 script load, analytics cookie, page view, event, or later reload tracking.
+- Consent lifecycle: granting analytics may initialize GA4 once. Rejecting on the first banner or returning with a previously rejected choice must keep GA4 inactive. Revoking a previous grant must stop future analytics and remove the documented `_ga` and `_ga_*` cookies.
 - Category model: `necessary` is enabled and read-only; `analytics` gates GA4/analytics tags through GTM; `marketing` is prepared for future ad pixels or remarketing tools through GTM.
 - Footer integration: the footer `Nastavení cookies` control reopens the preferences UI without adding a placeholder privacy/GDPR link.
 
