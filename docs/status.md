@@ -18,6 +18,7 @@ The Astro static site has been implemented from the documentation stack and extr
 - Build configuration: `npm ci && npm run build`, publishing `dist/`. Cloudflare Pages Functions are enabled.
 - Custom domain: `www.wavemarketing.cz` is active and validated.
 - Security-remediated production deployment: commit `2b017b21cd8b11d6f9e54706bef41e78e25c846c` on 2026-08-10.
+- Google Ads site-preparation deployment: commit `b6f8a8c837a1206aec07f6ae77c433650a9c7d4b`, Pages deployment `42e719ee-12a4-4a34-8f8d-8b63f02238b5`, succeeded on 2026-09-30 with Functions preserved (`uses_functions: true`). Live browser verification confirmed the updated CSP and Ads disclosure on the canonical domain.
 - Current public-access state: `www.wavemarketing.cz` is publicly reachable. The Cloudflare Access application was removed on 2026-08-09; run a live smoke test before treating the launch as complete.
 
 ## Current Launch Constraints
@@ -35,7 +36,7 @@ The Astro static site has been implemented from the documentation stack and extr
 - Web stream: `15118334044` for `https://www.wavemarketing.cz` with Measurement ID `G-V1DT4J144T`.
 - GTM container `GTM-WMJVN6WZ` version 2 and the corresponding site source are live. Production queues Google consent commands in the required argument shape and loads GTM only on canonical `www.wavemarketing.cz`; live browser verification confirmed that denied analytics persists across reload without GA cookies, GA scripts, or collection requests.
 - Google Ads base tag `AW-18465273250` is approved. GTM read access is restored: account `6361842694`, container `256024332`, workspace `3`, public ID `GTM-WMJVN6WZ`. The live version remains `2`, with two GA4 tags and no Ads tag. The workspace was clean. Trigger creation still returned `404 Not found or permission denied`; edit/publish access is required before the Ads tag can be installed and verified.
-- A production browser inspection on 2026-09-30 confirmed that `GTM-WMJVN6WZ` loads and that initial analytics/ad consent defaults to denied. The requested Ads ID was not observed in that initial inspection. The source now includes the required Google Ads CSP domains, updated marketing disclosures, and first-party `_gcl_*` cookie cleanup/reload on marketing revocation. All 89 tests and the production build pass. Deployment and post-consent Ads request verification remain outstanding; no Ads configuration has been published by this task.
+- Production browser inspections on 2026-09-30 confirmed that `GTM-WMJVN6WZ` loads and initial analytics/ad consent defaults to denied with no analytics or advertising cookies. The required Google Ads CSP domains, updated marketing disclosures, and first-party `_gcl_*` cookie cleanup/reload configuration are deployed. All 89 tests and the production build passed. Google Ads tag installation, post-consent Ads request verification, and live Ads cookie-revocation verification remain outstanding because GTM writes are denied; no Ads configuration has been published by this task.
 
 ## Security Remediation State
 
