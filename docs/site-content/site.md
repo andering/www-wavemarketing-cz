@@ -17,7 +17,7 @@ This file defines the content architecture for the launch version of canonical `
 - Audience: businesses looking for a human, reliable marketing partner.
 - Primary conversion: direct contact by phone, email, or the simplified backend-backed contact form.
 - Secondary conversion: visitor reads services and understands the collaboration approach.
-- Cookie consent: launch includes Czech consent UI for GTM-managed analytics and future marketing scripts. Consent copy must stay concise, human, and non-legalistic while accurately describing the categories.
+- Cookie consent: includes Czech consent UI for GTM-managed GA4 and Google Ads. Consent copy must stay concise, human, and non-legalistic while accurately describing the categories.
 
 ## Launch Navigation
 
@@ -73,6 +73,8 @@ The launch site contains these content sections. Render order, anchors, navigati
 - Preferences modal title: `Nastavení cookies`.
 - Preferences actions: `Přijmout vše`, `Jen nezbytné`, and `Uložit nastavení`.
 - Categories: `Nezbytné cookies`, `Analytické cookies`, and `Marketingové cookies`.
+- Preferences introduction: `Sami si můžete vybrat, s čím souhlasíte. Nezbytné cookies zajišťují fungování webu, analytické pomáhají měřit návštěvnost a marketingové slouží k vyhodnocování reklamy pomocí Google Ads.`
+- Marketing category description: `Pomáhají vyhodnocovat reklamu pomocí Google Ads spravovaného přes GTM. Spouští se jen s vaším souhlasem.`
 - Do not render a fake privacy/GDPR legal link in the banner or modal. Add a legal link only when a real target URL or page content is supplied.
 
 ## Content Tone

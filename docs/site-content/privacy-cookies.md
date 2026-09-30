@@ -75,15 +75,16 @@ Analytické cookies nám pomáhají měřit návštěvnost webu a pochopit, jak 
 
 #### Marketingové cookies
 
-Marketingové cookies mohou sloužit k vyhodnocování a cílení reklamních aktivit. Pro launch webu je tato kategorie připravena pro budoucí marketingové nástroje; konkrétní nástroje se mají přidat až po jejich schválení a zapojení do souhlasového nastavení.
+Marketingové cookies slouží k vyhodnocování reklamních aktivit pomocí Google Ads. Značka Google Ads `AW-18465273250` je spravována přes Google Tag Manager a spouští se jen při souhlasu s marketingovými cookies.
 
 ### Přehled cookies
 
-| Název       | Kategorie  | Poskytovatel          | Účel                                                        | Doba uložení |
-| ----------- | ---------- | --------------------- | ----------------------------------------------------------- | ------------ |
-| `cc_cookie` | Nezbytné   | WAVE marketing s.r.o. | Uložení nastavení souhlasu s cookies                        | 6 měsíců     |
-| `_ga`       | Analytické | Google Analytics      | Rozlišení návštěvníků pro anonymizované měření návštěvnosti | až 2 roky    |
-| `_ga_*`     | Analytické | Google Analytics      | Uložení stavu relace pro měření návštěvnosti                | až 2 roky    |
+| Název       | Kategorie    | Poskytovatel          | Účel                                                        | Doba uložení |
+| ----------- | ------------ | --------------------- | ----------------------------------------------------------- | ------------ |
+| `cc_cookie` | Nezbytné     | WAVE marketing s.r.o. | Uložení nastavení souhlasu s cookies                        | 6 měsíců     |
+| `_ga`       | Analytické   | Google Analytics      | Rozlišení návštěvníků pro anonymizované měření návštěvnosti | až 2 roky    |
+| `_ga_*`     | Analytické   | Google Analytics      | Uložení stavu relace pro měření návštěvnosti                | až 2 roky    |
+| `_gcl_*`    | Marketingové | Google Ads            | Uložení informací pro měření reklamních kampaní             | až 90 dní    |
 
 ### Jak souhlas změnit nebo odvolat
 
@@ -91,7 +92,7 @@ Souhlas s analytickými a marketingovými cookies můžete kdykoli změnit nebo 
 
 ### Předávání údajů třetím stranám
 
-Při udělení souhlasu s analytickými cookies může docházet ke zpracování údajů službami společnosti Google v souvislosti s Google Tag Managerem a Google Analytics. Nastavení souhlasu je řízené přes Google Consent Mode.
+Při udělení souhlasu s analytickými cookies může docházet ke zpracování údajů službou Google Analytics a při souhlasu s marketingovými cookies službou Google Ads. Obě služby jsou spravovány přes Google Tag Manager. Nastavení souhlasu je řízené přes Google Consent Mode.
 
 ### Vaše práva
 

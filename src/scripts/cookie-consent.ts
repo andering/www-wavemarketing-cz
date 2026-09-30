@@ -93,7 +93,15 @@ CookieConsent.run({
         reloadPage: false,
       },
     },
-    marketing: {},
+    marketing: {
+      autoClear: {
+        cookies: [
+          { name: /^_gcl_/ },
+          { name: /^_gcl_/, domain: "wavemarketing.cz" },
+        ],
+        reloadPage: true,
+      },
+    },
   },
   onConsent: updateGoogleConsent,
   onChange: updateGoogleConsent,

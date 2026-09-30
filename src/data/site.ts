@@ -285,7 +285,7 @@ export const siteContent = {
           {
             heading: "Marketingové cookies",
             paragraphs: [
-              "Marketingové cookies mohou sloužit k vyhodnocování a cílení reklamních aktivit. Pro launch webu je tato kategorie připravena pro budoucí marketingové nástroje; konkrétní nástroje se mají přidat až po jejich schválení a zapojení do souhlasového nastavení.",
+              "Marketingové cookies slouží k vyhodnocování reklamních aktivit pomocí Google Ads. Značka Google Ads AW-18465273250 je spravována přes Google Tag Manager a spouští se jen při souhlasu s marketingovými cookies.",
             ],
           },
         ],
@@ -299,7 +299,7 @@ export const siteContent = {
       {
         heading: "Předávání údajů třetím stranám",
         paragraphs: [
-          "Při udělení souhlasu s analytickými cookies může docházet ke zpracování údajů službami společnosti Google v souvislosti s Google Tag Managerem a Google Analytics. Nastavení souhlasu je řízené přes Google Consent Mode.",
+          "Při udělení souhlasu s analytickými cookies může docházet ke zpracování údajů službou Google Analytics a při souhlasu s marketingovými cookies službou Google Ads. Obě služby jsou spravovány přes Google Tag Manager. Nastavení souhlasu je řízené přes Google Consent Mode.",
         ],
       },
       {
@@ -337,6 +337,13 @@ export const siteContent = {
         purpose: "Uložení stavu relace pro měření návštěvnosti",
         duration: "až 2 roky",
       },
+      {
+        name: "_gcl_*",
+        category: "Marketingové",
+        provider: "Google Ads",
+        purpose: "Uložení informací pro měření reklamních kampaní",
+        duration: "až 90 dní",
+      },
     ],
   },
   cookieConsent: {
@@ -357,7 +364,7 @@ export const siteContent = {
       save: "Uložit nastavení",
       close: "Zavřít nastavení cookies",
       intro:
-        "Sami si můžete vybrat, s čím souhlasíte. Nezbytné cookies zajišťují fungování webu, analytické pomáhají měřit návštěvnost a marketingové jsou připravené pro budoucí reklamní nástroje.",
+        "Sami si můžete vybrat, s čím souhlasíte. Nezbytné cookies zajišťují fungování webu, analytické pomáhají měřit návštěvnost a marketingové slouží k vyhodnocování reklamy pomocí Google Ads.",
     },
     categories: [
       {
@@ -380,7 +387,7 @@ export const siteContent = {
         id: "marketing",
         label: "Marketingové cookies",
         description:
-          "Jsou připravené pro budoucí reklamní nebo remarketingové nástroje.",
+          "Pomáhají vyhodnocovat reklamu pomocí Google Ads spravovaného přes GTM. Spouští se jen s vaším souhlasem.",
         enabled: false,
         readOnly: false,
       },
