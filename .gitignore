@@ -5,17 +5,8 @@ dist/
 .superpowers/
 screen_*.png
 
-# Local deployment and Terraform state
+# Local environment and Cloudflare tooling cache
 .env
 .env.*
 !.env.example
-.terraform/
-terraform.tfvars.json
-*.auto.tfvars
-*.auto.tfvars.json
-tfplan
-*.tfplan
-*.tfstate
-*.tfstate.*
-crash.log
-crash.*.log
+.wrangler/

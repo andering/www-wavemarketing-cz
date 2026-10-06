@@ -123,7 +123,7 @@ describe("SEO implementation conformance", () => {
       "@type": "Organization",
       name: "WAVE marketing s.r.o.",
       url: canonicalUrl,
-      logo: `${canonicalUrl}/assets/wave-marketing-logo.svg`,
+      logo: `${canonicalUrl}/assets/wave-marketing-logo.png`,
       telephone: "+420605461440",
       email: "jana.skalnikova@wavemarketing.cz",
       address: {

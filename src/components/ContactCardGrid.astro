@@ -175,7 +175,7 @@ const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY;
 
 <style>
   .contact {
-    background: radial-gradient(circle at 50% 30%, rgba(116, 89, 60, 0.09), var(--ds-color-background) 62%);
+    background: var(--ds-color-background);
     scroll-margin-top: 112px;
   }
 
@@ -203,7 +203,7 @@ const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY;
   .contact__person-card,
   .contact__quick-actions,
   .contact__form-card {
-    background: color-mix(in srgb, var(--ds-color-surface-raised) 70%, transparent);
+    background: var(--ds-color-surface-raised);
     border: var(--ds-border-width) solid color-mix(in srgb, var(--ds-color-surface-raised) 80%, transparent);
     border-radius: var(--ds-radius-2xl);
     box-shadow: var(--ds-shadow-lg);
@@ -446,7 +446,7 @@ const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY;
 
   .contact__form-success .contact__success-icon {
     align-items: center;
-    background: rgba(0, 59, 61, 0.06);
+    background: var(--ds-color-tint);
     border-radius: var(--ds-radius-full);
     color: var(--ds-color-primary);
     display: inline-flex;

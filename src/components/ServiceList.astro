@@ -75,12 +75,12 @@ import { siteContent } from '../data/site';
   }
 
   .service-row:hover {
-    background: color-mix(in srgb, var(--ds-color-surface-raised) 52%, transparent);
+    background: var(--ds-color-surface-raised);
   }
 
   .service-row__icon {
     align-items: center;
-    background: rgba(0, 59, 61, 0.06);
+    background: var(--ds-color-tint);
     border-radius: var(--ds-radius-full);
     color: var(--ds-color-primary);
     display: inline-flex;
@@ -110,10 +110,10 @@ import { siteContent } from '../data/site';
   }
 
   .service-row__price-tag {
-    background: var(--ds-color-primary);
+    background: var(--ds-color-action);
     border: 2px solid var(--ds-color-surface-raised);
     border-radius: var(--ds-radius-md);
-    box-shadow: 0 3px 0 var(--ds-color-secondary), 0 10px 18px rgba(0, 59, 61, 0.16);
+    box-shadow: var(--ds-shadow-tag);
     color: var(--ds-color-surface-raised);
     display: inline-block;
     flex: 0 0 auto;

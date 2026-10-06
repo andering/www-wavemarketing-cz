@@ -17,12 +17,18 @@ The Astro static site has been implemented from the documentation stack and extr
 - Cloudflare Pages project: `www-wavemarketing-cz`, connected directly to GitHub repository `andering/www-wavemarketing-cz` with `main` as its production branch. No repository GitHub Actions workflow is used for deployment.
 - Build configuration: `npm ci && npm run build`, publishing `dist/`. Cloudflare Pages Functions are enabled.
 - Custom domain: `www.wavemarketing.cz` is active and validated.
+- Live configuration verified on 2026-10-06: GitHub integration and production deployments are enabled for `main`; preview deployments are disabled. The latest five production deployments all succeeded with trigger `github:push` and Functions enabled.
+- Latest production deployment at that verification: `039efb5f-2045-4d3a-ad2f-1437cd22c4c8`, commit `2ffde1e808179f91ac0f18660fb7fb57edb08eac`, completed on 2026-09-30 at 01:06:08 UTC. It matches the project's canonical deployment; the custom domain remains active with active validation and verification.
+- Repository inspection on 2026-10-06 found no tracked Terraform configuration, deployment utility dependency, deployment script, or GitHub Actions workflow. Routine delivery uses native Pages Git integration as defined in `docs/workflow.md`.
 - Security-remediated production deployment: commit `2b017b21cd8b11d6f9e54706bef41e78e25c846c` on 2026-08-10.
 - Google Ads site-preparation deployment: commit `b6f8a8c837a1206aec07f6ae77c433650a9c7d4b`, Pages deployment `42e719ee-12a4-4a34-8f8d-8b63f02238b5`, succeeded on 2026-09-30 with Functions preserved (`uses_functions: true`). Live browser verification confirmed the updated CSP and Ads disclosure on the canonical domain.
 - Final verified Google Ads CSP deployment: commit `d1fb3a05cc3fb87832aa09e105798508c66994af`, Pages deployment `8ec85012-2858-4678-b638-73cbede6314c`, succeeded on 2026-09-30 at 01:02:49 UTC with Functions preserved. Browser verification confirmed successful Ads script/collection requests and no CSP violations.
 - Current public-access state: `www.wavemarketing.cz` is publicly reachable. The Cloudflare Access application was removed on 2026-08-09; run a live smoke test before treating the launch as complete.
 
 ## Current Launch Constraints
+
+- Approved palette refresh: pure white backgrounds throughout the page, sections, header/footer, cards, form fields, and cookie UI; dark gray text, orange CTAs, and green/teal accents use the six supplied brand colors documented in `docs/design-system/`. The follow-up white-background request supersedes the initial pale turquoise surfaces and colored radial washes. This refresh is local and not yet deployed; logo/image assets retain their supplied colors.
+- Palette verification: all 88 tests and the production build pass. Browser checks at 1440px and 390px cover the homepage, mobile cookie preferences, and shared legal-page colors. Measured text contrast is 8.45:1 for body copy and 4.90:1 for teal secondary buttons. Primary buttons use near-black text on the exact brand orange (6.25:1), bold body typography, and a 16px minimum including mobile and native form buttons. The dark-orange/white preview was rejected and reverted.
 
 - Canonical target: `www.wavemarketing.cz`.
 - Primary conversion: low-friction contact by phone, email, or the approved simplified contact form.
@@ -62,8 +68,9 @@ The Astro static site has been implemented from the documentation stack and extr
 
 ## Resolved Production Assets
 
-- Logo: `public/assets/wave-marketing-logo.svg` for rendered site logo.
-- Logo icon derivatives: `public/favicon.ico`, `public/assets/wave-marketing-icon-32.png`, `public/assets/wave-marketing-apple-touch-icon.png`, and `public/assets/wave-marketing-icon-192.png` for favicon and app-icon compatibility.
+- Terms PDF: user-supplied `Obchodní podmínky WAVE marketing s.r.o..pdf`, approved for unchanged publication at `public/assets/obchodni-podminky-wave-marketing.pdf` and linked from the shared footer. This addition is local and has not yet been deployed.
+- Logo: `public/assets/wave-marketing-logo.png`, a 512px optimized copy of user-supplied `/app/4.png`, replaces the previous SVG in the header, mobile menu, and Organization metadata. This replacement is local and not yet deployed.
+- Logo icon derivatives: `public/favicon.ico` (16/32/48px), `public/assets/wave-marketing-icon-32.png`, `public/assets/wave-marketing-apple-touch-icon.png` (180px), and `public/assets/wave-marketing-icon-192.png`, generated from user-supplied wave-only `/app/1.png`. These replace the former icon artwork, including the privacy/cookies sharing image.
 - Jana/contact photo: `src/assets/jana-skalnikova-photo.png`, rendered through Astro's build-time image pipeline.
 - Hero collaboration image: `src/assets/wave-marketing-hero-collaboration.png`, rendered through Astro's build-time image pipeline.
 - Process solution proposal image: `src/assets/wave-marketing-process-solution-proposal.png`, rendered through Astro's build-time image pipeline.
@@ -71,7 +78,7 @@ The Astro static site has been implemented from the documentation stack and extr
 ## Asset Extraction Notes
 
 - The original launch logo and Jana/contact photo were extracted from the approved Stitch visual source after user confirmation that they are real client assets.
-- The rendered site logo now uses the verified vector asset from `/app/logo.zip`; ICO/PNG derivatives generated from that same logo source are used only where browser or platform icon compatibility benefits from raster assets.
+- The former vector logo from `/app/logo.zip` is superseded by the supplied `/app/4.png` circular logo and `/app/1.png` wave-only icon. Published PNG/ICO derivatives are pre-optimized, with excess icon whitespace cropped, and intentionally stay in `public/` for stable logo/metadata/icon URLs.
 - The process solution proposal image was replaced with the user-supplied generated source `/app/Gemini_Generated_Image_bovyvrbovyvrbovy.png` and stored as `src/assets/wave-marketing-process-solution-proposal.png` for Astro optimization.
 - Other Stitch-hosted imagery remains excluded from production unless explicitly approved later.
 - Production code must reference the local hero asset, not the original Stitch-hosted URL.

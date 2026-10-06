@@ -9,12 +9,12 @@ import { siteContent } from '../data/site';
       <svg class="intro__wave intro__fallback-wave" viewBox="0 80 720 500" role="presentation" focusable="false">
         <defs>
           <linearGradient id="intro-ribbon-primary" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0" stop-color="var(--ds-color-primary)" />
-            <stop offset="1" stop-color="color-mix(in srgb, var(--ds-color-primary) 72%, var(--ds-color-accent))" />
+            <stop offset="0" stop-color="var(--ds-brand-green)" />
+            <stop offset="1" stop-color="var(--ds-brand-turquoise)" />
           </linearGradient>
           <linearGradient id="intro-ribbon-secondary" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0" stop-color="var(--ds-color-secondary)" />
-            <stop offset="1" stop-color="var(--ds-color-primary)" />
+            <stop offset="0" stop-color="var(--ds-brand-turquoise)" />
+            <stop offset="1" stop-color="var(--ds-brand-teal)" />
           </linearGradient>
         </defs>
         <path class="intro__ribbon intro__ribbon--back" d="M-120 236C10 346 111 394 216 331C327 265 378 118 510 104C594 95 666 139 780 252L780 342C663 230 596 186 522 194C410 206 354 348 238 411C121 475 8 430 -120 320Z" />
@@ -90,7 +90,7 @@ import { siteContent } from '../data/site';
 
   .intro__ribbon {
     animation: intro-ribbon-drift 12s var(--ds-ease-standard) infinite;
-    filter: drop-shadow(0 20px 26px rgba(0, 59, 61, 0.18));
+    filter: drop-shadow(var(--ds-shadow-wave));
     transform-origin: center;
   }
 
@@ -101,7 +101,7 @@ import { siteContent } from '../data/site';
 
   .intro__ribbon--shadow {
     animation-delay: -8s;
-    fill: color-mix(in srgb, var(--ds-color-primary) 84%, #000000);
+    fill: var(--ds-brand-teal);
     opacity: 0.9;
   }
 

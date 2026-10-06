@@ -14,7 +14,7 @@ export const siteContent = {
     canonicalUrl: "https://www.wavemarketing.cz",
   },
   assets: {
-    logo: "/assets/wave-marketing-logo.svg",
+    logo: "/assets/wave-marketing-logo.png",
     icons: [
       {
         rel: "icon",
@@ -220,6 +220,12 @@ export const siteContent = {
       {
         label: "Ochrana osobních údajů a cookies",
         href: "/ochrana-osobnich-udaju-a-cookies/",
+        openInNewTab: false,
+      },
+      {
+        label: "Obchodní podmínky (PDF)",
+        href: "/assets/obchodni-podminky-wave-marketing.pdf",
+        openInNewTab: true,
       },
     ],
     copyright: "© 2026 WAVE Marketing. Všechna práva vyhrazena.",

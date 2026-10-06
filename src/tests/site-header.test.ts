@@ -116,10 +116,4 @@ describe("site header implementation", () => {
     expect(source).toContain(".site-header__cta,\n  .site-header__mobile-cta");
     expect(source).toContain("transform: translateY(0);");
   });
-
-  it("uses a square-cropped logo viewBox so the artwork fills the header slot", () => {
-    const source = readSource("public/assets/wave-marketing-logo.svg");
-
-    expect(source).toContain('viewBox="147 147 730 730"');
-  });
 });

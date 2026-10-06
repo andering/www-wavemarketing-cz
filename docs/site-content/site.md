@@ -48,8 +48,8 @@ The launch site contains these content sections. Render order, anchors, navigati
 
 ## Resolved Production Assets
 
-- Real WAVE Marketing logo asset: `public/assets/wave-marketing-logo.svg`.
-- Real WAVE Marketing logo icon assets for favicon/app-icon compatibility: `public/favicon.ico`, `public/assets/wave-marketing-icon-32.png`, `public/assets/wave-marketing-apple-touch-icon.png`, and `public/assets/wave-marketing-icon-192.png`.
+- Real WAVE Marketing logo asset: `public/assets/wave-marketing-logo.png`, optimized from the approved `/app/4.png` circular logo. Preserve the complete artwork and square proportions in the header, mobile menu, and Organization structured data. This pre-optimized 512px PNG intentionally stays in `public/assets/` to provide a stable shared logo URL.
+- Real WAVE Marketing logo icon assets for favicon/app-icon compatibility: `public/favicon.ico`, `public/assets/wave-marketing-icon-32.png`, `public/assets/wave-marketing-apple-touch-icon.png`, and `public/assets/wave-marketing-icon-192.png`. Generate these from the approved wave-only `/app/1.png`, cropping excess transparent space and centering the symbol proportionally on a square canvas; use a white background for the Apple touch icon.
 - Real Jana/contact photo asset: `src/assets/jana-skalnikova-photo.png`.
 - Approved hero collaboration image: `src/assets/wave-marketing-hero-collaboration.png`.
 - Approved process solution proposal image: `src/assets/wave-marketing-process-solution-proposal.png`.
@@ -60,10 +60,6 @@ The launch site contains these content sections. Render order, anchors, navigati
 - Content source: `privacy-cookies.md`.
 - Footer link label: `Ochrana osobních údajů a cookies`.
 - The page copy is draft legal-information content and requires client or legal review before being treated as final legal advice.
-
-## Optional Inputs Before Implementation
-
-- Hosting/deployment target.
 
 ## Cookie Consent Copy Requirements
 

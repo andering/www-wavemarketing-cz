@@ -179,7 +179,7 @@ describe("contact form implementation wiring", () => {
     expect(source).toContain(
       'class="contact__success-icon material-symbols-outlined"',
     );
-    expect(source).toContain("background: rgba(0, 59, 61, 0.06)");
+    expect(source).toContain("background: var(--ds-color-tint)");
     expect(source).toContain("color: var(--ds-color-primary)");
     expect(source).toContain(
       "https://challenges.cloudflare.com/turnstile/v0/api.js",

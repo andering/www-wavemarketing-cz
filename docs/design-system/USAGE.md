@@ -22,7 +22,7 @@ Treat `kitchensink.html` as a style fixture and state reference, not production 
 
 ## Do
 
-- Preserve the warm sand background, deep teal primary color, earth-brown accent, and editorial heading style.
+- Preserve pure white page/section/card/header/footer/cookie backgrounds, dark gray text, orange CTAs, green/teal wave accents, and editorial heading style. Use the exact brand palette and accessible derived states defined in `tokens.css` and `DESIGN.md`.
 - Use `Playfair Display` for headings and `Work Sans` for body and UI text.
 - Use rounded cards, organic media shapes, wave dividers, and tactile primary buttons where appropriate.
 - Keep layouts airy, centered, and human-scaled.

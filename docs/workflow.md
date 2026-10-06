@@ -73,7 +73,7 @@ Responsibilities:
 
 - Make changes by editing the existing source-of-truth files, not by adding side specs that bypass them.
 - For content changes, update `docs/site-content/` first, then mirror the approved change in `src/data/site.ts` or components.
-- For visual or component-pattern changes, update `docs/design-system/` first, then mirror the approved change in `src/styles/design-system.css` and components.
+- For visual or component-pattern changes, update `docs/design-system/` first, then mirror the approved change in `src/styles/design-system.css` and components. The production stylesheet imports `docs/design-system/tokens.css` directly so canonical token values and implementation cannot drift.
 - For section ordering, navigation, anchors, or component responsibilities, update `docs/site-content/page-map.md` first.
 - After meaningful durable cross-cutting decisions, update `docs/decisions.md` and the relevant canonical file.
 - Update `docs/status.md` for current open inputs, resolved assets, or active phase changes.
@@ -109,6 +109,15 @@ Specs are the source of truth. Tests must not become a second requirements layer
 - Visual finish, responsive polish, spacing feel, image treatment, and animation details should be verified mostly through browser review and `npm run build`.
 
 Future testing step: after the canonical specs are complete and stable, add a small validator suite split into spec-completeness checks and implementation-conformance checks. Generate or maintain those tests from the docs so changing requirements starts in the specs, not in tests.
+
+## Deployment Workflow
+
+- Cloudflare Pages deploys directly from GitHub repository `andering/www-wavemarketing-cz`. A push to `main` automatically builds and publishes production; preview deployments are disabled.
+- The Pages build command is `npm ci && npm run build`, with `dist/` as the output directory. Pages also deploys the contact endpoint from `functions/`.
+- Before delivering implementation changes, run `npm run test` and `npm run build`. Commit and push only when explicitly requested.
+- This repository does not use Terraform, another infrastructure-as-code utility, a manual deployment script, or a GitHub Actions deployment workflow. Routine delivery consists of source changes pushed to GitHub and the native Pages integration.
+- Hosting, DNS, secrets, and other infrastructure settings are managed directly in the relevant service when the user requests a change. Record durable decisions and verified state in the owning canonical docs.
+- After a production push, verify the Pages deployment result and deployed commit before claiming that changes are live.
 
 ## Local Development Note
 

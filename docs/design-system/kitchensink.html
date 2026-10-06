@@ -31,7 +31,7 @@
         display: inline-flex;
         padding: var(--ds-space-2) var(--ds-space-4);
         border-radius: var(--ds-radius-full);
-        background: rgba(0, 59, 61, 0.06);
+        background: var(--ds-color-tint);
         color: var(--ds-color-primary);
         font-size: var(--ds-text-xs);
         font-weight: var(--ds-font-weight-semibold);
@@ -124,6 +124,7 @@
         border-radius: var(--ds-radius-md);
         padding: var(--ds-space-3) var(--ds-space-6);
         font-family: var(--ds-font-body);
+        font-size: var(--ds-text-base);
         font-weight: var(--ds-font-weight-semibold);
         cursor: pointer;
         transition:
@@ -139,10 +140,14 @@
         outline-offset: 2px;
       }
       .btn-primary {
+        font-weight: var(--ds-font-weight-bold);
         background: var(--ds-color-secondary);
         color: var(--ds-color-secondary-foreground);
         box-shadow: var(--ds-shadow-button);
         transform: translateY(-2px);
+      }
+      .btn-primary:hover {
+        background: var(--ds-color-secondary-dark);
       }
       .btn-primary:active {
         box-shadow: none;
@@ -155,7 +160,7 @@
       }
       .btn-ghost {
         background: transparent;
-        color: var(--ds-color-secondary);
+        color: var(--ds-color-text);
       }
       .btn-error {
         background: var(--ds-color-error);
@@ -228,7 +233,7 @@
         font-weight: var(--ds-font-weight-medium);
       }
       .nav-link.active {
-        color: var(--ds-color-secondary);
+        color: var(--ds-color-text);
         border-bottom: 2px solid var(--ds-color-secondary);
       }
       .badge {
@@ -245,12 +250,12 @@
         color: var(--ds-color-primary);
       }
       .badge.success {
-        background: rgba(74, 222, 128, 0.18);
-        color: #166534;
+        background: color-mix(in srgb, var(--ds-color-success) 18%, white);
+        color: var(--ds-color-text);
       }
       .badge.warning {
-        background: rgba(245, 158, 11, 0.18);
-        color: #92400e;
+        background: color-mix(in srgb, var(--ds-color-warning) 18%, white);
+        color: var(--ds-color-text);
       }
       .badge.error {
         background: rgba(186, 26, 26, 0.14);
@@ -437,7 +442,7 @@
             ></div>
             <div class="swatch-body">
               <span class="token-name">--ds-color-background</span
-              ><span class="token-value">#fbf9f4</span>
+              ><span class="token-value">#ffffff</span>
             </div>
           </div>
           <div class="swatch">
@@ -447,7 +452,7 @@
             ></div>
             <div class="swatch-body">
               <span class="token-name">--ds-color-surface</span
-              ><span class="token-value">#fbf9f4</span>
+              ><span class="token-value">#ffffff</span>
             </div>
           </div>
           <div class="swatch">
@@ -457,7 +462,7 @@
             ></div>
             <div class="swatch-body">
               <span class="token-name">--ds-color-surface-muted</span
-              ><span class="token-value">#f5f3ee</span>
+              ><span class="token-value">#ffffff</span>
             </div>
           </div>
           <div class="swatch">
@@ -477,7 +482,7 @@
             ></div>
             <div class="swatch-body">
               <span class="token-name">--ds-color-surface-glass</span
-              ><span class="token-value">rgba(251, 249, 244, 0.95)</span>
+              ><span class="token-value">#ffffff</span>
             </div>
           </div>
           <div class="swatch">
@@ -487,7 +492,7 @@
             ></div>
             <div class="swatch-body">
               <span class="token-name">--ds-color-text</span
-              ><span class="token-value">#1a1c1c</span>
+              ><span class="token-value">#4d4d4d</span>
             </div>
           </div>
           <div class="swatch">
@@ -497,7 +502,7 @@
             ></div>
             <div class="swatch-body">
               <span class="token-name">--ds-color-text-muted</span
-              ><span class="token-value">#404949</span>
+              ><span class="token-value">#4d4d4d</span>
             </div>
           </div>
           <div class="swatch">
@@ -507,7 +512,7 @@
             ></div>
             <div class="swatch-body">
               <span class="token-name">--ds-color-border</span
-              ><span class="token-value">#e0ddd5</span>
+              ><span class="token-value">#cce9e9</span>
             </div>
           </div>
           <div class="swatch">
@@ -517,7 +522,7 @@
             ></div>
             <div class="swatch-body">
               <span class="token-name">--ds-color-border-strong</span
-              ><span class="token-value">#707979</span>
+              ><span class="token-value">#1a869c</span>
             </div>
           </div>
           <div class="swatch">
@@ -527,7 +532,7 @@
             ></div>
             <div class="swatch-body">
               <span class="token-name">--ds-color-primary</span
-              ><span class="token-value">#003b3d</span>
+              ><span class="token-value">#4d4d4d</span>
             </div>
           </div>
           <div class="swatch">
@@ -547,7 +552,7 @@
             ></div>
             <div class="swatch-body">
               <span class="token-name">--ds-color-primary-hover</span
-              ><span class="token-value">#012f31</span>
+              ><span class="token-value">#3e3e3e</span>
             </div>
           </div>
           <div class="swatch">
@@ -557,7 +562,7 @@
             ></div>
             <div class="swatch-body">
               <span class="token-name">--ds-color-secondary</span
-              ><span class="token-value">#74593c</span>
+              ><span class="token-value">#f16d23</span>
             </div>
           </div>
           <div class="swatch">
@@ -567,7 +572,7 @@
             ></div>
             <div class="swatch-body">
               <span class="token-name">--ds-color-secondary-foreground</span
-              ><span class="token-value">#ffffff</span>
+              ><span class="token-value">#111111</span>
             </div>
           </div>
           <div class="swatch">
@@ -577,7 +582,7 @@
             ></div>
             <div class="swatch-body">
               <span class="token-name">--ds-color-accent</span
-              ><span class="token-value">#f0e8dc</span>
+              ><span class="token-value">#2bc3c1</span>
             </div>
           </div>
           <div class="swatch">
@@ -587,7 +592,7 @@
             ></div>
             <div class="swatch-body">
               <span class="token-name">--ds-color-success</span
-              ><span class="token-value">#4ade80</span>
+              ><span class="token-value">#10a164</span>
             </div>
           </div>
           <div class="swatch">
@@ -597,7 +602,7 @@
             ></div>
             <div class="swatch-body">
               <span class="token-name">--ds-color-warning</span
-              ><span class="token-value">#f59e0b</span>
+              ><span class="token-value">#f16d23</span>
             </div>
           </div>
           <div class="swatch">
@@ -617,7 +622,7 @@
             ></div>
             <div class="swatch-body">
               <span class="token-name">--ds-color-button-edge</span
-              ><span class="token-value">#4d3a27</span>
+              ><span class="token-value">#4d4d4d</span>
             </div>
           </div>
           <div class="swatch">
@@ -627,7 +632,7 @@
             ></div>
             <div class="swatch-body">
               <span class="token-name">--ds-color-focus</span
-              ><span class="token-value">rgba(0, 59, 61, 0.22)</span>
+              ><span class="token-value">#4d4d4d</span>
             </div>
           </div>
           <div class="swatch">
@@ -637,7 +642,7 @@
             ></div>
             <div class="swatch-body">
               <span class="token-name">--ds-color-wave-strong</span
-              ><span class="token-value">rgba(0, 59, 61, 0.6)</span>
+              ><span class="token-value">#1a869c</span>
             </div>
           </div>
           <div class="swatch">
@@ -647,7 +652,7 @@
             ></div>
             <div class="swatch-body">
               <span class="token-name">--ds-color-wave-soft</span
-              ><span class="token-value">rgba(0, 59, 61, 0.4)</span>
+              ><span class="token-value">#2bc3c1</span>
             </div>
           </div>
         </div>
@@ -720,8 +725,7 @@
           <div class="field">
             <label for="message">Message</label
             ><textarea id="message" rows="4">
-A warm textarea style for future forms.</textarea
-            >
+A warm textarea style for future forms.</textarea>
           </div>
           <div class="field">
             <label for="topic">Topic</label

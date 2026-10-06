@@ -18,17 +18,19 @@ Use a centered maximum-width page rhythm with generous vertical spacing. Hero an
 
 ## Color System
 
-Use `--ds-color-background` for the page base and `--ds-color-surface` or `--ds-color-surface-muted` for quiet section surfaces. Use `--ds-color-primary` for brand text, icons, primary actions, and strong anchors. Use `--ds-color-secondary` for warm emphasis, tactile button backgrounds, highlighted italic words, and quote or CTA accents. Use `--ds-color-border` for subtle dividers and card borders. Use success, warning, and error tokens only for factual feedback states.
+The approved site palette is orange `#F16D23`, light turquoise `#2BC3C1`, green `#10A164`, blue/teal `#1A869C`, dark gray `#4D4D4D`, and white `#FFFFFF`. It supersedes the original sand/brown/deep-teal palette across both pages, navigation, cards, forms, cookie UI, and decorative waves. Logo PNGs and supplied imagery retain their original artwork; social icons retain their platform brand colors.
+
+Use pure white (`#FFFFFF`) backgrounds for the page, all sections, header, footer, cards, legal-page panels, form fields, and cookie UI, with dark gray headings/body text. Do not tint these surfaces turquoise or add colored radial washes; use borders and neutral shadows for separation. Orange is the main CTA background and large hero emphasis; turquoise and green remain in decorative waves and small icon/badge accents. `--ds-color-primary` remains the dark gray text/anchor token for existing components; `--ds-color-action` is a slightly darkened brand teal for white-on-teal buttons and labels. Derived tints are limited to small accents and feedback states. Normal-size text needs at least 4.5:1 contrast: orange buttons therefore use the darker neutral `--ds-color-secondary-foreground`, while small navigation/hover text stays dark gray and uses orange underlines. Large hero emphasis may use exact orange on white (at least 3:1). Use semantic success, warning, and error tokens only for factual feedback states; retain a distinct accessible error red.
 
 ## Typography
 
 Use `--ds-font-heading` for all major headings, hero headlines, card titles, and editorial emphasis. Use `--ds-font-body` for paragraphs, navigation, buttons, form controls, and metadata. Hero headlines should use large heading sizes with `--ds-leading-tight` and `--ds-tracking-tight`. Standard body copy uses `--ds-font-weight-regular`, `--ds-text-base`, and `--ds-leading-relaxed`. Lead and intro paragraphs use `--ds-font-weight-light`, `--ds-text-lead` (`1.25rem`), and `--ds-leading-lead`; the mobile/default lead token also stays at `1.25rem` so lead copy never drops below 20px at a 16px root size. Labels and badges should use uppercase body-family text with `--ds-font-weight-semibold` and `--ds-tracking-widest`.
 
-Hero lead copy may use a single inline shopping-tag emphasis for a strategically important word when approved by the website content/design source of truth. The approved homepage treatment applies only to the first `marketing` in `Děláme marketing lidsky.` and renders it as a slightly rotated teal label with equal corner rounding, off-white uppercase text, and a thin warm brown underside. Do not render a leading circular hole or extra highlight lines, and keep the element inline so the lead remains readable on mobile.
+Hero lead copy may use a single inline shopping-tag emphasis for a strategically important word when approved by the website content/design source of truth. The approved homepage treatment applies only to the first `marketing` in `Děláme marketing lidsky.` and renders it as a slightly rotated accessible teal label with equal corner rounding, white uppercase text, and a thin orange underside. Do not render a leading circular hole or extra highlight lines, and keep the element inline so the lead remains readable on mobile.
 
 ## Shopping Tag Labels
 
-Shopping-tag labels reuse the approved hero `marketing` inline tag language for small factual highlights such as service starting prices. Use deep teal background, off-white uppercase text, a thin raised off-white border, and a warm brown underside/shadow. Do not render a leading circular hole on shopping-tag labels. Service price tags belong at the bottom-right of each service row/card, separated from the service heading and body copy. Tags may be slightly rotated on desktop for a tactile feel, but keep rotation subtle and remove or reduce it on tight mobile layouts. Price tags must remain readable, factual, use only approved starting-price wording without upper ranges or monthly wording, and be paired with the section-level individual-pricing note; they must not imply a guaranteed final quote.
+Shopping-tag labels reuse the approved hero `marketing` inline tag language for small factual highlights such as service starting prices. Use accessible teal background, white uppercase text, a thin raised white border, and an orange underside/shadow. Do not render a leading circular hole on shopping-tag labels. Service price tags belong at the bottom-right of each service row/card, separated from the service heading and body copy. Tags may be slightly rotated on desktop for a tactile feel, but keep rotation subtle and remove or reduce it on tight mobile layouts. Price tags must remain readable, factual, use only approved starting-price wording without upper ranges or monthly wording, and be paired with the section-level individual-pricing note; they must not imply a guaranteed final quote.
 
 ## Layout System
 
@@ -50,11 +52,15 @@ Default surfaces should remain mostly flat with `--ds-shadow-none` or `--ds-shad
 
 ## Visual Techniques
 
-Use wave dividers between major sections, warm radial background washes, subtle glass navigation, organic image crops, pill labels, and round icon containers. Avoid generic gradients unless they stay close to the warm sand, teal, and brown palette. Decorative shapes should feel fluid and wave-like rather than geometric or tech-heavy.
+Use wave dividers between white sections, white navigation, organic image crops, pill labels, and round icon containers. Gradients are limited to decorative wave artwork within the approved palette, not section backgrounds. Decorative shapes should feel fluid and wave-like rather than geometric or tech-heavy. The intro shader and SVG fallback blend green, teal, and light turquoise.
 
 ## Buttons
 
-The primary button uses the warm brown (`--ds-color-secondary`) background, `--ds-color-secondary-foreground` text, tactile shadow, and raised transform. The secondary button uses the deep teal (`--ds-color-primary`) background with white foreground for important direct actions that should differ from the warm hero CTA. The tertiary button uses a white or raised surface, `--ds-color-primary` text, and `--ds-color-border` border; the hero's second button is tertiary. On active, tactile filled buttons translate down by `--ds-space-press-offset` and collapse the edge shadow. Ghost/link buttons use text color transitions and optional underline on hover. Disabled buttons lower opacity, remove movement, and keep keyboard focus visible when focusable.
+The primary button uses orange (`--ds-color-secondary`), dark neutral `--ds-color-secondary-foreground` text, tactile shadow, and raised transform. The secondary button uses accessible teal (`--ds-color-action`) with white foreground. The tertiary button uses a white surface, dark gray text, and a teal border; the hero's second button is tertiary. Hover variants preserve text contrast. On active, tactile filled buttons translate down by `--ds-space-press-offset` and collapse the edge shadow. Ghost/link buttons use orange underlines while retaining readable dark text. Disabled buttons lower opacity, remove movement, and keep keyboard focus visible when focusable.
+
+### Button Legibility
+
+All primary orange buttons, including header/mobile CTAs, form submission, and cookie consent actions, use near-black `#111111` text on the exact brand orange `#F16D23`, at least 16px body-family text, and bold weight (700). This provides approximately 6.25:1 contrast and avoids browser-default small button typography. Hover keeps the same readable foreground. Apply the body font family and base size explicitly to shared buttons so native form buttons match anchor CTAs.
 
 ## Forms
 
@@ -62,7 +68,7 @@ Forms use rounded inputs with light surfaces, `--ds-color-border`, body typograp
 
 ## Cookie Consent
 
-Cookie consent uses a WAVE-styled bottom bar for the first consent prompt and a preferences drawer/modal for granular settings. The bottom bar should feel like a compact elevated card: warm surface, subtle border, rounded corners, readable body copy, and clear button hierarchy using the existing button variants. The preferred desktop placement is bottom center or bottom full-width inside the page gutter rhythm; on mobile it may behave like a compact bottom sheet with stacked actions.
+Cookie consent uses a WAVE-styled bottom bar for the first consent prompt and a preferences drawer/modal for granular settings. The bottom bar should feel like a compact elevated card: pure white surface, subtle border, rounded corners, readable body copy, and clear button hierarchy using the existing button variants. The preferred desktop placement is bottom center or bottom full-width inside the page gutter rhythm; on mobile it may behave like a compact bottom sheet with stacked actions.
 
 The preferences UI should use the same card, button, focus, and typography rules as the rest of the site. Category rows use rounded surfaces, clear labels, short descriptions, and accessible toggles. Keep the UI practical and calm rather than legalistic or visually heavy. Required category state must not rely on color alone; disabled/read-only controls need clear text treatment. The approved launch variant is `bottom-bar-with-preferences-drawer`.
 
@@ -78,9 +84,13 @@ Use a fixed or sticky glass-like header with `--ds-color-surface-glass`, blur, s
 
 Launch contact sections should prefer a compact direct-contact bento with phone and email still more prominent than the form. On desktop, keep the focused person card, email card, and availability card immediately scannable, then add the simplified form as a secondary card using the same rounded surface language. Use a local avatar, name, role, `+420` phone display directly under the role, secondary phone CTA, stacked email action with the address below `Napište nám`, short meeting note, one textarea, consent checkbox, Turnstile slot, submit button, and muted company facts. Contact bento cards use `--ds-radius-2xl` instead of the larger bubble radius. Do not render the full client questionnaire, social widget, placeholder links, or remote imagery.
 
+## Logo Assets
+
+Use the complete approved circular logo from `/app/4.png` via `public/assets/wave-marketing-logo.png`, preserving square proportions and its white circular background. Header and offcanvas logo slots keep their existing dimensions and contain the complete artwork. Small favicon/app-icon variants use the approved wave-only `/app/1.png`, centered proportionally with excess transparent space removed; Apple touch icons use a white background.
+
 ## Footer
 
-Footer uses a muted warm surface, brand title or logo, short positioning copy, menu links, optional legal links, the approved cookie settings control, and a subtle top border for copyright. Keep density moderate and readable. Footer links and controls use muted text with secondary hover color and visible focus states.
+Footer uses a pure white surface, brand title or logo, short positioning copy, menu links, optional legal links, the approved cookie settings control, and a subtle top border for copyright. Keep density moderate and readable. Footer links and controls use dark gray text with orange hover underlines and visible focus states.
 
 ## Images and Media
 
@@ -88,7 +98,7 @@ Use real, verified assets only for production. Hero and human imagery should use
 
 ## Decorative Elements
 
-Use SVG wave dividers, circular icon wells, pill badges, warm radial washes, and occasional floating stats/contact tiles. Decorative elements should support the message and not introduce fake metrics or fake proof unless a metric is explicitly approved in the content source of truth, such as the hero `Růst tržeb` `+124%` popup. Dividers should use the original Stitch-style layered wave with a wavy top edge and straight lower closure, colored with `--ds-color-wave-strong` or `--ds-color-wave-soft`.
+Use SVG wave dividers, circular icon wells, pill badges, and occasional floating stats/contact tiles on white backgrounds. Decorative elements should support the message and not introduce fake metrics or fake proof unless a metric is explicitly approved in the content source of truth, such as the hero `Růst tržeb` `+124%` popup. Dividers should use the original Stitch-style layered wave with a wavy top edge and straight lower closure, colored with `--ds-color-wave-strong` or `--ds-color-wave-soft`.
 
 ### Intro Statement Variant: Split Editorial Wave Panel
 
@@ -124,6 +134,6 @@ Use `tokens.css` as the exact source for reusable values. Use `kitchensink.html`
 
 ## Do / Do Not Checklist
 
-Do use warm sand surfaces, deep teal structure, earth-brown emphasis, editorial headings, rounded cards, wave dividers, and tactile CTAs. Do keep content honest and human. Do derive new elements from the package tokens.
+Do use pure white surfaces, dark gray text, orange CTAs, turquoise/green wave accents, editorial headings, rounded cards, and tactile buttons. Do keep content honest and human. Do derive new elements from the package tokens.
 
 Do not use fake references, fake social links, raw token values, cold monochrome SaaS styling, heavy animation, or generic stock imagery. Do not reopen Stitch for normal implementation unless the design system is being refreshed.

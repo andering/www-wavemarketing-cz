@@ -71,15 +71,14 @@ describe("Astro image component usage", () => {
     expect(source).toContain('media="(min-width: 901px)"');
   });
 
-  it("uses a warm pending-state placeholder instead of a blank white hero frame", () => {
+  it("keeps the hero image loading surface white without a colored gradient", () => {
     const source = readSource("src/components/MarketingHero.astro");
     const heroFrameStyles = source.match(
       /\.hero__visual-frame \{(?<styles>[\s\S]*?)\n  \}/,
     )?.groups?.styles;
 
-    expect(heroFrameStyles).toContain("--hero-visual-placeholder");
-    expect(heroFrameStyles).toContain("linear-gradient");
-    expect(heroFrameStyles).not.toContain(
+    expect(heroFrameStyles).not.toContain("linear-gradient");
+    expect(heroFrameStyles).toContain(
       "background: var(--ds-color-surface-raised);",
     );
   });

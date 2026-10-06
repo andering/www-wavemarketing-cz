@@ -23,7 +23,13 @@ const resolveNavigationHref = (href: string) => `${hrefPrefix}${href}`;
     </section>
     <nav aria-label="Patička" class="site-footer__links">
       {siteContent.navigation.map((item) => <a href={resolveNavigationHref(item.href)}>{item.label}</a>)}
-      {siteContent.footer.legalLinks.map((item) => <a href={item.href}>{item.label}</a>)}
+      {siteContent.footer.legalLinks.map((item) => (
+        <a
+          href={item.href}
+          target={item.openInNewTab ? '_blank' : undefined}
+          rel={item.openInNewTab ? 'noopener' : undefined}
+        >{item.label}</a>
+      ))}
       <button type="button" data-cookie-preferences>{siteContent.footer.cookieSettingsLabel}</button>
     </nav>
   </div>
@@ -94,7 +100,10 @@ const resolveNavigationHref = (href: string) => `${hrefPrefix}${href}`;
 
   .site-footer a:hover,
   .site-footer button:hover {
-    color: var(--ds-color-secondary);
+    color: var(--ds-color-text);
+    text-decoration: underline;
+    text-decoration-color: var(--ds-color-secondary);
+    text-underline-offset: 0.25em;
   }
 
   .site-footer a:focus-visible,

@@ -1,26 +1,42 @@
 :root {
-  --ds-color-background: #fbf9f4;
-  --ds-color-surface: #fbf9f4;
-  --ds-color-surface-muted: #f5f3ee;
+  --ds-brand-orange: #f16d23;
+  --ds-brand-turquoise: #2bc3c1;
+  --ds-brand-green: #10a164;
+  --ds-brand-teal: #1a869c;
+  --ds-brand-gray: #4d4d4d;
+  --ds-brand-white: #ffffff;
+
+  --ds-color-background: #ffffff;
+  --ds-color-surface: #ffffff;
+  --ds-color-surface-muted: #ffffff;
   --ds-color-surface-raised: #ffffff;
-  --ds-color-surface-glass: rgba(251, 249, 244, 0.95);
-  --ds-color-text: #1a1c1c;
-  --ds-color-text-muted: #404949;
-  --ds-color-border: #e0ddd5;
-  --ds-color-border-strong: #707979;
-  --ds-color-primary: #003b3d;
+  --ds-color-surface-glass: #ffffff;
+  --ds-color-text: #4d4d4d;
+  --ds-color-text-muted: #4d4d4d;
+  --ds-color-border: #cce9e9;
+  --ds-color-border-strong: #1a869c;
+  --ds-color-primary: #4d4d4d;
   --ds-color-primary-foreground: #ffffff;
-  --ds-color-primary-hover: #012f31;
-  --ds-color-secondary: #74593c;
-  --ds-color-secondary-foreground: #ffffff;
-  --ds-color-accent: #f0e8dc;
-  --ds-color-success: #4ade80;
-  --ds-color-warning: #f59e0b;
+  --ds-color-primary-hover: #3e3e3e;
+  --ds-color-secondary: #f16d23;
+  --ds-color-secondary-foreground: #111111;
+  --ds-color-secondary-dark: #f48040;
+  --ds-color-background-soft: #ffffff;
+  --ds-color-action: #247b8c;
+  --ds-color-action-hover: #206d7c;
+  --ds-color-accent: #2bc3c1;
+  --ds-color-success: #10a164;
+  --ds-color-warning: #f16d23;
   --ds-color-error: #ba1a1a;
-  --ds-color-button-edge: #4d3a27;
-  --ds-color-focus: rgba(0, 59, 61, 0.22);
-  --ds-color-wave-strong: rgba(0, 59, 61, 0.6);
-  --ds-color-wave-soft: rgba(0, 59, 61, 0.4);
+  --ds-color-button-edge: #4d4d4d;
+  --ds-color-focus: #4d4d4d;
+  --ds-color-wave-strong: #1a869c;
+  --ds-color-wave-soft: #2bc3c1;
+  --ds-color-tint: rgba(43, 195, 193, 0.1);
+  --ds-color-overlay: rgba(26, 134, 156, 0.24);
+  --ds-shadow-tag:
+    0 3px 0 var(--ds-color-secondary), 0 10px 18px rgba(26, 134, 156, 0.16);
+  --ds-shadow-wave: 0 20px 26px rgba(16, 161, 100, 0.18);
 
   --ds-font-heading: "Playfair Display", Georgia, serif;
   --ds-font-body: "Work Sans", system-ui, sans-serif;
@@ -85,10 +101,10 @@
   --ds-border-strong: 4px;
 
   --ds-shadow-none: none;
-  --ds-shadow-sm: 0 1px 3px rgba(26, 28, 28, 0.08);
-  --ds-shadow-md: 0 8px 20px rgba(26, 28, 28, 0.1);
-  --ds-shadow-lg: 0 18px 45px rgba(26, 28, 28, 0.14);
-  --ds-shadow-warm: 0 20px 50px rgba(116, 89, 60, 0.15);
+  --ds-shadow-sm: 0 1px 3px rgba(77, 77, 77, 0.08);
+  --ds-shadow-md: 0 8px 20px rgba(77, 77, 77, 0.1);
+  --ds-shadow-lg: 0 18px 45px rgba(77, 77, 77, 0.14);
+  --ds-shadow-warm: 0 20px 50px rgba(77, 77, 77, 0.12);
   --ds-shadow-button: 0 4px 0 0 var(--ds-color-button-edge);
 
   --ds-duration-fast: 150ms;

@@ -85,7 +85,7 @@ function parseCssColor(value: string): [number, number, number] {
     return [Number(rgb[1]) / 255, Number(rgb[2]) / 255, Number(rgb[3]) / 255];
   }
 
-  return [0.0, 0.23, 0.24];
+  return [26 / 255, 134 / 255, 156 / 255];
 }
 
 function compileShader(
@@ -165,13 +165,13 @@ function initIntroShader(canvas: HTMLCanvasElement) {
   const accent = gl.getUniformLocation(program, "uAccent");
   const rootStyles = getComputedStyle(document.documentElement);
   const primaryColor = parseCssColor(
-    rootStyles.getPropertyValue("--ds-color-primary"),
+    rootStyles.getPropertyValue("--ds-brand-green"),
   );
   const secondaryColor = parseCssColor(
-    rootStyles.getPropertyValue("--ds-color-secondary"),
+    rootStyles.getPropertyValue("--ds-brand-teal"),
   );
   const accentColor = parseCssColor(
-    rootStyles.getPropertyValue("--ds-color-accent"),
+    rootStyles.getPropertyValue("--ds-brand-turquoise"),
   );
 
   let frame = 0;

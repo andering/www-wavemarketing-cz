@@ -75,12 +75,12 @@ describe("cookie consent source-of-truth", () => {
     expect(siteContent.legalPage.title).toBe(
       "Ochrana osobních údajů a cookies",
     );
-    expect(siteContent.footer.legalLinks).toEqual([
-      {
+    expect(siteContent.footer.legalLinks).toContainEqual(
+      expect.objectContaining({
         label: "Ochrana osobních údajů a cookies",
         href: "/ochrana-osobnich-udaju-a-cookies/",
-      },
-    ]);
+      }),
+    );
   });
 });
 

@@ -38,11 +38,14 @@ This control reopens the cookie preferences UI. It is an interactive control, no
 
 ## Legal Links
 
-Approved launch legal link:
+Approved legal links, in render order:
 
 - `Ochrana osobních údajů a cookies` -> `/ochrana-osobnich-udaju-a-cookies/`
+- `Obchodní podmínky (PDF)` -> `/assets/obchodni-podminky-wave-marketing.pdf`
 
-Do not render `GDPR`, `Obchodní podmínky`, or similar additional links as placeholders.
+The terms link opens the user-supplied PDF in a new tab (`target="_blank"`, `rel="noopener"`), without forcing a download. Preserve the supplied document unchanged at `public/assets/obchodni-podminky-wave-marketing.pdf`. It follows the privacy/cookies link and precedes the cookie settings control on every page using the shared footer.
+
+Do not render additional legal links as placeholders.
 
 ## Copyright
 
@@ -53,7 +56,7 @@ Do not render `GDPR`, `Obchodní podmínky`, or similar additional links as plac
 - Keep footer concise.
 - Do not include references link at launch.
 - Do not include social links in the footer unless that placement is explicitly requested; supplied social URLs are rendered in the header/offcanvas for launch.
-- Do not include placeholder legal links beyond the approved privacy/cookies page link.
+- Legal links must point to the approved privacy/cookies page or the supplied terms PDF; no placeholders.
 - Include the approved `Nastavení cookies` control so visitors can reopen consent preferences.
 
 ## Notes For Page Mapping

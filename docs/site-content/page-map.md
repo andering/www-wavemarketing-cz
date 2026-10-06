@@ -39,8 +39,8 @@ The implementation should define or generate these component/widget contracts fr
 
 ## Asset Gates
 
-- `logo`: resolved at `public/assets/wave-marketing-logo.svg`; used by `site-header` and optionally `site-footer`.
-- `logo-icons`: icon derivatives resolved at `public/favicon.ico`, `public/assets/wave-marketing-icon-32.png`, `public/assets/wave-marketing-apple-touch-icon.png`, and `public/assets/wave-marketing-icon-192.png`; used only for favicon and app-icon compatibility.
+- `logo`: resolved at `public/assets/wave-marketing-logo.png`, optimized from the approved circular `/app/4.png`; used by the desktop/mobile header, offcanvas heading, and Organization structured data.
+- `logo-icons`: wave-only derivatives from approved `/app/1.png`, resolved at `public/favicon.ico`, `public/assets/wave-marketing-icon-32.png`, `public/assets/wave-marketing-apple-touch-icon.png`, and `public/assets/wave-marketing-icon-192.png`; used for favicon/app-icon compatibility and the privacy/cookies page sharing preview.
 - `jana-contact-photo`: resolved at `src/assets/jana-skalnikova-photo.png`; used by `contact-card-grid` through Astro's image pipeline.
 - `hero-visual`: resolved at `src/assets/wave-marketing-hero-collaboration.png`; used by `marketing-hero` inside an organic image frame through Astro's responsive image pipeline.
 - `process-solution-proposal-visual`: resolved at `src/assets/wave-marketing-process-solution-proposal.png`; used by step 3 of `process-steps` through Astro's responsive image pipeline.
@@ -160,7 +160,7 @@ The implementation should define or generate these component/widget contracts fr
 - Variant: `muted-brand-footer`.
 - Design contract: `Footer`.
 - Content slots: brand label, footer copy, footer navigation, company facts, cookie settings control, copyright.
-- Launch rule: footer may mirror the approved navigation, include a `Nastavení cookies` control that reopens the consent preferences UI, and link to the approved privacy/cookies page. It must not add a reference/case-study section, social links, or placeholder legal links.
+- Launch rule: footer may mirror the approved navigation, include a `Nastavení cookies` control that reopens the consent preferences UI, and link to the approved privacy/cookies page. Immediately after the privacy/cookies link, render `Obchodní podmínky (PDF)` pointing to `/assets/obchodni-podminky-wave-marketing.pdf`, opening in a new tab with `rel="noopener"` and without a forced download. Both pages use this shared footer. It must not add a reference/case-study section, social links, or placeholder legal links.
 
 ### 9. Cookie Consent
 
@@ -190,7 +190,7 @@ The implementation should define or generate these component/widget contracts fr
 - Do not render references, case studies, client logos, testimonials, or fake metrics. The only approved metric-style content is the hero floating growth popup recorded in `sections/hero.md`.
 - Do not render the full client questionnaire or any contact form without the approved Cloudflare Pages Function, Turnstile, and Resend backend path.
 - Do not render social links without final URLs.
-- Do not render placeholder legal links; the approved privacy/cookies footer link is allowed because it has a real route and content source.
+- Do not render placeholder legal links; the approved privacy/cookies page and supplied terms PDF have real destinations and content sources.
 - Do not use Stitch-hosted imagery as production assets.
 - Do not render direct GA4 tracking code outside GTM.
 
