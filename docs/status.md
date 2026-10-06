@@ -17,6 +17,7 @@ The Astro static site has been implemented from the documentation stack and extr
 - Cloudflare Pages project: `www-wavemarketing-cz`, connected directly to GitHub repository `andering/www-wavemarketing-cz` with `main` as its production branch. No repository GitHub Actions workflow is used for deployment.
 - Build configuration: `npm ci && npm run build`, publishing `dist/`. Cloudflare Pages Functions are enabled.
 - Custom domain: `www.wavemarketing.cz` is active and validated.
+- Branding and terms release: commit `7c42d320261955505820fadf4539bd6dcc1cbb6a`, Pages deployment `7592eeb8-1caf-496b-ae29-7aed24b3a1da`, completed successfully on 2026-10-06 at 22:28:18 UTC via `github:push`, with Functions enabled. Cloudflare confirmed this as the canonical deployment and the custom domain as active. Live browser verification confirmed white surfaces, orange `#F16D23` buttons with `#111111` bold 16px text, and the new logo. Both pages expose the terms PDF link in a new tab. PDF, logo, favicon, and all icon PNGs returned HTTP 200 and SHA-256 hashes identical to the committed assets.
 - Live configuration verified on 2026-10-06: GitHub integration and production deployments are enabled for `main`; preview deployments are disabled. The latest five production deployments all succeeded with trigger `github:push` and Functions enabled.
 - Latest production deployment at that verification: `039efb5f-2045-4d3a-ad2f-1437cd22c4c8`, commit `2ffde1e808179f91ac0f18660fb7fb57edb08eac`, completed on 2026-09-30 at 01:06:08 UTC. It matches the project's canonical deployment; the custom domain remains active with active validation and verification.
 - Repository inspection on 2026-10-06 found no tracked Terraform configuration, deployment utility dependency, deployment script, or GitHub Actions workflow. Routine delivery uses native Pages Git integration as defined in `docs/workflow.md`.
@@ -27,7 +28,7 @@ The Astro static site has been implemented from the documentation stack and extr
 
 ## Current Launch Constraints
 
-- Approved palette refresh: pure white backgrounds throughout the page, sections, header/footer, cards, form fields, and cookie UI; dark gray text, orange CTAs, and green/teal accents use the six supplied brand colors documented in `docs/design-system/`. The follow-up white-background request supersedes the initial pale turquoise surfaces and colored radial washes. This refresh is local and not yet deployed; logo/image assets retain their supplied colors.
+- Approved palette refresh: pure white backgrounds throughout the page, sections, header/footer, cards, form fields, and cookie UI; dark gray text, orange CTAs, and green/teal accents use the six supplied brand colors documented in `docs/design-system/`. The follow-up white-background request supersedes the initial pale turquoise surfaces and colored radial washes. This refresh is deployed and verified in the branding and terms release above; logo/image assets retain their supplied colors.
 - Palette verification: all 88 tests and the production build pass. Browser checks at 1440px and 390px cover the homepage, mobile cookie preferences, and shared legal-page colors. Measured text contrast is 8.45:1 for body copy and 4.90:1 for teal secondary buttons. Primary buttons use near-black text on the exact brand orange (6.25:1), bold body typography, and a 16px minimum including mobile and native form buttons. The dark-orange/white preview was rejected and reverted.
 
 - Canonical target: `www.wavemarketing.cz`.
@@ -68,8 +69,8 @@ The Astro static site has been implemented from the documentation stack and extr
 
 ## Resolved Production Assets
 
-- Terms PDF: user-supplied `Obchodní podmínky WAVE marketing s.r.o..pdf`, approved for unchanged publication at `public/assets/obchodni-podminky-wave-marketing.pdf` and linked from the shared footer. This addition is local and has not yet been deployed.
-- Logo: `public/assets/wave-marketing-logo.png`, a 512px optimized copy of user-supplied `/app/4.png`, replaces the previous SVG in the header, mobile menu, and Organization metadata. This replacement is local and not yet deployed.
+- Terms PDF: user-supplied `Obchodní podmínky WAVE marketing s.r.o..pdf`, published unchanged at `public/assets/obchodni-podminky-wave-marketing.pdf` and linked from the shared footer. Verified live on 2026-10-06.
+- Logo: `public/assets/wave-marketing-logo.png`, a 512px optimized copy of user-supplied `/app/4.png`, replaces the previous SVG in the header, mobile menu, and Organization metadata. Verified live on 2026-10-06.
 - Logo icon derivatives: `public/favicon.ico` (16/32/48px), `public/assets/wave-marketing-icon-32.png`, `public/assets/wave-marketing-apple-touch-icon.png` (180px), and `public/assets/wave-marketing-icon-192.png`, generated from user-supplied wave-only `/app/1.png`. These replace the former icon artwork, including the privacy/cookies sharing image.
 - Jana/contact photo: `src/assets/jana-skalnikova-photo.png`, rendered through Astro's build-time image pipeline.
 - Hero collaboration image: `src/assets/wave-marketing-hero-collaboration.png`, rendered through Astro's build-time image pipeline.
